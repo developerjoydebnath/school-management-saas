@@ -3,7 +3,8 @@
 import OrderFilterbar from "@/modules/dashboard/components/OrderFilterBar";
 import OrderTable from "@/modules/dashboard/components/OrderTable";
 import PageHeading from "@/shared/components/custom/PageHeading";
-import { SimpleEditor } from "@/shared/components/tiptap-templates/simple/simple-editor";
+import TextEditor from "@/shared/components/form/editor/TextEditor";
+import { SimpleEditor } from "@/shared/components/form/rich-editor/simple-editor";
 import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
 import { useState } from "react";
 
@@ -38,8 +39,10 @@ export default function Orders() {
 
       <SimpleEditor value="" onValueChange={() => { }} className="mb-5" />
 
-      <Card className="p-6">
-        <CardHeader className="px-0">
+      <TextEditor value="" onValueChange={() => { }} className="mb-5" />
+
+      <Card className="p-4">
+        <CardHeader className="p-0">
           <OrderFilterbar filter={filter} setFilter={setFilter} />
         </CardHeader>
 

@@ -196,6 +196,44 @@ const data = [
     createdAt: "2026-04-17T01:00:00Z",
     updatedAt: "2026-04-17T01:10:00Z",
     deletedAt: null
+  },
+  {
+    id: 11,
+    orderId: "ORD-1010",
+    subtotal: 700,
+    totalCharge: 65,
+    discount: 25,
+    currency: "USD",
+    deliveryCharge: 45,
+    deliveryAddress: "Gazipur, Bangladesh",
+    deliveryManId: 110,
+    total: 740,
+    grandTotal: 785,
+    customerId: 10,
+    note: "",
+    trxId: "TRX1010",
+    createdAt: "2026-04-17T01:00:00Z",
+    updatedAt: "2026-04-17T01:10:00Z",
+    deletedAt: null
+  },
+  {
+    id: 12,
+    orderId: "ORD-1010",
+    subtotal: 700,
+    totalCharge: 65,
+    discount: 25,
+    currency: "USD",
+    deliveryCharge: 45,
+    deliveryAddress: "Gazipur, Bangladesh",
+    deliveryManId: 110,
+    total: 740,
+    grandTotal: 785,
+    customerId: 10,
+    note: "",
+    trxId: "TRX1010",
+    createdAt: "2026-04-17T01:00:00Z",
+    updatedAt: "2026-04-17T01:10:00Z",
+    deletedAt: null
   }
 ];
 
@@ -224,9 +262,12 @@ export default function OrderTable({
   const orders: Order[] = data.map((order: Record<string, any>) => new Order(order));
 
   const meta = {
-    total: 10,
     page: 1,
-    limit: ROW_LIMIT,
+    limit: 10,
+    total: 12,
+    totalPages: 2,
+    hasNextPage: false,
+    hasPreviousPage: false,
   };
 
   const isLoading = false;
@@ -238,6 +279,7 @@ export default function OrderTable({
         isLoading={isLoading}
         pagination={{
           page,
+          totalPages: meta.totalPages,
           total: meta.total,
           limit: ROW_LIMIT,
           onPageChange: setPage,

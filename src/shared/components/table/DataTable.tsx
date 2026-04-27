@@ -28,6 +28,15 @@ import {
 import { useState } from "react";
 import { Pagination } from "./Pagination";
 
+declare module "@tanstack/react-table" {
+  interface ColumnMeta<TData, TValue> {
+    classNames?: {
+      th?: string;
+      td?: string;
+    };
+  }
+}
+
 type DataTableProps<T> = {
   data: T[];
   columns: ColumnDef<T>[];
@@ -42,7 +51,9 @@ type DataTableProps<T> = {
     total: number;
     page: number;
     limit: number;
+    totalPages: number;
     onPageChange: (page: number) => void;
+    onLimitChange?: (limit: number) => void;
   };
   isLoading?: boolean;
   error?: any;
@@ -72,7 +83,7 @@ export default function DataTable<T>({
     return (
       <div className="flex h-full w-full flex-col items-center">
         <Image
-          src="/data-not-found.jpg"
+          src="/images/data-not-found.png"
           alt="Data not found"
           width={300}
           height={300}
@@ -101,7 +112,7 @@ export default function DataTable<T>({
     <div>
       <div className={cn("overflow-x-auto", className)}>
         <div className={cn("w-full", classNames?.tableContainer)}>
-          <Table className={cn("mb-2 w-full table-auto", classNames?.table)}>
+          <Table className={cn("w-full table-auto", classNames?.table)}>
             <TableHeader className="[&_th]:text-xs [&_th]:font-medium [&_tr]:border-b-0">
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
@@ -144,7 +155,7 @@ export default function DataTable<T>({
               ))}
             </TableHeader>
 
-            <TableBody className="[&_tr]:even:bg-gray-25 [&_tr]:hover:bg-gray-25 [&_tr]:border-b [&_tr]:border-dashed [&_tr]:border-gray-50">
+            <TableBody className="[&_tr]:even:bg-gray-25 [&_tr]:hover:bg-gray-25 [&_tr]:border-b [&_tr]:border-b-border">
               {isLoading
                 ? Array.from({ length: 10 }).map((_, index) => (
                   <TableRow key={`loadingRow-${index}`}>
@@ -167,7 +178,7 @@ export default function DataTable<T>({
                       <TableCell
                         key={cell.id}
                         className={cn(
-                          "h-14 px-2.5 py-2 text-sm font-normal text-gray-700",
+                          "h-14 px-2.5 py-2 text-sm font-normal text-muted-foreground",
                           classNames?.td,
                           cell.column.columnDef.meta?.classNames?.td,
                         )}
