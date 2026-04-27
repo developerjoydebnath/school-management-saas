@@ -111,23 +111,23 @@ export default function DataTable<T>({
   return (
     <div>
       <div className={cn("overflow-x-auto", className)}>
-        <div className={cn("w-full", classNames?.tableContainer)}>
+        <div className={cn("w-full rounded-md overflow-hidden border", classNames?.tableContainer)}>
           <Table className={cn("w-full table-auto", classNames?.table)}>
-            <TableHeader className="[&_th]:text-xs [&_th]:font-medium [&_tr]:border-b-0">
+            <TableHeader className="[&_th]:text-sm [&_th]:font-medium [&_tr]:border-b [&_th]:py-1.5 bg-accent">
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
                     <TableHead
                       key={header.id}
                       className={cn(
-                        "bg-gray-25 h-8 p-0 text-gray-600",
+                        "h-8 p-0 text-accent-foreground",
                         classNames?.th,
                         header.column.columnDef?.meta?.classNames?.th,
                       )}
                     >
                       <div
                         onClick={header.column.getToggleSortingHandler()}
-                        className="flex w-full items-center px-2.5 py-2 hover:cursor-pointer"
+                        className={cn("flex w-full items-center px-2.5 py-2", header?.column.getCanSort() ? "cursor-pointer" : "cursor-default")}
                       >
                         <span className="flex-1">
                           {header.isPlaceholder
@@ -138,7 +138,7 @@ export default function DataTable<T>({
                             )}
                         </span>
 
-                        <span className="flex size-5 items-center justify-center">
+                        <span className={"flex size-5 items-center justify-center"}>
                           {header.column.getIsSorted() && (
                             <IconSortAZ
                               className="size-4"

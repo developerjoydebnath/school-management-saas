@@ -51,7 +51,6 @@ import {
 import { ListDropdownMenu } from "@/shared/components/form/rich-editor/tiptap-ui/list-dropdown-menu"
 import { MarkButton } from "@/shared/components/form/rich-editor/tiptap-ui/mark-button"
 import { TextAlignButton } from "@/shared/components/form/rich-editor/tiptap-ui/text-align-button"
-import { UndoRedoButton } from "@/shared/components/form/rich-editor/tiptap-ui/undo-redo-button"
 
 // --- Icons ---
 import { ArrowLeftIcon } from "@/shared/components/form/rich-editor/tiptap-icons/arrow-left-icon"
@@ -82,13 +81,6 @@ const MainToolbarContent = ({
 }) => {
   return (
     <>
-      <ToolbarGroup>
-        <UndoRedoButton action="undo" />
-        <UndoRedoButton action="redo" />
-      </ToolbarGroup>
-
-      <ToolbarSeparator />
-
       <ToolbarGroup>
         <HeadingDropdownMenu modal={false} levels={[1, 2, 3, 4]} />
         <ListDropdownMenu

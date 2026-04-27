@@ -3,7 +3,9 @@
 import { cn } from "@/shared/lib/utils";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import RCPagination, { type PaginationProps } from "rc-pagination";
-import { useState } from "react";
+import { Button } from "../ui/button";
+import { DebouncedInput } from "../ui/debounced-input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 type TPaginationProps = {
   total: number;
@@ -26,41 +28,33 @@ export function Pagination({
   onLimitChange,
   className,
 }: TPaginationProps) {
-  const [goToValue, setGoToValue] = useState("");
-
   const currentPage = page ?? 1;
   const safeTotalPages = totalPages ?? Math.ceil(total / limit) ?? 1;
-
-  const handleGoTo = () => {
-    const num = parseInt(goToValue, 10);
-    if (!isNaN(num) && num >= 1 && num <= safeTotalPages) {
-      onPageChange(num);
-    }
-    setGoToValue("");
-  };
 
   const itemRender: PaginationProps["itemRender"] = (pageNum, type) => {
     if (type === "prev") {
       return (
-        <button
+        <Button
           disabled={currentPage <= 1}
-          className="flex items-center gap-1 h-7 px-2.5 text-sm border border-gray-300 rounded text-gray-600 hover:bg-gray-50 transition-colors select-none disabled:opacity-40 disabled:cursor-not-allowed"
+          variant={"outline"}
+          className="shadow-none"
         >
           <IconChevronLeft className="size-3.5" />
           <span>Prev</span>
-        </button>
+        </Button>
       );
     }
 
     if (type === "next") {
       return (
-        <button
+        <Button
           disabled={currentPage >= safeTotalPages}
-          className="flex items-center gap-1 h-7 px-2.5 text-sm border border-gray-300 rounded text-gray-600 hover:bg-gray-50 transition-colors select-none disabled:opacity-40 disabled:cursor-not-allowed"
+          variant={"outline"}
+          className="shadow-none"
         >
           <span>Next</span>
           <IconChevronRight className="size-3.5" />
-        </button>
+        </Button>
       );
     }
 
@@ -75,21 +69,17 @@ export function Pagination({
     // type === "page"
     const isActive = pageNum === currentPage;
     return (
-      <button
-        className={cn(
-          "flex items-center justify-center h-7 w-7 text-sm rounded border transition-colors select-none",
-          isActive
-            ? "bg-primary border-primary text-white font-medium"
-            : "border-gray-300 text-gray-600 hover:bg-gray-50",
-        )}
+      <Button
+        variant={isActive ? "default" : "outline"}
+        className={cn("shadow-none", pageNum < 100 ? "min-w-9" : "")}
       >
         {pageNum}
-      </button>
+      </Button>
     );
   };
 
   return (
-    <div className={cn("flex flex-col gap-2", className)}>
+    <div className={cn("flex flex-col gap-4", className)}>
       {/* Top row */}
       <div className="flex items-center justify-between flex-wrap gap-3">
 
@@ -97,43 +87,35 @@ export function Pagination({
         <div className="flex items-center gap-4 flex-wrap">
           {/* Result per page */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600 whitespace-nowrap">
+            <span className="text-sm text-muted-foreground whitespace-nowrap">
               Result per page
             </span>
-            <div className="relative">
-              <select
-                value={limit}
-                onChange={(e) => onLimitChange?.(Number(e.target.value))}
-                className={cn(
-                  "appearance-none h-7 pl-2 pr-6 text-sm border border-gray-300 rounded",
-                  "bg-white text-gray-700 focus:outline-none focus:ring-1 focus:ring-primary",
-                  onLimitChange ? "cursor-pointer" : "pointer-events-none opacity-60",
-                )}
-              >
+            <Select value={limit.toString()} onValueChange={(v) => onLimitChange?.(Number(v))}>
+              <SelectTrigger className="w-[70px]!">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="min-w-0!" align="center">
                 {PAGE_SIZE_OPTIONS.map((size) => (
-                  <option key={size} value={size}>
+                  <SelectItem key={size} value={size.toString()}>
                     {size}
-                  </option>
+                  </SelectItem>
                 ))}
-              </select>
-              <IconChevronRight className="absolute right-1.5 top-1/2 -translate-y-1/2 rotate-90 size-3 text-gray-500 pointer-events-none" />
-            </div>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Go to page */}
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600 whitespace-nowrap">
+            <span className="text-sm text-muted-foreground whitespace-nowrap">
               Go to page
             </span>
-            <input
+            <DebouncedInput
               type="number"
               min={1}
               max={safeTotalPages}
-              value={goToValue}
-              onChange={(e) => setGoToValue(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleGoTo()}
-              onBlur={handleGoTo}
-              className="h-7 w-14 px-2 text-sm border border-gray-300 rounded text-center bg-white text-gray-700 focus:outline-none focus:ring-1 focus:ring-primary [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              value={page}
+              onChange={(value) => onPageChange(Number(value))}
+              className="w-14 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
           </div>
         </div>
@@ -152,16 +134,16 @@ export function Pagination({
       </div>
 
       {/* Bottom row: Page info + Total */}
-      <div className="flex items-center gap-6 text-sm text-gray-600">
+      <div className="flex items-center gap-6 text-sm text-muted-foreground">
         <span>
           Page{" "}
-          <span className="font-medium text-gray-800">{currentPage}</span>{" "}
+          <span className="font-medium text-muted-foreground">{currentPage}</span>{" "}
           of{" "}
-          <span className="font-medium text-gray-800">{safeTotalPages}</span>
+          <span className="font-medium text-muted-foreground">{safeTotalPages}</span>
         </span>
         <span>
           Total data{" "}
-          <span className="font-medium text-gray-800">{total}</span>
+          <span className="font-medium text-muted-foreground">{total}</span>
         </span>
       </div>
     </div>

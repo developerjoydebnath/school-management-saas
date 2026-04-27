@@ -247,6 +247,7 @@ export default function OrderTable({
   filter: OrderFilter;
 }) {
   const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(ROW_LIMIT);
 
   // const { data, meta, isLoading } = useTableData("/orders", {
   //   page: page.toString(),
@@ -263,9 +264,9 @@ export default function OrderTable({
 
   const meta = {
     page: 1,
-    limit: 10,
-    total: 12,
-    totalPages: 2,
+    limit: ROW_LIMIT,
+    total: 1000,
+    totalPages: Math.ceil(1000 / ROW_LIMIT),
     hasNextPage: false,
     hasPreviousPage: false,
   };
@@ -283,6 +284,7 @@ export default function OrderTable({
           total: meta.total,
           limit: ROW_LIMIT,
           onPageChange: setPage,
+          onLimitChange: setLimit,
         }}
         columns={[
           {
