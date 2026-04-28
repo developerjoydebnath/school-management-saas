@@ -1,28 +1,16 @@
-import { create } from 'zustand'
+import { create } from "zustand";
 
 export type BreadcrumbItemType = {
-  label: string
-  href?: string
-}
-
-type LayoutStore = {
-  heading: string
-  subHeading: string
-}
+	label: string;
+	href?: string;
+};
 
 type BreadcrumbStore = {
-  breadcrumbs: BreadcrumbItemType[];
-  layout: LayoutStore;
-  setBreadcrumbs: (breadcrumbs: BreadcrumbItemType[]) => void;
-  setLayout: (layout: LayoutStore) => void;
-}
+	breadcrumbs: BreadcrumbItemType[];
+	setBreadcrumbs: (breadcrumbs: BreadcrumbItemType[]) => void;
+};
 
 export const useBreadcrumbStore = create<BreadcrumbStore>((set) => ({
-  breadcrumbs: [],
-  layout: {
-    heading: "",
-    subHeading: "",
-  },
-  setBreadcrumbs: (breadcrumbs: BreadcrumbItemType[]) => set({ breadcrumbs }),
-  setLayout: (layout: LayoutStore) => set({ layout }),
-}))
+	breadcrumbs: [],
+	setBreadcrumbs: (breadcrumbs: BreadcrumbItemType[]) => set({ breadcrumbs }),
+}));

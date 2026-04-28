@@ -51,10 +51,10 @@ export default function SearchInput({
   };
 
   return (
-    <div className={cn("relative h-10 w-full", className)}>
+    <div className={cn("relative h-9 w-full", className)}>
       <IconSearch className="absolute top-1/2 left-3 size-5 -translate-y-1/2 text-gray-400" />
       <Input
-        className="h-full border-gray-100 pl-10 shadow-none"
+        className="h-full pl-10 shadow-none"
         placeholder="Search"
         value={inputValue}
         onChange={handleChange}

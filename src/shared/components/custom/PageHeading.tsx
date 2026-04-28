@@ -1,24 +1,26 @@
-"use client";
-
-import { useBreadcrumbStore } from "@/shared/stores/breadcrumb-store";
-import { useEffect } from "react";
+import { cn } from "@/shared/lib/utils";
 
 type Props = {
   heading: string;
   subHeading: string;
+  children?: React.ReactNode;
+  className?: string;
 }
 
 export default function PageHeading({
   heading,
   subHeading,
+  children,
+  className
 }: Props) {
-  const { setLayout } = useBreadcrumbStore();
-  useEffect(() => {
-    setLayout({
-      heading,
-      subHeading,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [heading, subHeading]);
-  return null;
+
+  return (
+    <div className={cn("flex justify-between items-center gap-4", className)}>
+      <div className="flex flex-col gap-1">
+        <h1 className="text-2xl font-bold">{heading}</h1>
+        <p className="text-sm text-muted-foreground">{subHeading}</p>
+      </div>
+      {children}
+    </div>
+  );
 }

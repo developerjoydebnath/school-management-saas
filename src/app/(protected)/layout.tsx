@@ -9,7 +9,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
       <AppSidebar />
       <div className='flex flex-1 flex-col overflow-hidden'>
         <Header />
-        <main className='flex-1 overflow-y-auto bg-accent relative p-4'>
+        <main className='flex-1 overflow-y-auto bg-accent relative sm:p-6 p-4'>
           {children}
         </main>
       </div>

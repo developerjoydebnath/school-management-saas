@@ -1,11 +1,14 @@
 "use client";
 
-import OrderFilterbar from "@/modules/dashboard/components/OrderFilterBar";
+import OrderFilterBar from "@/modules/dashboard/components/OrderFilterBar";
 import OrderTable from "@/modules/dashboard/components/OrderTable";
 import PageHeading from "@/shared/components/custom/PageHeading";
-import { SimpleEditor } from "@/shared/components/form/rich-editor/simple-editor";
+import TableFilter from "@/shared/components/table/TableFilter";
+import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
-import { useState } from "react";
+import { useBreadcrumbStore } from "@/shared/stores/breadcrumb-store";
+import { IconPlus } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
 
 export type FilterOption = {
   label: string;
@@ -28,22 +31,41 @@ export default function Orders() {
     startDate: undefined,
     endDate: undefined,
   });
+  const { setBreadcrumbs } = useBreadcrumbStore();
+
+
+  useEffect(() => {
+    setBreadcrumbs([
+      {
+        label: "Home",
+        href: "/",
+      },
+      {
+        label: "Orders",
+        href: "/dashboard",
+      },
+    ]);
+  }, [setBreadcrumbs]);
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="space-y-6">
       <PageHeading
         heading="Orders"
         subHeading="Manage your orders here. You can filter, search, and view details of each order."
-      />
-
-      <SimpleEditor value="" onValueChange={() => { }} className="mb-5" />
+      >
+        <Button>
+          <IconPlus />
+          Add Order
+        </Button>
+      </PageHeading>
 
       <Card className="p-6 ring-0">
         <CardHeader className="p-0">
-          <OrderFilterbar filter={filter} setFilter={setFilter} />
+          <OrderFilterBar filter={filter} setFilter={setFilter} />
         </CardHeader>
 
-        <CardContent className="p-0">
+        <CardContent className="p-0 space-y-4">
+          <TableFilter filter={filter} setFilter={setFilter} />
           <OrderTable queryType="ACTIVE" filter={filter} />
         </CardContent>
       </Card>

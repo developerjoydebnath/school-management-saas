@@ -17,19 +17,13 @@ type Props = {
   type?: "ACTIVE" | "HISTORY";
 };
 
-export default function OrderFilterbar({
+export default function OrderFilterBar({
   filter,
   setFilter,
   type = "ACTIVE",
 }: Props) {
   return (
     <div className="@container/filter flex flex-wrap items-center gap-2 sm:gap-4">
-      <SearchInput
-        value={filter.search}
-        onValueChange={(search) => setFilter({ ...filter, search })}
-        className="h-9 w-full @sm/filter:w-[clamp(200px,20vw,300px)]"
-      />
-
       <FilterButton
         title="Status"
         selected={filter.status}
@@ -134,6 +128,12 @@ export default function OrderFilterbar({
           </div>
         </FilterContent>
       </FilterContainer>
+
+      <SearchInput
+        value={filter.search}
+        onValueChange={(search) => setFilter({ ...filter, search })}
+        className="h-9 w-full @sm/filter:w-[clamp(200px,20vw,300px)]"
+      />
     </div>
   );
 }
