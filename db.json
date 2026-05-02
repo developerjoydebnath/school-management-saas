@@ -1,0 +1,59 @@
+{
+  "admissions": [],
+  "users": [
+    {
+      "id": 1,
+      "email": "dev@educore.com",
+      "password": "password",
+      "name": "Developer User",
+      "base_role": "DEVELOPER",
+      "permissions": [],
+      "token": "token_dev"
+    },
+    {
+      "id": 2,
+      "email": "superadmin@educore.com",
+      "password": "password",
+      "name": "Super Admin",
+      "base_role": "SUPER_ADMIN",
+      "permissions": [],
+      "token": "token_superadmin"
+    },
+    {
+      "id": 3,
+      "email": "admin@educore.com",
+      "password": "password",
+      "name": "School Admin",
+      "base_role": "SCHOOL_ADMIN",
+      "permissions": ["dashboard.view", "academics.view", "students.view"],
+      "token": "token_schooladmin"
+    },
+    {
+      "id": 4,
+      "email": "teacher@educore.com",
+      "password": "password",
+      "name": "Teacher User",
+      "base_role": "TEACHER",
+      "permissions": ["dashboard.view", "academics.view"],
+      "token": "token_teacher"
+    },
+    {
+      "id": 5,
+      "email": "student@educore.com",
+      "password": "password",
+      "name": "Student User",
+      "base_role": "STUDENT",
+      "permissions": ["dashboard.view"],
+      "token": "token_student"
+    },
+    {
+      "id": 6,
+      "email": "parent@educore.com",
+      "password": "password",
+      "name": "Parent User",
+      "base_role": "PARENT",
+      "permissions": ["dashboard.view"],
+      "token": "token_parent"
+    }
+  ]
+}

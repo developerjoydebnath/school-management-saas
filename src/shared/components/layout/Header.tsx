@@ -1,5 +1,6 @@
 "use client"
 
+import { NavUser } from "@/shared/components/custom/nav-user"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,7 +12,6 @@ import {
 import { Separator } from "@/shared/components/ui/separator"
 import { SidebarTrigger } from "@/shared/components/ui/sidebar"
 import { useBreadcrumbStore } from "@/shared/stores/breadcrumb-store"
-import { NavUser } from "@/shared/components/custom/nav-user"
 import React from "react"
 
 export default function Header() {
@@ -27,7 +27,7 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-10 flex h-14 shrink-0 bg-background items-center justify-between border-b px-4">
+    <header className="sticky top-0 z-50 flex h-14 shrink-0 bg-background items-center justify-between border-b px-4">
       <div className="flex items-center gap-2">
         <SidebarTrigger />
         <Separator orientation="vertical" className="mr-2 h-4 my-auto" />

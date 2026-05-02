@@ -120,7 +120,7 @@ export default function DataTable<T>({
                     <TableHead
                       key={header.id}
                       className={cn(
-                        "h-8 p-0 text-accent-foreground",
+                        "h-8 p-0 text-foreground",
                         classNames?.th,
                         header.column.columnDef?.meta?.classNames?.th,
                       )}
@@ -163,7 +163,7 @@ export default function DataTable<T>({
                       <TableCell
                         key={col.id}
                         className={cn(
-                          "h-14 px-2.5 py-2 text-sm font-normal text-gray-700",
+                          "h-14 px-2.5 py-2 text-sm font-normal text-foreground",
                           classNames?.td,
                         )}
                       >
@@ -178,7 +178,7 @@ export default function DataTable<T>({
                       <TableCell
                         key={cell.id}
                         className={cn(
-                          "h-14 px-2.5 py-2 text-sm font-normal text-muted-foreground",
+                          "h-14 px-2.5 py-2 text-sm font-normal text-foreground",
                           classNames?.td,
                           cell.column.columnDef.meta?.classNames?.td,
                         )}

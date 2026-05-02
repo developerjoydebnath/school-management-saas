@@ -29,7 +29,7 @@ export default function PasswordInput({
         type={passShow ? "text" : "password"}
         placeholder={placeholder}
         className={cn(
-          "focus:border-primary focus:ring-primary rounded-md border-gray-200 shadow-none",
+          "focus:border-primary focus:ring-primary rounded-md h-10 shadow-none",
           hasError && "border-red-500 focus:ring-red-500",
           className,
         )}

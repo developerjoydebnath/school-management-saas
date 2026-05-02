@@ -1,5 +1,5 @@
 import { cn } from '@/shared/lib/tiptap-utils';
-import { IconCopy, IconFileExcel, IconFilter2Cancel, IconPdf, IconTable } from '@tabler/icons-react';
+import { IconCloudDownload, IconCopy, IconFileDescription, IconFileTypePdf, IconFilter2Cancel, IconTable } from '@tabler/icons-react';
 import SearchInput from '../form/SearchInput';
 import { Button } from '../ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
@@ -9,24 +9,33 @@ type WithSearch = {
 }
 
 type Props<T extends WithSearch> = {
+  children?: React.ReactNode;
   filter: T;
   setFilter: (filter: T) => void;
   className?: string;
-  actions?: React.ReactNode;
+  hideExport?: boolean;
+  hideSearch?: boolean;
+  hideReset?: boolean;
+  resetFilters?: () => void;
 }
 
 export default function TableFilter<T extends WithSearch>({
+  children,
   filter,
   setFilter,
-  actions,
   className,
+  hideExport,
+  hideReset,
+  hideSearch,
+  resetFilters,
 }: Props<T>) {
   return (
     <section className={cn('flex justify-between items-center', className)}>
-      <div>
-        <DropdownMenu>
+      <div className="flex items-center gap-2">
+        {!hideExport && <DropdownMenu>
           <DropdownMenuTrigger render={
             <Button variant='outline'>
+              <IconCloudDownload className='size-4' />
               Export
             </Button>
           } />
@@ -36,32 +45,34 @@ export default function TableFilter<T extends WithSearch>({
               Copy
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer">
-              <IconPdf className='size-4' />
+              <IconFileTypePdf className='size-4' />
               PDF
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer">
-              <IconFileExcel className='size-4' />
+              <IconTable className='size-4' />
               Excel
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer">
-              <IconTable className='size-4' />
+              <IconFileDescription className='size-4' />
               CSV
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu>}
+
+        {children}
       </div>
 
       <div className='flex items-center gap-2'>
-        <SearchInput
+        {!hideSearch && <SearchInput
           value={filter.search}
           onValueChange={(search) => setFilter({ ...filter, search })}
           className="max-w-80 w-full"
-        />
+        />}
 
-        <Button variant={'outline'}>
+        {!hideReset && <Button onClick={resetFilters ? resetFilters : () => { }} variant={'outline'}>
           <IconFilter2Cancel className='size-4' />
           Reset Filters
-        </Button>
+        </Button>}
       </div>
     </section>
   )

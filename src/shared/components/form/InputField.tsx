@@ -30,6 +30,7 @@ interface FormFieldProps extends UseControllerProps {
   helperText?: string;
   min?: number;
   max?: number;
+  control: any;
 }
 
 export default function InputField({
@@ -45,7 +46,7 @@ export default function InputField({
       {props.label && (
         <Label
           htmlFor={field.name}
-          className={cn("text-sm font-medium text-gray-600", labelClass)}
+          className={cn("text-sm font-medium text-muted-foreground", labelClass)}
         >
           {props.label} {!required && "(Optional)"}
         </Label>
@@ -125,6 +126,7 @@ export default function InputField({
             className={className}
             value={field.value}
             onChange={field.onChange}
+            hasError={!!fieldState.error}
           />
         ))
 
@@ -155,7 +157,7 @@ export default function InputField({
               {...field}
               className={cn(
                 fieldState.error ? "border-red-500 focus:ring-red-500" : "",
-                "focus:border-primary focus:ring-primary rounded-md border-gray-200 shadow-none",
+                "focus:border-primary focus:ring-primary rounded-md shadow-none h-10",
                 className,
               )}
             />

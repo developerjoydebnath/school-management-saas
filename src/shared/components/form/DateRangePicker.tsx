@@ -30,7 +30,7 @@ export default function DateRangePicker({
           <Button
             size="lg"
             className={cn(
-              "hover:bg-gray-25/5 h-9 w-full justify-start border border-dashed border-gray-200 bg-transparent text-sm text-gray-600",
+              "hover:bg-gray-25/5 h-9 w-full justify-start border border-border bg-transparent text-sm text-foreground",
               className,
             )}
           >
@@ -60,6 +60,7 @@ export default function DateRangePicker({
           numberOfMonths={2}
           selected={value}
           onSelect={onValueChange}
+          showOutsideDays={false}
           classNames={{
             day_outside: "day-outside !text-gray-600 ",
           }}

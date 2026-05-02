@@ -84,7 +84,7 @@ function RecursiveMenuItem({ item, level }: { item: SidebarMenuType; level: numb
             <SidebarMenuButton tooltip={item.name} isActive={isActive} className={`px-4 py-3 h-auto rounded-none border-l-4 ${isActive ? 'border-primary bg-sidebar-accent' : 'border-transparent'}`}>
               {item.icon && <item.icon />}
               <span className="font-medium tracking-wide">{item.name}</span>
-              <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              <ChevronRight className={`ml-auto transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`} />
             </SidebarMenuButton>
           } />
           <CollapsibleContent>

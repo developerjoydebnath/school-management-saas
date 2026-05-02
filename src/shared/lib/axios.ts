@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 const axios = Axios.create({
-  baseURL: "/api",
+  baseURL: "/api/proxy",
   withCredentials: true,
 });
 

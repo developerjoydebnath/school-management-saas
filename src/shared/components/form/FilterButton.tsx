@@ -62,29 +62,49 @@ export default function FilterButton({
 
   return (
     <div>
-      <label className="mb-2 block text-sm font-medium text-gray-600">
+      <label className="mb-2 block text-xs w-full font-medium text-muted-foreground">
         {title}
       </label>
       <Popover>
         <PopoverTrigger
           className={cn(
-            "hover:bg-gray-25 flex h-9 w-full items-center gap-2 rounded-md border border-dashed px-2 text-sm text-gray-600",
+            "flex h-9 w-full cursor-pointer bg-transparent items-center gap-2 rounded-md border border-border px-2 text-sm",
             className,
           )}
         >
-          <div className="flex items-center space-x-2">
+          <div className="flex w-full items-center space-x-2">
             <IconCirclePlus strokeWidth={1.5} className="size-4" />
             <span> {title} </span>
           </div>
 
           <Separator
             orientation="vertical"
-            className={cn(!selected?.length && "hidden")}
           />
 
-          {selected?.length ? (
+          {/* <Separator
+            orientation="vertical"
+            className={cn(!selected?.length && "hidden")}
+          /> */}
+
+
+          <>
+            <Badge variant="secondary" className="bg-gray-50 text-gray-700">
+              {selected.length} selected
+            </Badge>
+
+            <Badge
+              onClick={resetFilter}
+              variant="secondary"
+              className="cursor-pointer rounded-full aspect-square bg-gray-50 p-1 text-gray-700 hover:bg-gray-200 active:bg-gray-100"
+            >
+              <IconX size={12} />
+            </Badge>
+          </>
+
+
+          {/* {selected?.length ? (
             <>
-              {selected.length > 2 ? (
+              {selected.length > 0 ? (
                 <Badge variant="secondary" className="bg-gray-50 text-gray-700">
                   {selected.length} selected
                 </Badge>
@@ -107,7 +127,7 @@ export default function FilterButton({
                 <IconX size={12} />
               </Badge>
             </>
-          ) : null}
+          ) : null} */}
         </PopoverTrigger>
         <PopoverContent align="start" className="p-0">
           <Command>

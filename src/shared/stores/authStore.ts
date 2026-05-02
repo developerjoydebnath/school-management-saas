@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type AuthUserStateType = {
+export type AuthUserStateType = {
     id: number | null;
     name: string | null;
     auth_id: string | null;

@@ -26,6 +26,9 @@ import {
 } from "@/shared/components/ui/dropdown-menu"
 import { useSidebar } from "@/shared/components/ui/sidebar"
 import { useTheme } from "next-themes"
+import { useAuthStore } from "@/shared/stores/authStore"
+import { useRouter } from "next/navigation"
+import { PATHS } from "@/shared/configs/paths.config"
 
 export function NavUser({
   user,
@@ -39,6 +42,17 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar()
   const { setTheme, theme } = useTheme()
+  const clearAuth = useAuthStore((state) => state.clearAuth)
+  const router = useRouter()
+
+  const handleLogout = () => {
+    // Clear proxy auth cookie
+    document.cookie = 'auth_token=; path=/; max-age=0; SameSite=Lax';
+    // Clear client auth store
+    clearAuth();
+    // Redirect to login
+    router.push(PATHS.AUTH.LOGIN);
+  }
 
   return (
     <DropdownMenu>
@@ -121,7 +135,10 @@ export function NavUser({
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className="text-red-600 focus:text-red-600 focus:bg-red-100 dark:focus:bg-red-900/30">
+        <DropdownMenuItem 
+          onClick={handleLogout}
+          className="text-red-600 focus:text-red-600 focus:bg-red-100 dark:focus:bg-red-900/30 cursor-pointer"
+        >
           <LogOut className="mr-2 h-4 w-4" />
           Log out
         </DropdownMenuItem>
