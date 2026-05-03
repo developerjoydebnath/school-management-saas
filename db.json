@@ -1,59 +1,198 @@
 {
-  "admissions": [],
-  "users": [
-    {
-      "id": 1,
-      "email": "dev@educore.com",
-      "password": "password",
-      "name": "Developer User",
-      "base_role": "DEVELOPER",
-      "permissions": [],
-      "token": "token_dev"
-    },
-    {
-      "id": 2,
-      "email": "superadmin@educore.com",
-      "password": "password",
-      "name": "Super Admin",
-      "base_role": "SUPER_ADMIN",
-      "permissions": [],
-      "token": "token_superadmin"
-    },
-    {
-      "id": 3,
-      "email": "admin@educore.com",
-      "password": "password",
-      "name": "School Admin",
-      "base_role": "SCHOOL_ADMIN",
-      "permissions": ["dashboard.view", "academics.view", "students.view"],
-      "token": "token_schooladmin"
-    },
-    {
-      "id": 4,
-      "email": "teacher@educore.com",
-      "password": "password",
-      "name": "Teacher User",
-      "base_role": "TEACHER",
-      "permissions": ["dashboard.view", "academics.view"],
-      "token": "token_teacher"
-    },
-    {
-      "id": 5,
-      "email": "student@educore.com",
-      "password": "password",
-      "name": "Student User",
-      "base_role": "STUDENT",
-      "permissions": ["dashboard.view"],
-      "token": "token_student"
-    },
-    {
-      "id": 6,
-      "email": "parent@educore.com",
-      "password": "password",
-      "name": "Parent User",
-      "base_role": "PARENT",
-      "permissions": ["dashboard.view"],
-      "token": "token_parent"
-    }
-  ]
+	"admissions": [],
+	"subjects": [
+		{
+			"id": "1",
+			"name": "Bangla 1st Paper",
+			"code": "101",
+			"type": "MANDATORY",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "2",
+			"name": "Bangla 2nd Paper",
+			"code": "102",
+			"type": "MANDATORY",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "3",
+			"name": "English 1st Paper",
+			"code": "107",
+			"type": "MANDATORY",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "4",
+			"name": "English 2nd Paper",
+			"code": "108",
+			"type": "MANDATORY",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "5",
+			"name": "Mathematics",
+			"code": "109",
+			"type": "MANDATORY",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "6",
+			"name": "General Science",
+			"code": "127",
+			"type": "MANDATORY",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "7",
+			"name": "Bangladesh and Global Studies",
+			"code": "150",
+			"type": "MANDATORY",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "8",
+			"name": "Information and Communication Technology",
+			"code": "154",
+			"type": "MANDATORY",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "9",
+			"name": "Physics",
+			"code": "136",
+			"type": "OPTIONAL",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "10",
+			"name": "Chemistry",
+			"code": "137",
+			"type": "OPTIONAL",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "11",
+			"name": "Biology",
+			"code": "138",
+			"type": "OPTIONAL",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "12",
+			"name": "Higher Mathematics",
+			"code": "126",
+			"type": "OPTIONAL",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "13",
+			"name": "Accounting",
+			"code": "146",
+			"type": "OPTIONAL",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "14",
+			"name": "Finance & Banking",
+			"code": "152",
+			"type": "OPTIONAL",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "15",
+			"name": "Business Entrepreneurship",
+			"code": "143",
+			"type": "OPTIONAL",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "16",
+			"name": "Geography and Environment",
+			"code": "110",
+			"type": "OPTIONAL",
+			"status": "ACTIVE"
+		},
+		{
+			"id": "17",
+			"name": "Agriculture Studies",
+			"code": "134",
+			"type": "PRACTICAL",
+			"status": "ACTIVE"
+		}
+	],
+	"classes": [
+		{
+			"id": "1",
+			"name": "Class 1",
+			"capacity": 30,
+			"roomNumber": "101",
+			"status": "Active"
+		},
+		{
+			"name": "Class 2",
+			"sections": ["A", "B", "C"],
+			"capacity": 30,
+			"roomNumber": "102",
+			"status": "Active",
+			"id": "9HQ5ejTr2bE"
+		}
+	],
+	"users": [
+		{
+			"id": "1",
+			"email": "dev@educore.com",
+			"password": "password",
+			"name": "Developer User",
+			"base_role": "DEVELOPER",
+			"permissions": [],
+			"token": "token_dev"
+		},
+		{
+			"id": "2",
+			"email": "superadmin@educore.com",
+			"password": "password",
+			"name": "Super Admin",
+			"base_role": "SUPER_ADMIN",
+			"permissions": [],
+			"token": "token_superadmin"
+		},
+		{
+			"id": "3",
+			"email": "admin@educore.com",
+			"password": "password",
+			"name": "School Admin",
+			"base_role": "SCHOOL_ADMIN",
+			"permissions": ["dashboard.view", "academics.view", "students.view"],
+			"token": "token_schooladmin"
+		},
+		{
+			"id": "4",
+			"email": "teacher@educore.com",
+			"password": "password",
+			"name": "Teacher User",
+			"base_role": "TEACHER",
+			"permissions": ["dashboard.view", "academics.view"],
+			"token": "token_teacher"
+		},
+		{
+			"id": "5",
+			"email": "student@educore.com",
+			"password": "password",
+			"name": "Student User",
+			"base_role": "STUDENT",
+			"permissions": ["dashboard.view"],
+			"token": "token_student"
+		},
+		{
+			"id": "6",
+			"email": "parent@educore.com",
+			"password": "password",
+			"name": "Parent User",
+			"base_role": "PARENT",
+			"permissions": ["dashboard.view"],
+			"token": "token_parent"
+		}
+	],
+	"$schema": "./node_modules/json-server/schema.json"
 }

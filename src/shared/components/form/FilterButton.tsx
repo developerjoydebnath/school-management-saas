@@ -72,9 +72,9 @@ export default function FilterButton({
             className,
           )}
         >
-          <div className="flex w-full items-center space-x-2">
+          <div className="flex w-full items-center space-x-2 pr-2">
             <IconCirclePlus strokeWidth={1.5} className="size-4" />
-            <span> {title} </span>
+            <span className="line-clamp-1"> {title} </span>
           </div>
 
           <Separator

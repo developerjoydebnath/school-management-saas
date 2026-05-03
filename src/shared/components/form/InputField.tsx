@@ -17,6 +17,7 @@ import { match } from "ts-pattern";
 import DatePicker from "./DatePicker";
 import NumberInput from "./NumberInput";
 import PasswordInput from "./PasswordInput";
+import TagInput from "./TagInput";
 
 interface FormFieldProps extends UseControllerProps {
   label?: string;
@@ -106,12 +107,12 @@ export default function InputField({
             value={field.value?.toString()}
             onValueChange={field.onChange}
           >
-            <SelectTrigger className="h-10 w-full">
+            <SelectTrigger className="h-10! w-full">
               <SelectValue placeholder={props.placeholder} />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="p-1">
               {props?.options?.map((opt) => (
-                <SelectItem key={opt.value} value={opt.value}>
+                <SelectItem key={opt.value} value={opt.value} className="cursor-pointer py-2">
                   {opt.label}
                 </SelectItem>
               ))}
@@ -135,6 +136,16 @@ export default function InputField({
           <DatePicker
             value={field.value}
             onValueChange={field.onChange}
+            className={className}
+          />
+        ))
+
+        // tags
+        .with("tags", () => (
+          <TagInput
+            value={field.value || []}
+            onChange={field.onChange}
+            placeholder={props.placeholder}
             className={className}
           />
         ))

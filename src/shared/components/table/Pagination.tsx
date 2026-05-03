@@ -91,10 +91,10 @@ export function Pagination({
               Result per page
             </span>
             <Select value={limit.toString()} onValueChange={(v) => onLimitChange?.(Number(v))}>
-              <SelectTrigger className="w-[70px]!">
+              <SelectTrigger className="w-[70px]! h-9! shadow-none">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="min-w-0!" align="center">
+              <SelectContent className="p-1 min-w-0!" align="center">
                 {PAGE_SIZE_OPTIONS.map((size) => (
                   <SelectItem key={size} value={size.toString()}>
                     {size}

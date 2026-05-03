@@ -22,7 +22,7 @@ export default function NumberInput({
         onChange(Math.max(+e.target.value, Number(props.min || 0)))
       }
       className={cn(
-        "focus:border-primary focus:ring-primary w-full rounded-md px-3 py-2",
+        "focus:border-primary focus:ring-primary w-full rounded-md px-3 py-2 h-10",
         className,
       )}
       onFocus={(e) => e.target.select()}
