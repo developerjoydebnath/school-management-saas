@@ -1,7 +1,7 @@
 "use client";
 
-import SubjectForm from '@/modules/academics/components/SubjectForm';
-import SubjectList from '@/modules/academics/components/SubjectList';
+import SubjectForm from '@/modules/academics/subjects/components/SubjectForm';
+import SubjectList from '@/modules/academics/subjects/components/SubjectList';
 import PageHeading from '@/shared/components/custom/PageHeading';
 import { Button } from '@/shared/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/shared/components/ui/dialog';
@@ -18,7 +18,7 @@ export default function SubjectsPage() {
     setBreadcrumbs([
       { label: "Dashboard", href: PATHS.DASHBOARD },
       { label: "Academics", href: PATHS.ACADEMICS.ROOT },
-      { label: "Subjects", href: PATHS.ACADEMICS.SUBJECTS },
+      { label: "Subjects", href: PATHS.ACADEMICS.SUBJECTS.ROOT },
     ]);
   }, [setBreadcrumbs]);
 
@@ -31,7 +31,7 @@ export default function SubjectsPage() {
         <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
           <DialogTrigger render={
             <Button>
-              <Plus className="mr-2 h-4 w-4" /> Add Subject
+              <Plus className="h-4 w-4" /> Add Subject
             </Button>
           }>
           </DialogTrigger>

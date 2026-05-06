@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
 import { useAuthStore } from '@/shared/stores/authStore';
 import { hasAccess } from '@/shared/utils/permission';
+import React from 'react';
 
 interface PermissionGuardProps {
   /** Array of required permissions to check */

@@ -25,13 +25,20 @@ export const CLASS_FORM_FIELDS = [
     type: "text",
   },
   {
+    name: "shift",
+    label: "Shift",
+    placeholder: "Select Shift",
+    type: "select",
+    options: [], // Will be populated dynamically
+  },
+  {
     name: "status",
     label: "Status",
     placeholder: "Select Status",
     type: "select",
     options: [
-      { label: "Active", value: "Active" },
-      { label: "Inactive", value: "Inactive" },
+      { label: "Active", value: "ACTIVE" },
+      { label: "Inactive", value: "INACTIVE" },
     ],
   },
 ];

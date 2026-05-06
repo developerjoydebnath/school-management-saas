@@ -13,7 +13,7 @@ export default function AdmissionSettingsPage() {
       { label: "Home", href: "/" },
       { label: "Dashboard", href: PATHS.DASHBOARD },
       { label: "Admission Management", href: PATHS.ADMISSION.ROOT },
-      { label: "Admission Settings", href: PATHS.ADMISSION.SETTINGS },
+      { label: "Admission Settings", href: PATHS.ADMISSION.SETTINGS.ROOT },
     ]);
   }, [setBreadcrumbs]);
 

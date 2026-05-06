@@ -1,0 +1,65 @@
+"use client";
+
+import ShiftForm from '@/modules/academics/shifts/components/ShiftForm';
+import ShiftList from '@/modules/academics/shifts/components/ShiftList';
+import PageHeading from '@/shared/components/custom/PageHeading';
+import PermissionGuard from '@/shared/components/custom/PermissionGuard';
+import { Button } from '@/shared/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/shared/components/ui/dialog';
+import { ScrollArea } from '@/shared/components/ui/scroll-area';
+import { PATHS } from '@/shared/configs/paths.config';
+import { PERMISSIONS } from '@/shared/configs/permissions.config';
+import { useBreadcrumbStore } from '@/shared/stores/breadcrumb-store';
+import { Plus } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+export default function ShiftsPage() {
+  const { setBreadcrumbs } = useBreadcrumbStore();
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+
+  useEffect(() => {
+    setBreadcrumbs([
+      { label: "Dashboard", href: PATHS.DASHBOARD },
+      { label: "Academics", href: PATHS.ACADEMICS.ROOT },
+      { label: "Shifts", href: PATHS.ACADEMICS.SHIFTS.ROOT },
+    ]);
+  }, [setBreadcrumbs]);
+
+  return (
+    <div className="space-y-6">
+      <PageHeading
+        heading="Shifts"
+        subHeading="Manage academic shifts and timings."
+      >
+        <PermissionGuard
+          permissions={[
+            PERMISSIONS.ACADEMICS.ALL,
+            PERMISSIONS.ACADEMICS.SHIFTS?.ALL,
+            PERMISSIONS.ACADEMICS.SHIFTS?.CREATE,
+          ].filter(Boolean) as string[]}
+        >
+          <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+            <DialogTrigger render={
+              <Button>
+                <Plus className="h-4 w-4" /> Add Shift
+              </Button>
+            }>
+            </DialogTrigger>
+            <DialogContent className="px-0">
+              <DialogHeader className="px-6">
+                <DialogTitle>Add New Shift</DialogTitle>
+              </DialogHeader>
+              <ScrollArea className="max-h-[80vh] px-4">
+                <ShiftForm onSuccess={() => setIsCreateOpen(false)} />
+              </ScrollArea>
+            </DialogContent>
+          </Dialog>
+        </PermissionGuard>
+      </PageHeading>
+
+      <div className="w-full">
+        <ShiftList />
+      </div>
+    </div>
+  );
+}

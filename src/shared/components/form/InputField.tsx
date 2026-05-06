@@ -18,6 +18,8 @@ import DatePicker from "./DatePicker";
 import NumberInput from "./NumberInput";
 import PasswordInput from "./PasswordInput";
 import TagInput from "./TagInput";
+import ClassSelection from "./ClassSelection";
+import SubjectSelection from "./SubjectSelection";
 
 interface FormFieldProps extends UseControllerProps {
   label?: string;
@@ -146,6 +148,24 @@ export default function InputField({
             value={field.value || []}
             onChange={field.onChange}
             placeholder={props.placeholder}
+            className={className}
+          />
+        ))
+
+        // classSelection
+        .with("classSelection", () => (
+          <ClassSelection
+            value={field.value || []}
+            onChange={field.onChange}
+            className={className}
+          />
+        ))
+
+        // subjectSelection
+        .with("subjectSelection", () => (
+          <SubjectSelection
+            value={field.value || []}
+            onChange={field.onChange}
             className={className}
           />
         ))

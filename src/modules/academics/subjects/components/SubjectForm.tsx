@@ -1,7 +1,7 @@
 "use client";
 
-import { SUBJECT_FORM_FIELDS } from "@/modules/academics/constants/subject.constant";
-import { SubjectFormValues, subjectSchema } from "@/modules/academics/dto/subject.dto";
+import { SUBJECT_FORM_FIELDS } from "@/modules/academics/subjects/constants/subject.constant";
+import { SubjectFormValues, subjectSchema } from "@/modules/academics/subjects/dto/subject.dto";
 import InputField from "@/shared/components/form/InputField";
 import { Button } from "@/shared/components/ui/button";
 import axios from "@/shared/lib/axios";
@@ -27,12 +27,19 @@ export default function SubjectForm({ onSuccess, initialData }: SubjectFormProps
       code: initialData?.code || "",
       type: initialData?.type || SubjectTypeEnum.MANDATORY,
       status: initialData?.status || StatusEnum.ACTIVE,
+      classes: initialData?.classes || [],
     },
   });
 
   useEffect(() => {
     if (initialData) {
-      form.reset(initialData);
+      form.reset({
+        name: initialData.name,
+        code: initialData.code,
+        type: initialData.type,
+        status: initialData.status,
+        classes: initialData.classes || [],
+      });
     }
   }, [initialData, form]);
 

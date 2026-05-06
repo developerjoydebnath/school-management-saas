@@ -6,6 +6,7 @@ export class Subject {
 	private _code: string;
 	private _type: SubjectTypeEnum;
 	private _status: StatusEnum;
+	private _classes: string[];
 	private _createdAt: Date;
 	private _updatedAt: Date;
 	private _original: any;
@@ -16,6 +17,7 @@ export class Subject {
 		this._code = data.code || "";
 		this._type = data.type || "";
 		this._status = data.status || "";
+		this._classes = data.classes || [];
 		this._createdAt = data.createdAt || "";
 		this._updatedAt = data.updatedAt || "";
 		this._original = data.original || "";
@@ -39,6 +41,10 @@ export class Subject {
 
 	get status(): StatusEnum {
 		return this._status;
+	}
+
+	get classes(): string[] {
+		return this._classes;
 	}
 
 	get createdAt(): Date {

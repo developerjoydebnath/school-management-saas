@@ -1,7 +1,7 @@
 "use client";
 
-import ClassForm from '@/modules/academics/components/ClassForm';
-import ClassList from '@/modules/academics/components/ClassList';
+import ClassForm from '@/modules/academics/classes/components/ClassForm';
+import ClassList from '@/modules/academics/classes/components/ClassList';
 import PageHeading from '@/shared/components/custom/PageHeading';
 import { Button } from '@/shared/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/shared/components/ui/dialog';
@@ -18,7 +18,7 @@ export default function ClassesPage() {
     setBreadcrumbs([
       { label: "Dashboard", href: PATHS.DASHBOARD },
       { label: "Academics", href: PATHS.ACADEMICS.ROOT },
-      { label: "Classes", href: PATHS.ACADEMICS.CLASSES },
+      { label: "Classes", href: PATHS.ACADEMICS.CLASSES.ROOT },
     ]);
   }, [setBreadcrumbs]);
 
@@ -31,7 +31,7 @@ export default function ClassesPage() {
         <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
           <DialogTrigger render={
             <Button>
-              <Plus className="mr-2 h-4 w-4" /> Add Class
+              <Plus className="h-4 w-4" /> Add Class
             </Button>
           }>
 

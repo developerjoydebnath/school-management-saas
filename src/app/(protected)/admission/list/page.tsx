@@ -14,7 +14,7 @@ export default function ApplicationListPage() {
       { label: "Home", href: "/" },
       { label: "Dashboard", href: PATHS.DASHBOARD },
       { label: "Admission Management", href: PATHS.ADMISSION.ROOT },
-      { label: "Application List", href: PATHS.ADMISSION.LIST },
+      { label: "Application List", href: PATHS.ADMISSION.LIST.ROOT },
     ]);
   }, [setBreadcrumbs]);
 

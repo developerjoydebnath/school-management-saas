@@ -6,6 +6,7 @@ export const subjectSchema = z.object({
 	code: z.string().optional(),
 	type: z.enum(SubjectTypeEnum),
 	status: z.enum(StatusEnum),
+	classes: z.array(z.string()).optional(),
 });
 
 export type SubjectFormValues = z.infer<typeof subjectSchema>;

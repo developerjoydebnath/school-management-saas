@@ -7,22 +7,22 @@ const fetcher = (url: string) => axios.get(url);
 
 // Custom SWR hook for handling URL params and data fetching
 export const useSWR = (
-  url: string | null,
-  query?: Record<string, any>,
-  options?: SWRConfiguration,
+	url: string | null,
+	query?: Record<string, any>,
+	options?: SWRConfiguration
 ) => {
-  const sp = buildQueryParams(query || {});
+	const sp = buildQueryParams(query || {});
 
-  const { data, error, ...response } = useSWRInstance(
-    url ? `${url}?${sp.toString()}` : null,
-    fetcher,
-    { shouldRetryOnError: false, revalidateOnFocus: false, ...options },
-  );
+	const { data, error, ...response } = useSWRInstance(
+		url ? `${url}${sp?.toString() ? `?${sp.toString()}` : ""}` : null,
+		fetcher,
+		{ shouldRetryOnError: false, revalidateOnFocus: false, ...options }
+	);
 
-  return {
-    data: data?.data,
-    isError: error,
-    error,
-    ...response,
-  };
+	return {
+		data: data?.data,
+		isError: error,
+		error,
+		...response,
+	};
 };

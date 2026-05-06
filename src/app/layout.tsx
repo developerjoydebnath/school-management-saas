@@ -1,6 +1,4 @@
-import { ThemeProvider } from "@/shared/components/custom/theme-provider";
-import { Toaster } from "@/shared/components/ui/sonner";
-import { TooltipProvider } from "@/shared/components/ui/tooltip";
+import Provider from "@/shared/components/providers/Provider";
 import { cn } from "@/shared/lib/utils";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
@@ -35,10 +33,9 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
-        <ThemeProvider>
-          <TooltipProvider>{children}</TooltipProvider>
-        </ThemeProvider>
-        <Toaster richColors />
+        <Provider>
+          {children}
+        </Provider>
       </body>
     </html>
   );

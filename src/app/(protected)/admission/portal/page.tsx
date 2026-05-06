@@ -13,7 +13,7 @@ export default function OnlinePortalPage() {
       { label: "Home", href: "/" },
       { label: "Dashboard", href: PATHS.DASHBOARD },
       { label: "Admission Management", href: PATHS.ADMISSION.ROOT },
-      { label: "Online Portal", href: PATHS.ADMISSION.PORTAL },
+      { label: "Online Portal", href: PATHS.ADMISSION.PORTAL.ROOT },
     ]);
   }, [setBreadcrumbs]);
 

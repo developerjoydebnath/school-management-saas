@@ -13,7 +13,7 @@ export default function TransferStudentsPage() {
       { label: "Home", href: "/" },
       { label: "Dashboard", href: PATHS.DASHBOARD },
       { label: "Admission Management", href: PATHS.ADMISSION.ROOT },
-      { label: "Transfer Students", href: PATHS.ADMISSION.TRANSFER },
+      { label: "Transfer Students", href: PATHS.ADMISSION.TRANSFER.ROOT },
     ]);
   }, [setBreadcrumbs]);
 

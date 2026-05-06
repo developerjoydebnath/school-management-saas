@@ -32,4 +32,10 @@ export const SUBJECT_FORM_FIELDS = [
       { label: "Inactive", value: "Inactive" },
     ],
   },
+  {
+    name: "classes",
+    label: "Assigned Classes",
+    type: "classSelection",
+    required: false,
+  },
 ];
