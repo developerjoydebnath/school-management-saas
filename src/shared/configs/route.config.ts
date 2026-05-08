@@ -63,7 +63,7 @@ export type SidebarMenuType = {
 export const SidebarMenu: SidebarMenuType[] = [
 	{
 		id: "dashboard",
-		name: "Dashboard",
+		name: "dashboard",
 		path: PATHS.DASHBOARD,
 		icon: LayoutDashboard,
 		permissions: [PERMISSIONS.DASHBOARD.VIEW],
@@ -71,7 +71,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "academics",
-		name: "Academics",
+		name: "academics",
 		path: PATHS.ACADEMICS.ROOT,
 		icon: BookOpen,
 		permissions: [PERMISSIONS.ACADEMICS.VIEW],
@@ -79,7 +79,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "academics_classes",
-				name: "Classes & Sections",
+				name: "academics_classes",
 				path: PATHS.ACADEMICS.CLASSES.ROOT,
 				icon: Building2,
 				permissions: [PERMISSIONS.ACADEMICS.CLASSES.VIEW],
@@ -87,7 +87,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "academics_subjects",
-				name: "Subjects",
+				name: "academics_subjects",
 				path: PATHS.ACADEMICS.SUBJECTS.ROOT,
 				icon: BookOpen,
 				permissions: [PERMISSIONS.ACADEMICS.SUBJECTS.VIEW],
@@ -95,7 +95,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "academics_syllabus",
-				name: "Syllabus",
+				name: "academics_syllabus",
 				path: PATHS.ACADEMICS.SYLLABUS.ROOT,
 				icon: FileBadge2,
 				permissions: [PERMISSIONS.ACADEMICS.SYLLABUS.VIEW],
@@ -103,7 +103,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "academics_timetable",
-				name: "Class Timetable",
+				name: "academics_timetable",
 				path: PATHS.ACADEMICS.TIMETABLE.ROOT,
 				icon: AlarmClockCheck,
 				permissions: [PERMISSIONS.ACADEMICS.TIMETABLE.VIEW],
@@ -111,7 +111,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "academics_homework",
-				name: "Homework & Assignments",
+				name: "academics_homework",
 				path: PATHS.ACADEMICS.HOMEWORK.ROOT,
 				icon: BookMarked,
 				permissions: [PERMISSIONS.ACADEMICS.HOMEWORK.VIEW],
@@ -119,7 +119,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "academics_online_classes",
-				name: "Online Classes",
+				name: "academics_online_classes",
 				path: PATHS.ACADEMICS.ONLINE_CLASSES.ROOT,
 				icon: Laptop,
 				permissions: [PERMISSIONS.ACADEMICS.ONLINE_CLASSES.VIEW],
@@ -127,7 +127,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "academics_shifts",
-				name: "Shifts",
+				name: "academics_shifts",
 				path: PATHS.ACADEMICS.SHIFTS.ROOT,
 				icon: AlarmClockCheck,
 				permissions: [PERMISSIONS.ACADEMICS.SHIFTS.VIEW],
@@ -137,7 +137,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "admission",
-		name: "Admission",
+		name: "admission",
 		path: PATHS.ADMISSION.ROOT,
 		icon: DoorOpen,
 		permissions: [PERMISSIONS.ADMISSION.VIEW],
@@ -145,7 +145,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "admission_new",
-				name: "New Admission",
+				name: "admission_new",
 				path: PATHS.ADMISSION.NEW.ROOT,
 				icon: UserCheck,
 				permissions: [PERMISSIONS.ADMISSION.NEW.VIEW],
@@ -153,7 +153,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "admission_list",
-				name: "Application List",
+				name: "admission_list",
 				path: PATHS.ADMISSION.LIST.ROOT,
 				icon: ClipboardList,
 				permissions: [PERMISSIONS.ADMISSION.LIST.VIEW],
@@ -161,7 +161,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "admission_portal",
-				name: "Online Portal",
+				name: "admission_portal",
 				path: PATHS.ADMISSION.PORTAL.ROOT,
 				icon: Globe,
 				permissions: [PERMISSIONS.ADMISSION.PORTAL.VIEW],
@@ -169,7 +169,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "admission_transfer",
-				name: "Transfer Students",
+				name: "admission_transfer",
 				path: PATHS.ADMISSION.TRANSFER.ROOT,
 				icon: ArrowRightLeft,
 				permissions: [PERMISSIONS.ADMISSION.TRANSFER.VIEW],
@@ -177,7 +177,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "admission_settings",
-				name: "Admission Settings",
+				name: "admission_settings",
 				path: PATHS.ADMISSION.SETTINGS.ROOT,
 				icon: Settings,
 				permissions: [PERMISSIONS.ADMISSION.SETTINGS.VIEW],
@@ -187,7 +187,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "students",
-		name: "Students",
+		name: "students",
 		path: PATHS.STUDENTS.ROOT,
 		icon: GraduationCap,
 		permissions: [PERMISSIONS.STUDENTS.VIEW],
@@ -195,7 +195,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "students_directory",
-				name: "Student Directory",
+				name: "students_directory",
 				path: PATHS.STUDENTS.DIRECTORY.ROOT,
 				icon: Users,
 				permissions: [PERMISSIONS.STUDENTS.DIRECTORY.VIEW],
@@ -203,7 +203,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "students_attendance",
-				name: "Attendance",
+				name: "students_attendance",
 				path: PATHS.STUDENTS.ATTENDANCE.ROOT,
 				icon: UserCheck,
 				permissions: [PERMISSIONS.STUDENTS.ATTENDANCE.VIEW],
@@ -211,7 +211,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "students_profile",
-				name: "Student Profile",
+				name: "students_profile",
 				path: PATHS.STUDENTS.PROFILE.ROOT,
 				icon: User,
 				permissions: [PERMISSIONS.STUDENTS.PROFILE.VIEW],
@@ -219,7 +219,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "students_promotion",
-				name: "Class Promotion",
+				name: "students_promotion",
 				path: PATHS.STUDENTS.PROMOTION.ROOT,
 				icon: TrendingUp,
 				permissions: [PERMISSIONS.STUDENTS.PROMOTION.VIEW],
@@ -227,7 +227,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "students_id_cards",
-				name: "ID Cards",
+				name: "students_id_cards",
 				path: PATHS.STUDENTS.ID_CARDS.ROOT,
 				icon: IdCard,
 				permissions: [PERMISSIONS.STUDENTS.ID_CARDS.VIEW],
@@ -235,7 +235,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "students_certificates",
-				name: "Certificates",
+				name: "students_certificates",
 				path: PATHS.STUDENTS.CERTIFICATES.ROOT,
 				icon: Award,
 				permissions: [PERMISSIONS.STUDENTS.CERTIFICATES.VIEW],
@@ -243,7 +243,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "students_behavior",
-				name: "Behavior & Counseling",
+				name: "students_behavior",
 				path: PATHS.STUDENTS.BEHAVIOR.ROOT,
 				icon: HeartHandshake,
 				permissions: [PERMISSIONS.STUDENTS.BEHAVIOR.VIEW],
@@ -253,7 +253,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "staff",
-		name: "Staff & Teachers",
+		name: "staff",
 		path: PATHS.STAFF.ROOT,
 		icon: Users,
 		permissions: [PERMISSIONS.STAFF.VIEW],
@@ -261,7 +261,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "staff_directory",
-				name: "Staff Directory",
+				name: "staff_directory",
 				path: PATHS.STAFF.DIRECTORY.ROOT,
 				icon: Users,
 				permissions: [PERMISSIONS.STAFF.DIRECTORY.VIEW],
@@ -269,7 +269,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "staff_teachers",
-				name: "Teacher Directory",
+				name: "staff_teachers",
 				path: PATHS.STAFF.TEACHERS.ROOT,
 				icon: UsersRound,
 				permissions: [PERMISSIONS.STAFF.TEACHERS.VIEW],
@@ -277,7 +277,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "staff_attendance",
-				name: "Staff Attendance",
+				name: "staff_attendance",
 				path: PATHS.STAFF.ATTENDANCE.ROOT,
 				icon: UserCheck,
 				permissions: [PERMISSIONS.STAFF.ATTENDANCE.VIEW],
@@ -285,7 +285,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "staff_departments",
-				name: "Departments",
+				name: "staff_departments",
 				path: PATHS.STAFF.DEPARTMENTS.ROOT,
 				icon: Network,
 				permissions: [PERMISSIONS.STAFF.DEPARTMENTS.VIEW],
@@ -293,7 +293,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "staff_performance",
-				name: "Teacher Performance",
+				name: "staff_performance",
 				path: PATHS.STAFF.PERFORMANCE.ROOT,
 				icon: Activity,
 				permissions: [PERMISSIONS.STAFF.PERFORMANCE.VIEW],
@@ -303,7 +303,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "parents",
-		name: "Parents",
+		name: "parents",
 		path: PATHS.PARENTS.ROOT,
 		icon: UsersRound,
 		permissions: [PERMISSIONS.PARENTS.VIEW],
@@ -311,7 +311,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "parents_directory",
-				name: "Parent Directory",
+				name: "parents_directory",
 				path: PATHS.PARENTS.DIRECTORY.ROOT,
 				icon: UsersRound,
 				permissions: [PERMISSIONS.PARENTS.DIRECTORY.VIEW],
@@ -319,7 +319,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "parents_portal",
-				name: "Portal Access",
+				name: "parents_portal",
 				path: PATHS.PARENTS.PORTAL.ROOT,
 				icon: Laptop,
 				permissions: [PERMISSIONS.PARENTS.PORTAL.VIEW],
@@ -329,7 +329,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "finance",
-		name: "Finance",
+		name: "finance",
 		path: PATHS.FINANCE.ROOT,
 		icon: Banknote,
 		permissions: [PERMISSIONS.FINANCE.VIEW],
@@ -337,7 +337,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "finance_fees",
-				name: "Fee Collection",
+				name: "finance_fees",
 				path: PATHS.FINANCE.FEES.ROOT,
 				icon: Banknote,
 				permissions: [PERMISSIONS.FINANCE.FEES.VIEW],
@@ -345,7 +345,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "finance_expenses",
-				name: "Expenses",
+				name: "finance_expenses",
 				path: PATHS.FINANCE.EXPENSES.ROOT,
 				icon: Banknote,
 				permissions: [PERMISSIONS.FINANCE.EXPENSES.VIEW],
@@ -353,7 +353,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "finance_payroll",
-				name: "Payroll",
+				name: "finance_payroll",
 				path: PATHS.FINANCE.PAYROLL.ROOT,
 				icon: Banknote,
 				permissions: [PERMISSIONS.FINANCE.PAYROLL.VIEW],
@@ -361,7 +361,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "finance_ledger",
-				name: "Student Ledger",
+				name: "finance_ledger",
 				path: PATHS.FINANCE.LEDGER.ROOT,
 				icon: BookType,
 				permissions: [PERMISSIONS.FINANCE.LEDGER.VIEW],
@@ -369,7 +369,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "finance_scholarships",
-				name: "Scholarships & Waivers",
+				name: "finance_scholarships",
 				path: PATHS.FINANCE.SCHOLARSHIPS.ROOT,
 				icon: Gift,
 				permissions: [PERMISSIONS.FINANCE.SCHOLARSHIPS.VIEW],
@@ -377,7 +377,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "finance_budget",
-				name: "Budget Planning",
+				name: "finance_budget",
 				path: PATHS.FINANCE.BUDGET.ROOT,
 				icon: PieChart,
 				permissions: [PERMISSIONS.FINANCE.BUDGET.VIEW],
@@ -385,7 +385,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "finance_vouchers",
-				name: "Voucher Management",
+				name: "finance_vouchers",
 				path: PATHS.FINANCE.VOUCHERS.ROOT,
 				icon: Receipt,
 				permissions: [PERMISSIONS.FINANCE.VOUCHERS.VIEW],
@@ -393,7 +393,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "finance_bank_accounts",
-				name: "Bank Accounts",
+				name: "finance_bank_accounts",
 				path: PATHS.FINANCE.BANK_ACCOUNTS.ROOT,
 				icon: Landmark,
 				permissions: [PERMISSIONS.FINANCE.BANK_ACCOUNTS.VIEW],
@@ -403,7 +403,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "hr",
-		name: "HR Management",
+		name: "hr",
 		path: PATHS.HR.ROOT,
 		icon: Briefcase,
 		permissions: [PERMISSIONS.HR.VIEW],
@@ -411,7 +411,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "hr_leave",
-				name: "Leave Management",
+				name: "hr_leave",
 				path: PATHS.HR.LEAVE.ROOT,
 				icon: CalendarDays,
 				permissions: [PERMISSIONS.HR.LEAVE.VIEW],
@@ -419,7 +419,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "hr_loan",
-				name: "Loan & Advance",
+				name: "hr_loan",
 				path: PATHS.HR.LOAN.ROOT,
 				icon: Banknote,
 				permissions: [PERMISSIONS.HR.LOAN.VIEW],
@@ -427,7 +427,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "hr_appraisal",
-				name: "Performance Appraisal",
+				name: "hr_appraisal",
 				path: PATHS.HR.APPRAISAL.ROOT,
 				icon: Activity,
 				permissions: [PERMISSIONS.HR.APPRAISAL.VIEW],
@@ -437,7 +437,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "examinations",
-		name: "Examination & Results",
+		name: "examinations",
 		path: PATHS.EXAMINATIONS.ROOT,
 		icon: ClipboardList,
 		permissions: [PERMISSIONS.EXAMINATIONS.VIEW],
@@ -445,7 +445,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "examinations_schedule",
-				name: "Exam Schedule",
+				name: "examinations_schedule",
 				path: PATHS.EXAMINATIONS.SCHEDULE.ROOT,
 				icon: CalendarDays,
 				permissions: [PERMISSIONS.EXAMINATIONS.SCHEDULE.VIEW],
@@ -453,7 +453,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "examinations_marks",
-				name: "Mark Entry",
+				name: "examinations_marks",
 				path: PATHS.EXAMINATIONS.MARKS.ROOT,
 				icon: FileBadge2,
 				permissions: [PERMISSIONS.EXAMINATIONS.MARKS.VIEW],
@@ -461,7 +461,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "examinations_results",
-				name: "Result Processing",
+				name: "examinations_results",
 				path: PATHS.EXAMINATIONS.RESULTS.ROOT,
 				icon: Activity,
 				permissions: [PERMISSIONS.EXAMINATIONS.RESULTS.VIEW],
@@ -469,7 +469,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "examinations_report_cards",
-				name: "Report Cards",
+				name: "examinations_report_cards",
 				path: PATHS.EXAMINATIONS.REPORT_CARDS.ROOT,
 				icon: ClipboardList,
 				permissions: [PERMISSIONS.EXAMINATIONS.REPORT_CARDS.VIEW],
@@ -477,7 +477,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "examinations_question_bank",
-				name: "Question Bank",
+				name: "examinations_question_bank",
 				path: PATHS.EXAMINATIONS.QUESTION_BANK.ROOT,
 				icon: BookOpen,
 				permissions: [PERMISSIONS.EXAMINATIONS.QUESTION_BANK.VIEW],
@@ -485,7 +485,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "examinations_settings",
-				name: "Exam Settings",
+				name: "examinations_settings",
 				path: PATHS.EXAMINATIONS.SETTINGS.ROOT,
 				icon: Settings,
 				permissions: [PERMISSIONS.EXAMINATIONS.SETTINGS.VIEW],
@@ -495,7 +495,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "library",
-		name: "Library",
+		name: "library",
 		path: PATHS.LIBRARY.ROOT,
 		icon: Library,
 		permissions: [PERMISSIONS.LIBRARY.VIEW],
@@ -503,7 +503,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "library_catalog",
-				name: "Book Catalog",
+				name: "library_catalog",
 				path: PATHS.LIBRARY.CATALOG.ROOT,
 				icon: BookOpen,
 				permissions: [PERMISSIONS.LIBRARY.CATALOG.VIEW],
@@ -511,7 +511,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "library_issue_return",
-				name: "Issue & Return",
+				name: "library_issue_return",
 				path: PATHS.LIBRARY.ISSUE_RETURN.ROOT,
 				icon: ArrowRightLeft,
 				permissions: [PERMISSIONS.LIBRARY.ISSUE_RETURN.VIEW],
@@ -519,7 +519,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "library_fines",
-				name: "Fine Management",
+				name: "library_fines",
 				path: PATHS.LIBRARY.FINES.ROOT,
 				icon: Coins,
 				permissions: [PERMISSIONS.LIBRARY.FINES.VIEW],
@@ -527,7 +527,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "library_reports",
-				name: "Library Reports",
+				name: "library_reports",
 				path: PATHS.LIBRARY.REPORTS.ROOT,
 				icon: BarChart3,
 				permissions: [PERMISSIONS.LIBRARY.REPORTS.VIEW],
@@ -537,7 +537,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "communications",
-		name: "Communications",
+		name: "communications",
 		path: PATHS.COMMUNICATIONS.ROOT,
 		icon: Megaphone,
 		permissions: [PERMISSIONS.COMMUNICATIONS.VIEW],
@@ -545,7 +545,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "communications_announcements",
-				name: "Announcements",
+				name: "communications_announcements",
 				path: PATHS.COMMUNICATIONS.ANNOUNCEMENTS.ROOT,
 				icon: Megaphone,
 				permissions: [PERMISSIONS.COMMUNICATIONS.ANNOUNCEMENTS.VIEW],
@@ -553,7 +553,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "communications_notice_board",
-				name: "Notice Board",
+				name: "communications_notice_board",
 				path: PATHS.COMMUNICATIONS.NOTICE_BOARD.ROOT,
 				icon: Clipboard,
 				permissions: [PERMISSIONS.COMMUNICATIONS.NOTICE_BOARD.VIEW],
@@ -561,7 +561,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "communications_messages",
-				name: "Parent-Teacher Messaging",
+				name: "communications_messages",
 				path: PATHS.COMMUNICATIONS.MESSAGES.ROOT,
 				icon: MessageSquare,
 				permissions: [PERMISSIONS.COMMUNICATIONS.MESSAGES.VIEW],
@@ -569,7 +569,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "communications_complaints",
-				name: "Complaints & Feedback",
+				name: "communications_complaints",
 				path: PATHS.COMMUNICATIONS.COMPLAINTS.ROOT,
 				icon: AlertCircle,
 				permissions: [PERMISSIONS.COMMUNICATIONS.COMPLAINTS.VIEW],
@@ -579,7 +579,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "events",
-		name: "Events Management",
+		name: "events",
 		path: PATHS.EVENTS.ROOT,
 		icon: CalendarDays,
 		permissions: [PERMISSIONS.EVENTS.VIEW],
@@ -587,7 +587,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "events_scheduling",
-				name: "Event Scheduling",
+				name: "events_scheduling",
 				path: PATHS.EVENTS.SCHEDULING.ROOT,
 				icon: CalendarDays,
 				permissions: [PERMISSIONS.EVENTS.SCHEDULING.VIEW],
@@ -595,7 +595,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "events_participants",
-				name: "Participant Management",
+				name: "events_participants",
 				path: PATHS.EVENTS.PARTICIPANTS.ROOT,
 				icon: Users,
 				permissions: [PERMISSIONS.EVENTS.PARTICIPANTS.VIEW],
@@ -603,7 +603,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "events_gallery",
-				name: "Event Gallery",
+				name: "events_gallery",
 				path: PATHS.EVENTS.GALLERY.ROOT,
 				icon: FileBadge2,
 				permissions: [PERMISSIONS.EVENTS.GALLERY.VIEW],
@@ -613,7 +613,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "transport",
-		name: "Transport Management",
+		name: "transport",
 		path: PATHS.TRANSPORT.ROOT,
 		icon: Bus,
 		permissions: [PERMISSIONS.TRANSPORT.VIEW],
@@ -621,7 +621,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "transport_routes",
-				name: "Route Management",
+				name: "transport_routes",
 				path: PATHS.TRANSPORT.ROUTES.ROOT,
 				icon: Network,
 				permissions: [PERMISSIONS.TRANSPORT.ROUTES.VIEW],
@@ -629,7 +629,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "transport_vehicles",
-				name: "Vehicle Management",
+				name: "transport_vehicles",
 				path: PATHS.TRANSPORT.VEHICLES.ROOT,
 				icon: Bus,
 				permissions: [PERMISSIONS.TRANSPORT.VEHICLES.VIEW],
@@ -637,7 +637,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "transport_assignment",
-				name: "Student Assignment",
+				name: "transport_assignment",
 				path: PATHS.TRANSPORT.ASSIGNMENT.ROOT,
 				icon: Users,
 				permissions: [PERMISSIONS.TRANSPORT.ASSIGNMENT.VIEW],
@@ -645,7 +645,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "transport_attendance",
-				name: "Transport Attendance",
+				name: "transport_attendance",
 				path: PATHS.TRANSPORT.ATTENDANCE.ROOT,
 				icon: UserCheck,
 				permissions: [PERMISSIONS.TRANSPORT.ATTENDANCE.VIEW],
@@ -655,7 +655,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "canteen",
-		name: "Canteen / Tuck Shop",
+		name: "canteen",
 		path: PATHS.CANTEEN.ROOT,
 		icon: Store,
 		permissions: [PERMISSIONS.CANTEEN.VIEW],
@@ -663,7 +663,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "canteen_menu",
-				name: "Menu Management",
+				name: "canteen_menu",
 				path: PATHS.CANTEEN.MENU.ROOT,
 				icon: ClipboardList,
 				permissions: [PERMISSIONS.CANTEEN.MENU.VIEW],
@@ -671,7 +671,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "canteen_sales",
-				name: "Sales Tracking",
+				name: "canteen_sales",
 				path: PATHS.CANTEEN.SALES.ROOT,
 				icon: Banknote,
 				permissions: [PERMISSIONS.CANTEEN.SALES.VIEW],
@@ -679,7 +679,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "canteen_expense",
-				name: "Canteen Expense",
+				name: "canteen_expense",
 				path: PATHS.CANTEEN.EXPENSE.ROOT,
 				icon: Banknote,
 				permissions: [PERMISSIONS.CANTEEN.EXPENSE.VIEW],
@@ -689,7 +689,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "reports",
-		name: "Reports & Analytics",
+		name: "reports",
 		path: PATHS.REPORTS.ROOT,
 		icon: BarChart3,
 		permissions: [PERMISSIONS.REPORTS.VIEW],
@@ -697,7 +697,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "reports_academic",
-				name: "Academic Reports",
+				name: "reports_academic",
 				path: PATHS.REPORTS.ACADEMIC.ROOT,
 				icon: BarChart3,
 				permissions: [PERMISSIONS.REPORTS.ACADEMIC.VIEW],
@@ -705,7 +705,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "reports_finance",
-				name: "Finance Reports",
+				name: "reports_finance",
 				path: PATHS.REPORTS.FINANCE.ROOT,
 				icon: PieChart,
 				permissions: [PERMISSIONS.REPORTS.FINANCE.VIEW],
@@ -713,7 +713,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "reports_student",
-				name: "Student Reports",
+				name: "reports_student",
 				path: PATHS.REPORTS.STUDENT.ROOT,
 				icon: Users,
 				permissions: [PERMISSIONS.REPORTS.STUDENT.VIEW],
@@ -721,7 +721,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "reports_scheduled",
-				name: "Scheduled Reports",
+				name: "reports_scheduled",
 				path: PATHS.REPORTS.SCHEDULED.ROOT,
 				icon: CalendarDays,
 				permissions: [PERMISSIONS.REPORTS.SCHEDULED.VIEW],
@@ -731,7 +731,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "roles",
-		name: "Roles & Permissions",
+		name: "roles",
 		path: PATHS.ROLES.ROOT,
 		icon: ShieldCheck,
 		permissions: [PERMISSIONS.ROLES.VIEW],
@@ -739,7 +739,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "roles_management",
-				name: "Role Management",
+				name: "roles_management",
 				path: PATHS.ROLES.MANAGEMENT.ROOT,
 				icon: ShieldCheck,
 				permissions: [PERMISSIONS.ROLES.MANAGEMENT.VIEW],
@@ -747,7 +747,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "roles_matrix",
-				name: "Permission Matrix",
+				name: "roles_matrix",
 				path: PATHS.ROLES.MATRIX.ROOT,
 				icon: Network,
 				permissions: [PERMISSIONS.ROLES.MATRIX.VIEW],
@@ -757,7 +757,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 	},
 	{
 		id: "settings",
-		name: "Settings",
+		name: "settings",
 		path: PATHS.SETTINGS.ROOT,
 		icon: Settings,
 		permissions: [PERMISSIONS.SETTINGS.VIEW],
@@ -765,7 +765,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 		children: [
 			{
 				id: "settings_profile",
-				name: "School Profile",
+				name: "settings_profile",
 				path: PATHS.SETTINGS.PROFILE.ROOT,
 				icon: School,
 				permissions: [PERMISSIONS.SETTINGS.PROFILE.VIEW],
@@ -773,7 +773,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "settings_users",
-				name: "User Management",
+				name: "settings_users",
 				path: PATHS.SETTINGS.USERS.ROOT,
 				icon: Users,
 				permissions: [PERMISSIONS.SETTINGS.USERS.VIEW],
@@ -781,7 +781,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "settings_integrations",
-				name: "Integration Settings",
+				name: "settings_integrations",
 				path: PATHS.SETTINGS.INTEGRATIONS.ROOT,
 				icon: Link,
 				permissions: [PERMISSIONS.SETTINGS.INTEGRATIONS.VIEW],
@@ -789,7 +789,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "settings_localization",
-				name: "Localization",
+				name: "settings_localization",
 				path: PATHS.SETTINGS.LOCALIZATION.ROOT,
 				icon: Globe,
 				permissions: [PERMISSIONS.SETTINGS.LOCALIZATION.VIEW],
@@ -797,7 +797,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "settings_backup",
-				name: "Data & Backup",
+				name: "settings_backup",
 				path: PATHS.SETTINGS.BACKUP.ROOT,
 				icon: Database,
 				permissions: [PERMISSIONS.SETTINGS.BACKUP.VIEW],
@@ -805,7 +805,7 @@ export const SidebarMenu: SidebarMenuType[] = [
 			},
 			{
 				id: "settings_audit",
-				name: "Audit Log",
+				name: "settings_audit",
 				path: PATHS.SETTINGS.AUDIT.ROOT,
 				icon: History,
 				permissions: [PERMISSIONS.SETTINGS.AUDIT.VIEW],

@@ -2,7 +2,7 @@ import { StatusEnum } from "../types/enums";
 
 export class Teacher {
 	private _id: string;
-	private _name: string;
+	private _name: string | { en: string; bn: string };
 	private _subjects: string[];
 	private _mobileNumber: string;
 	private _email: string;
@@ -29,7 +29,7 @@ export class Teacher {
 		return this._id;
 	}
 
-	get name(): string {
+	get name(): any {
 		return this._name;
 	}
 

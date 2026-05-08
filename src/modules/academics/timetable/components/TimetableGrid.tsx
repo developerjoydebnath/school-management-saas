@@ -3,8 +3,9 @@
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import { GripHorizontal, Pencil, Plus, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { getLocalizedName } from "@/shared/utils/localization";
 import { DAYS } from "../types";
 
 interface TimetableGridProps {
@@ -25,6 +26,7 @@ export function TimetableGrid({
 	onReorderPeriods,
 }: TimetableGridProps) {
 	const t = useTranslations("Timetable");
+	const locale = useLocale();
 	const [draggedPeriodId, setDraggedPeriodId] = useState<string | null>(null);
 
 	const handleDragStart = (e: React.DragEvent, id: string) => {
@@ -72,7 +74,7 @@ export function TimetableGrid({
 								</div>
 								<div className="mt-1.5 mb-1 flex flex-col items-center justify-center gap-1">
 									<span className="text-foreground text-[11px] font-bold tracking-wider uppercase">
-										{p.name}
+										{getLocalizedName(p.name, locale)}
 									</span>
 									<span className="text-muted-foreground bg-accent rounded-full px-2 py-0.5 text-[10px] font-medium">
 										{p.startTime}-{p.endTime}
@@ -141,7 +143,7 @@ export function TimetableGrid({
 																transform: "rotate(180deg)",
 															}}
 														>
-															{p.name}
+															{getLocalizedName(p.name, locale)}
 														</span>
 														<div
 															className={cn(
@@ -184,7 +186,10 @@ export function TimetableGrid({
 														>
 															<div className="flex items-start justify-between gap-1">
 																<span className="text-foreground line-clamp-1 text-xs leading-tight font-bold">
-																	{assignment.subjectName}
+																	{getLocalizedName(
+																		assignment.subjectName,
+																		locale
+																	)}
 																</span>
 																{assignment.roomNumber && (
 																	<span className="bg-accent text-muted-foreground rounded px-2 py-1 text-xs leading-none font-semibold whitespace-nowrap">
@@ -195,12 +200,18 @@ export function TimetableGrid({
 															</div>
 															<div className="mt-1 flex items-center gap-1.5">
 																<div className="bg-primary/10 text-primary flex size-5 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold">
-																	{assignment.teacherName
+																	{getLocalizedName(
+																		assignment.teacherName,
+																		locale
+																	)
 																		?.substring(0, 2)
 																		.toUpperCase() || "?"}
 																</div>
 																<span className="text-muted-foreground line-clamp-1 text-[12px] leading-none font-medium">
-																	{assignment.teacherName}
+																	{getLocalizedName(
+																		assignment.teacherName,
+																		locale
+																	)}
 																</span>
 															</div>
 														</div>

@@ -12,6 +12,8 @@ import { Skeleton } from "@/shared/components/ui/skeleton";
 import { useSWR } from "@/shared/hooks/use-swr";
 import { cn } from "@/shared/lib/utils";
 import { Teacher } from "@/shared/models/teacher.model";
+import { useLocale } from "next-intl";
+import { getLocalizedName } from "@/shared/utils/localization";
 import * as React from "react";
 
 interface TeacherSelectionProps {
@@ -34,6 +36,7 @@ export default function TeacherSelection({
 	const [searchValue, setSearchValue] = React.useState("");
 	const [open, setOpen] = React.useState(false);
 	const anchor = useComboboxAnchor();
+	const locale = useLocale();
 
 	const serializedTeachers = teachers?.map((t: any) => new Teacher(t)) || [];
 	const selectedTeacher = serializedTeachers.find((t: Teacher) => t.id === value);
@@ -41,14 +44,16 @@ export default function TeacherSelection({
 	React.useEffect(() => {
 		if (selectedTeacher) {
 			// eslint-disable-next-line react-hooks/set-state-in-effect
-			setSearchValue(selectedTeacher.name);
+			setSearchValue(getLocalizedName(selectedTeacher.name, locale));
 		} else {
 			setSearchValue("");
 		}
 	}, [selectedTeacher]);
 
 	const filteredTeachers = serializedTeachers.filter((teacher: Teacher) =>
-		teacher.name.toLowerCase().includes(searchValue.toLowerCase())
+		getLocalizedName(teacher.name, locale)
+			.toLowerCase()
+			.includes(searchValue.toLowerCase())
 	);
 
 	const getSubjectNames = (subjectIds: string[]) => {
@@ -57,7 +62,7 @@ export default function TeacherSelection({
 
 		const names = subjectIds.map((id) => {
 			const subject = subjects.find((s: any) => s.id === id);
-			return subject ? subject.name : id;
+			return subject ? getLocalizedName(subject.name, locale) : id;
 		});
 
 		return names.join(", ");
@@ -73,7 +78,7 @@ export default function TeacherSelection({
 					onOpenChange={(newOpen) => {
 						setOpen(newOpen);
 						if (!newOpen) {
-							setSearchValue(selectedTeacher?.name || "");
+							setSearchValue(getLocalizedName(selectedTeacher?.name, locale) || "");
 						} else {
 							setSearchValue("");
 						}
@@ -120,11 +125,15 @@ export default function TeacherSelection({
 										<div className="flex items-center gap-3">
 											<Avatar className="size-8">
 												<AvatarFallback>
-													{teacher.name.substring(0, 2).toUpperCase()}
+													{getLocalizedName(teacher.name, locale)
+														?.substring(0, 2)
+														.toUpperCase() || "?"}
 												</AvatarFallback>
 											</Avatar>
 											<div className="flex flex-col">
-												<span className="font-medium">{teacher.name}</span>
+												<span className="font-medium">
+													{getLocalizedName(teacher.name, locale)}
+												</span>
 												<span className="text-muted-foreground line-clamp-1 text-xs">
 													{getSubjectNames(teacher.subjects)}
 												</span>

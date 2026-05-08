@@ -2,6 +2,7 @@
 
 import axios from "@/shared/lib/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useSWRConfig } from "swr";
@@ -9,6 +10,7 @@ import { useSWRConfig } from "swr";
 import InputField from "@/shared/components/form/InputField";
 import { Button } from "@/shared/components/ui/button";
 import { StatusEnum } from "@/shared/types/enums";
+import { useTranslations } from "next-intl";
 import { TeacherFormValues, teacherSchema } from "../dto/teacher.dto";
 
 interface TeacherFormProps {
@@ -18,11 +20,18 @@ interface TeacherFormProps {
 
 export default function TeacherForm({ onSuccess, initialData }: TeacherFormProps) {
 	const { mutate } = useSWRConfig();
+	const ft = useTranslations("Forms");
 
 	const form = useForm<TeacherFormValues>({
 		resolver: zodResolver(teacherSchema),
 		defaultValues: {
-			name: initialData?.name || "",
+			name: {
+				en:
+					typeof initialData?.name === "object"
+						? initialData?.name?.en
+						: initialData?.name || "",
+				bn: typeof initialData?.name === "object" ? initialData?.name?.bn : "",
+			},
 			mobile: initialData?.mobileNumber || initialData?.mobile || initialData?.contact || "",
 			email: initialData?.email || "",
 			address: initialData?.address || "",
@@ -30,6 +39,25 @@ export default function TeacherForm({ onSuccess, initialData }: TeacherFormProps
 			status: (initialData?.status?.toUpperCase() as StatusEnum) || StatusEnum.ACTIVE,
 		},
 	});
+
+	useEffect(() => {
+		if (initialData) {
+			form.reset({
+				name: {
+					en:
+						typeof initialData.name === "object"
+							? initialData.name.en
+							: initialData.name || "",
+					bn: typeof initialData.name === "object" ? initialData.name.bn : "",
+				},
+				mobile: initialData.mobileNumber || initialData.mobile || initialData.contact || "",
+				email: initialData.email || "",
+				address: initialData.address || "",
+				subjects: initialData.subjects || [],
+				status: (initialData.status?.toUpperCase() as StatusEnum) || StatusEnum.ACTIVE,
+			});
+		}
+	}, [initialData, form]);
 
 	const onSubmit = async (data: TeacherFormValues) => {
 		try {
@@ -56,9 +84,16 @@ export default function TeacherForm({ onSuccess, initialData }: TeacherFormProps
 			<div className="space-y-4">
 				<InputField
 					control={form.control}
-					name="name"
-					label="Name"
-					placeholder="Enter teacher's name"
+					name="name.en"
+					label="Name (English)"
+					placeholder="Enter teacher's name in English"
+					type="text"
+				/>
+				<InputField
+					control={form.control}
+					name="name.bn"
+					label="Name (Bangla)"
+					placeholder="Enter teacher's name in Bangla"
 					type="text"
 				/>
 				<div className="grid grid-cols-2 gap-4">
@@ -106,11 +141,11 @@ export default function TeacherForm({ onSuccess, initialData }: TeacherFormProps
 			<Button type="submit" className="h-10 w-full" disabled={form.formState.isSubmitting}>
 				{form.formState.isSubmitting
 					? initialData?.id
-						? "Updating..."
-						: "Adding..."
+						? ft("updating")
+						: ft("saving")
 					: initialData?.id
-						? "Update Teacher"
-						: "Add Teacher"}
+						? ft("update")
+						: ft("save")}
 			</Button>
 		</form>
 	);

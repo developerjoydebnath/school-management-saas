@@ -1,6 +1,7 @@
 "use client";
 
 import FilterButton from "@/shared/components/form/FilterButton";
+import { useTranslations } from "next-intl";
 import { TeacherFilter } from "./TeacherList";
 
 type Props = {
@@ -9,9 +10,10 @@ type Props = {
 };
 
 export default function TeacherFilterBar({ filter, setFilter }: Props) {
+	const t = useTranslations("Teachers");
 	const filterFields = [
 		{
-			title: "Status",
+			title: t("status"),
 			selected: filter.status,
 			onSelect: (opt: any) => setFilter({ ...filter, status: opt }),
 			clearFilter: () => setFilter({ ...filter, status: [] }),

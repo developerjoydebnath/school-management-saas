@@ -18,8 +18,11 @@ import { Teacher } from "@/shared/models/teacher.model";
 import { StatusEnum } from "@/shared/types/enums";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil, Trash2 } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useSWR } from "@/shared/hooks/use-swr";
+import { getLocalizedName } from "@/shared/utils/localization";
 import TeacherFilterBar from "./TeacherFilterBar";
 import TeacherForm from "./TeacherForm";
 
@@ -41,6 +44,10 @@ export default function TeacherList() {
 		newStatus: boolean;
 	} | null>(null);
 	const [isChangingStatus, setIsChangingStatus] = useState(false);
+	const t = useTranslations("Teachers");
+	const tc = useTranslations("Common");
+	const locale = useLocale();
+	const { data: subjectsData } = useSWR("/subjects");
 	const [filter, setFilter] = useState<TeacherFilter>(initialFilters);
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(10);
@@ -94,13 +101,15 @@ export default function TeacherList() {
 		{
 			id: "name",
 			accessorKey: "name",
-			header: "Name",
-			cell: ({ row }) => <span className="font-medium">{row.original.name}</span>,
+			header: t("teacherName"),
+			cell: ({ row }) => (
+				<span className="font-medium">{getLocalizedName(row.original.name, locale)}</span>
+			),
 		},
 		{
 			id: "email",
 			accessorKey: "email",
-			header: "Email/Mobile",
+			header: t("emailMobile"),
 			cell: ({ row }) => (
 				<div className="flex flex-col">
 					<span className="text-sm font-medium">{row.original.email}</span>
@@ -113,22 +122,25 @@ export default function TeacherList() {
 		{
 			id: "subjects",
 			accessorKey: "subjects",
-			header: "Subjects",
+			header: t("subjects"),
 			cell: ({ row }) => {
 				const subjects = row.original.subjects;
 				if (!subjects || subjects.length === 0)
 					return <span className="text-muted-foreground">-</span>;
 				return (
 					<div className="flex max-w-[200px] flex-wrap items-center gap-1">
-						{subjects.slice(0, 2).map((subject: any, idx: number) => (
-							<Badge
-								key={idx}
-								variant="secondary"
-								className="h-5 rounded-sm px-1.5 py-0 text-[10px]"
-							>
-								{subject}
-							</Badge>
-						))}
+						{subjects.slice(0, 2).map((subjectId: string, idx: number) => {
+							const subject = subjectsData?.find((s: any) => s.id === subjectId);
+							return (
+								<Badge
+									key={idx}
+									variant="secondary"
+									className="h-5 rounded-sm px-1.5 py-0 text-[10px]"
+								>
+									{subject ? getLocalizedName(subject.name, locale) : subjectId}
+								</Badge>
+							);
+						})}
 						{subjects.length > 2 && (
 							<Badge
 								variant="secondary"
@@ -143,7 +155,7 @@ export default function TeacherList() {
 		},
 		{
 			id: "status",
-			header: "Status",
+			header: t("status"),
 			cell: ({ row }) => {
 				const teacher = row.original;
 				return (
@@ -169,7 +181,7 @@ export default function TeacherList() {
 		},
 		{
 			id: "actions",
-			header: "Actions",
+			header: t("actions"),
 			cell: ({ row }) => {
 				const teacher = row.original;
 				return (
@@ -197,7 +209,7 @@ export default function TeacherList() {
 							]}
 						>
 							<Button
-								variant="outline"
+								variant="destructive"
 								size="icon-sm"
 								onClick={() => setTeacherToDelete(teacher.id)}
 							>
@@ -246,7 +258,7 @@ export default function TeacherList() {
 				<DialogContent className="px-0">
 					<DialogHeader className="px-6">
 						<DialogTitle>
-							{editingTeacher?.id ? "Edit Teacher" : "Add New Teacher"}
+							{editingTeacher?.id ? t("editTeacherTitle") : t("addTeacherTitle")}
 						</DialogTitle>
 					</DialogHeader>
 					<ScrollArea className="max-h-[80vh] px-4">
@@ -264,9 +276,9 @@ export default function TeacherList() {
 				isOpen={!!teacherToDelete}
 				onClose={() => setTeacherToDelete(null)}
 				onConfirm={confirmDelete}
-				title="Delete Teacher"
-				description="Are you sure you want to delete this teacher? This action cannot be undone."
-				confirmText="Delete"
+				title={t("deleteTeacherTitle")}
+				description={t("deleteTeacherDescription")}
+				confirmText={tc("delete")}
 				variant="destructive"
 				isLoading={isDeleting}
 			/>
@@ -275,9 +287,13 @@ export default function TeacherList() {
 				isOpen={!!teacherToChangeStatus}
 				onClose={() => setTeacherToChangeStatus(null)}
 				onConfirm={confirmStatusChange}
-				title="Change Teacher Status"
-				description={`Are you sure you want to change the status to ${teacherToChangeStatus?.newStatus ? "Active" : "Inactive"}?`}
-				confirmText="Change Status"
+				title={t("statusChangeTitle")}
+				description={
+					teacherToChangeStatus?.newStatus
+						? tc("changeToActiveDesc")
+						: tc("changeToInactiveDesc")
+				}
+				confirmText={tc("changeStatus")}
 				variant="default"
 				isLoading={isChangingStatus}
 			/>

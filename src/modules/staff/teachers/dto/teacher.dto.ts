@@ -2,7 +2,10 @@ import { StatusEnum } from "@/shared/types/enums";
 import { z } from "zod";
 
 export const teacherSchema = z.object({
-	name: z.string().min(1, { message: "Name is required" }),
+	name: z.object({
+		en: z.string().min(1, { message: "English name is required" }),
+		bn: z.string().min(1, { message: "Bangla name is required" }),
+	}),
 	mobile: z.string().min(1, { message: "Mobile number is required" }),
 	email: z.email({ message: "Invalid email address" }),
 	address: z.string().min(1, { message: "Address is required" }),

@@ -11,26 +11,26 @@ import { PATHS } from "@/shared/configs/paths.config";
 import { PERMISSIONS } from "@/shared/configs/permissions.config";
 import { useBreadcrumbStore } from "@/shared/stores/breadcrumb-store";
 import { Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 export default function TeachersPage() {
 	const { setBreadcrumbs } = useBreadcrumbStore();
 	const [isCreateOpen, setIsCreateOpen] = useState(false);
+	const t = useTranslations("Teachers");
+	const tNav = useTranslations("Navigation");
 
 	useEffect(() => {
 		setBreadcrumbs([
-			{ label: "Dashboard", href: PATHS.DASHBOARD },
-			{ label: "Staff & Teachers", href: PATHS.STAFF.ROOT },
-			{ label: "Teacher Directory", href: PATHS.STAFF.TEACHERS.ROOT },
+			{ label: tNav("dashboard"), href: PATHS.DASHBOARD },
+			{ label: tNav("staff"), href: PATHS.STAFF.ROOT },
+			{ label: tNav("staff_teachers"), href: PATHS.STAFF.TEACHERS.ROOT },
 		]);
-	}, [setBreadcrumbs]);
+	}, [setBreadcrumbs, tNav]);
 
 	return (
 		<div className="space-y-6">
-			<PageHeading
-				heading="Teacher Directory"
-				subHeading="Manage teachers and staff directory."
-			>
+			<PageHeading routeName="Teachers">
 				<PermissionGuard
 					permissions={[
 						PERMISSIONS.STAFF.ALL,
@@ -40,7 +40,7 @@ export default function TeachersPage() {
 				>
 					<Button onClick={() => setIsCreateOpen(true)}>
 						<Plus className="size-4" />
-						Add Teacher
+						{t("addTeacher")}
 					</Button>
 				</PermissionGuard>
 			</PageHeading>
@@ -52,7 +52,7 @@ export default function TeachersPage() {
 			<Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
 				<DialogContent className="px-0">
 					<DialogHeader className="px-6">
-						<DialogTitle>Add New Teacher</DialogTitle>
+						<DialogTitle>{t("addTeacherTitle")}</DialogTitle>
 					</DialogHeader>
 					<ScrollArea className="max-h-[80vh] px-4">
 						<TeacherForm onSuccess={() => setIsCreateOpen(false)} />

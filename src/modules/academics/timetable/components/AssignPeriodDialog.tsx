@@ -15,8 +15,9 @@ import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { Plus, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { getLocalizedName } from "@/shared/utils/localization";
 
 interface AssignPeriodDialogProps {
 	open: boolean;
@@ -37,6 +38,7 @@ export function AssignPeriodDialog({
 }: AssignPeriodDialogProps) {
 	const [localAssignments, setLocalAssignments] = useState<any[]>([]);
 	const t = useTranslations("Timetable");
+	const locale = useLocale();
 	const ft = useTranslations("Forms");
 
 	useEffect(() => {
@@ -84,7 +86,7 @@ export function AssignPeriodDialog({
 				<DialogHeader className="border-b px-6 pb-4">
 					<DialogTitle>{t("assignPeriod")}</DialogTitle>
 					<DialogDescription className="text-muted-foreground text-xs">
-						{assigningPeriod?.day} • {assigningPeriod?.period?.name} •{" "}
+						{assigningPeriod?.day} • {getLocalizedName(assigningPeriod?.period?.name, locale)} •{" "}
 						{assigningPeriod?.period?.startTime}-{assigningPeriod?.period?.endTime}
 					</DialogDescription>
 				</DialogHeader>

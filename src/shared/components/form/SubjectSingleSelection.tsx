@@ -11,6 +11,8 @@ import { Skeleton } from "@/shared/components/ui/skeleton";
 import { useSWR } from "@/shared/hooks/use-swr";
 import { cn } from "@/shared/lib/utils";
 import { Subject } from "@/shared/models/subject.model";
+import { useLocale } from "next-intl";
+import { getLocalizedName } from "@/shared/utils/localization";
 import * as React from "react";
 
 interface SubjectSingleSelectionProps {
@@ -30,6 +32,7 @@ export default function SubjectSingleSelection({
 	const [searchValue, setSearchValue] = React.useState("");
 	const [open, setOpen] = React.useState(false);
 	const anchor = useComboboxAnchor();
+	const locale = useLocale();
 
 	const serializedSubjects = subjects?.map((s: any) => new Subject(s)) || [];
 	const selectedSubject = serializedSubjects.find((s: Subject) => s.id === value);
@@ -37,14 +40,16 @@ export default function SubjectSingleSelection({
 	React.useEffect(() => {
 		if (selectedSubject) {
 			// eslint-disable-next-line react-hooks/set-state-in-effect
-			setSearchValue(selectedSubject.name);
+			setSearchValue(getLocalizedName(selectedSubject.name, locale));
 		} else {
 			setSearchValue("");
 		}
 	}, [selectedSubject]);
 
 	const filteredSubjects = serializedSubjects.filter((subject: Subject) =>
-		subject.name.toLowerCase().includes(searchValue.toLowerCase())
+		getLocalizedName(subject.name, locale)
+			.toLowerCase()
+			.includes(searchValue.toLowerCase())
 	);
 
 	return (
@@ -57,7 +62,7 @@ export default function SubjectSingleSelection({
 					onOpenChange={(newOpen) => {
 						setOpen(newOpen);
 						if (!newOpen) {
-							setSearchValue(selectedSubject?.name || "");
+							setSearchValue(getLocalizedName(selectedSubject?.name, locale) || "");
 						} else {
 							setSearchValue("");
 						}
@@ -101,7 +106,7 @@ export default function SubjectSingleSelection({
 										value={subject.id}
 										className="cursor-pointer"
 									>
-										{subject.name}
+										{getLocalizedName(subject.name, locale)}
 									</ComboboxItem>
 								))
 							)}

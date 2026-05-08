@@ -19,6 +19,7 @@ import { SidebarMenu, SidebarMenuType } from "@/shared/configs/route.config"
 import { useMenuStateStore } from "@/shared/stores/menu-state-store"
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { usePathname, useRouter } from "next/navigation"
 
 export function NavMain() {
@@ -40,6 +41,7 @@ function RecursiveMenuItem({ item, level }: { item: SidebarMenuType; level: numb
   const pathname = usePathname()
   const router = useRouter()
   const { setOpenMobile, isMobile, state, setOpen } = useSidebar()
+  const t = useTranslations("Navigation")
 
   const hasChildren = item.children && item.children.length > 0
   const isOpen = unfoldedMenus.includes(item.id)
@@ -81,9 +83,9 @@ function RecursiveMenuItem({ item, level }: { item: SidebarMenuType; level: numb
       >
         <SidebarMenuItem>
           <CollapsibleTrigger render={
-            <SidebarMenuButton tooltip={item.name} isActive={isActive} className={`px-4 py-3 h-auto rounded-none border-l-4 ${isActive ? 'border-primary bg-sidebar-accent' : 'border-transparent'}`}>
+            <SidebarMenuButton tooltip={t(item.name)} isActive={isActive} className={`px-4 py-3 h-auto rounded-none border-l-4 ${isActive ? 'border-primary bg-sidebar-accent' : 'border-transparent'}`}>
               {item.icon && <item.icon />}
-              <span className="font-medium tracking-wide">{item.name}</span>
+              <span className="font-medium tracking-wide">{t(item.name)}</span>
               <ChevronRight className={`ml-auto transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`} />
             </SidebarMenuButton>
           } />
@@ -104,14 +106,14 @@ function RecursiveMenuItem({ item, level }: { item: SidebarMenuType; level: numb
     return (
       <SidebarMenuItem>
         <SidebarMenuButton
-          tooltip={item.name}
+          tooltip={t(item.name)}
           isActive={isActive}
           onClick={handleNavigate}
           render={<Link href={item.path} onClick={(e) => e.preventDefault()} />}
           className={`px-4 py-3 h-auto rounded-none border-l-4 ${isActive ? 'border-primary bg-sidebar-accent' : 'border-transparent'}`}
         >
           {item.icon && <item.icon />}
-          <span className="font-medium tracking-wide">{item.name}</span>
+          <span className="font-medium tracking-wide">{t(item.name)}</span>
         </SidebarMenuButton>
       </SidebarMenuItem>
     )
@@ -125,7 +127,7 @@ function RecursiveMenuItem({ item, level }: { item: SidebarMenuType; level: numb
         className={`px-4 py-3 h-auto rounded-none border-l-4 ${isActive ? 'border-primary bg-sidebar-accent' : 'border-transparent'}`}
       >
         {item.icon && <item.icon className="scale-90" />}
-        <span className="tracking-wide">{item.name}</span>
+        <span className="tracking-wide">{t(item.name)}</span>
       </SidebarMenuSubButton>
     </SidebarMenuSubItem>
   )
