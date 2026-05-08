@@ -1,6 +1,7 @@
 "use client"
 
 import { NavUser } from "@/shared/components/custom/nav-user"
+import { LanguageSwitcher } from "@/shared/components/custom/LanguageSwitcher"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -54,6 +55,7 @@ export default function Header() {
         </Breadcrumb>
       </div>
       <div className="flex items-center gap-4">
+        <LanguageSwitcher />
         <NavUser user={data.user} />
       </div>
     </header>

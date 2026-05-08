@@ -4,6 +4,8 @@ import { useSWR } from "@/shared/hooks/use-swr";
 import { cn } from "@/shared/lib/utils";
 
 import { ClassModel } from "@/shared/models/class.model";
+import { useLocale } from "next-intl";
+import { getLocalizedName } from "@/shared/utils/localization";
 
 interface ClassSelectionProps {
   value: string[];
@@ -13,6 +15,7 @@ interface ClassSelectionProps {
 
 export default function ClassSelection({ value = [], onChange, className }: ClassSelectionProps) {
   const { data: classes, isLoading } = useSWR("/classes");
+  const locale = useLocale();
 
   const serializedClasses = classes?.map((cls: any) => new ClassModel(cls));
 
@@ -49,7 +52,7 @@ export default function ClassSelection({ value = [], onChange, className }: Clas
                 )}
                 onClick={() => toggleClass(cls.id)}
               >
-                {cls.name}
+                {getLocalizedName(cls.name, locale)}
               </Badge>
             );
           })}

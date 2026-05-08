@@ -8,7 +8,9 @@ import { useSWR } from "@/shared/hooks/use-swr";
 import axios from "@/shared/lib/axios";
 import { StatusEnum } from "@/shared/types/enums";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IconPlus } from "@tabler/icons-react";
 import { Trash2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -20,6 +22,8 @@ interface ClassFormProps {
 }
 
 export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
+	const t = useTranslations("Classes");
+	const ft = useTranslations("Forms");
 	const { mutate: globalMutate } = useSWRConfig();
 	const { data: shifts } = useSWR("/shifts");
 
@@ -32,7 +36,13 @@ export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
 	const form = useForm<ClassFormValues>({
 		resolver: zodResolver(classSchema),
 		defaultValues: {
-			name: initialData?.name || "",
+			name: {
+				en:
+					typeof initialData?.name === "object"
+						? initialData?.name?.en
+						: initialData?.name || "",
+				bn: typeof initialData?.name === "object" ? initialData?.name?.bn : "",
+			},
 			sections: initialData?.sections || [],
 			capacity: initialData?.capacity || 30,
 			roomNumber: initialData?.roomNumber || "",
@@ -52,7 +62,13 @@ export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
 	useEffect(() => {
 		if (initialData) {
 			form.reset({
-				name: initialData.name,
+				name: {
+					en:
+						typeof initialData.name === "object"
+							? initialData.name.en
+							: initialData.name || "",
+					bn: typeof initialData.name === "object" ? initialData.name.bn : "",
+				},
 				sections: initialData.sections || [],
 				capacity: initialData.capacity,
 				roomNumber: initialData.roomNumber,
@@ -88,20 +104,29 @@ export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
 	};
 
 	return (
-		<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-2">
+		<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-2 pb-2">
 			<div className="space-y-4">
 				<InputField
 					control={form.control}
-					name="name"
-					label="Class Name"
+					name="name.en"
+					label="Class Name (English)"
 					placeholder="e.g. Class 1"
 					type="text"
 				/>
 
+				<InputField
+					control={form.control}
+					name="name.bn"
+					label="Class Name (Bangla)"
+					placeholder="e.g. ক্লাস ১"
+					type="text"
+				/>
+
 				<div className="flex items-center justify-between">
-					<p className="text-muted-foreground text-sm font-medium">Sections</p>
+					<p className="text-muted-foreground text-sm font-medium">{t("sections")}</p>
 					<Button type="button" variant="outline" size="sm" onClick={handleAddSection}>
-						Add Section
+						<IconPlus />
+						{t("addSection")}
 					</Button>
 				</div>
 
@@ -120,9 +145,9 @@ export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
 								</div>
 								<Button
 									type="button"
-									variant="ghost"
+									variant="destructive"
 									size="icon"
-									className="text-destructive hover:text-destructive hover:bg-destructive/10 mt-6"
+									className="mt-6"
 									onClick={() => remove(index)}
 								>
 									<Trash2 className="h-4 w-4" />
@@ -134,12 +159,14 @@ export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
 									control={form.control}
 									name={`sections.${index}.capacity`}
 									label="Capacity"
+									placeholder="e.g. 30"
 									type="number"
 								/>
 								<InputField
 									control={form.control}
 									name={`sections.${index}.roomNumber`}
 									label="Room"
+									placeholder="e.g. 101"
 									type="text"
 								/>
 							</div>
@@ -148,6 +175,7 @@ export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
 								name={`sections.${index}.shift`}
 								label="Shift"
 								type="select"
+								placeholder="Select Shift"
 								options={shiftOptions}
 							/>
 						</CardContent>
@@ -164,12 +192,14 @@ export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
 								control={form.control}
 								name="capacity"
 								label="Default Capacity"
+								placeholder="e.g. 30"
 								type="number"
 							/>
 							<InputField
 								control={form.control}
 								name="roomNumber"
 								label="Default Room"
+								placeholder="e.g. 101"
 								type="text"
 							/>
 						</div>
@@ -178,6 +208,7 @@ export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
 							name="shift"
 							label="Default Shift"
 							type="select"
+							placeholder="Select Shift"
 							options={shiftOptions}
 						/>
 					</div>
@@ -198,11 +229,11 @@ export default function ClassForm({ onSuccess, initialData }: ClassFormProps) {
 			<Button type="submit" className="h-10 w-full" disabled={form.formState.isSubmitting}>
 				{form.formState.isSubmitting
 					? initialData?.id
-						? "Updating..."
-						: "Adding..."
+						? ft("updateLoading")
+						: ft("saveLoading")
 					: initialData?.id
-						? "Update Class"
-						: "Add Class"}
+						? ft("update")
+						: ft("save")}
 			</Button>
 		</form>
 	);

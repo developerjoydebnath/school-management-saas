@@ -18,8 +18,10 @@ import { Subject } from "@/shared/models/subject.model";
 import { StatusEnum } from "@/shared/types/enums";
 import { ColumnDef } from "@tanstack/react-table";
 import { Eye, Pencil, Trash2 } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
+import { getLocalizedName } from "@/shared/utils/localization";
 import SubjectFilterBar from "./SubjectFilterBar";
 import SubjectForm from "./SubjectForm";
 
@@ -33,6 +35,9 @@ const initialFilters: SubjectFilter = { search: "", subjectType: [], status: [] 
 
 export default function SubjectList() {
 	const [filter, setFilter] = useState<SubjectFilter>(initialFilters);
+	const t = useTranslations("Subjects");
+	const tc = useTranslations("Common");
+	const locale = useLocale();
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(10);
 
@@ -99,13 +104,15 @@ export default function SubjectList() {
 		{
 			id: "name",
 			accessorKey: "name",
-			header: "Subject Name",
-			cell: ({ row }) => <span className="font-medium">{row.original.name}</span>,
+			header: t("subjectName"),
+			cell: ({ row }) => (
+				<span className="font-medium">{getLocalizedName(row.original.name, locale)}</span>
+			),
 		},
 		{
 			id: "code",
 			accessorKey: "code",
-			header: "Code",
+			header: t("subjectCode"),
 			cell: ({ row }) =>
 				row.original.code ? (
 					<Badge variant="secondary" className="h-5 rounded-sm px-1.5 py-0 text-xs">
@@ -118,13 +125,13 @@ export default function SubjectList() {
 		{
 			id: "type",
 			accessorKey: "type",
-			header: "Type",
+			header: t("subjectType"),
 			cell: ({ row }) => row.original.type,
 		},
 		{
 			id: "classes",
 			accessorKey: "classes",
-			header: "Classes",
+			header: t("assignedClasses"),
 			cell: ({ row }) => {
 				const classes = row.original.classes;
 				if (!classes || classes.length === 0)
@@ -143,7 +150,7 @@ export default function SubjectList() {
 									variant="outline"
 									className="bg-accent h-6 rounded-sm px-1.5 py-0 text-xs font-normal"
 								>
-									{cls ? cls.name : clsId}
+									{cls ? getLocalizedName(cls.name, locale) : clsId}
 								</Badge>
 							);
 						})}
@@ -162,7 +169,7 @@ export default function SubjectList() {
 		{
 			id: "status",
 			accessorKey: "status",
-			header: "Status",
+			header: t("status"),
 			cell: ({ row }) => {
 				const sub = row.original;
 				return (
@@ -188,7 +195,7 @@ export default function SubjectList() {
 		},
 		{
 			id: "actions",
-			header: "Actions",
+			header: t("actions"),
 			cell: ({ row }) => {
 				const sub = row.original;
 				return (
@@ -279,22 +286,22 @@ export default function SubjectList() {
 			>
 				<DialogContent className="max-w-md">
 					<DialogHeader>
-						<DialogTitle>Subject Details</DialogTitle>
+						<DialogTitle>{t("subjectDetails")}</DialogTitle>
 					</DialogHeader>
 					{viewingSubject && (
 						<div className="mt-4 space-y-6">
 							<div className="grid grid-cols-2 gap-x-4 gap-y-6">
 								<div>
 									<p className="text-muted-foreground mb-1 text-xs font-medium">
-										Subject Name
+										{t("subjectName")}
 									</p>
 									<p className="text-foreground text-sm font-medium">
-										{viewingSubject.name}
+										{getLocalizedName(viewingSubject.name, locale)}
 									</p>
 								</div>
 								<div>
 									<p className="text-muted-foreground mb-1 text-xs font-medium">
-										Subject Code
+										{t("subjectCode")}
 									</p>
 									<p className="text-foreground text-sm font-medium">
 										{viewingSubject.code || "-"}
@@ -302,7 +309,7 @@ export default function SubjectList() {
 								</div>
 								<div>
 									<p className="text-muted-foreground mb-1 text-xs font-medium">
-										Subject Type
+										{t("subjectType")}
 									</p>
 									<p className="text-foreground text-sm font-medium capitalize">
 										{viewingSubject.type.toLowerCase()}
@@ -310,7 +317,7 @@ export default function SubjectList() {
 								</div>
 								<div>
 									<p className="text-muted-foreground mb-1 text-xs font-medium">
-										Status
+										{t("status")}
 									</p>
 									<Badge
 										variant="outline"
@@ -328,7 +335,7 @@ export default function SubjectList() {
 							</div>
 							<div>
 								<p className="text-muted-foreground mb-2 text-xs font-medium">
-									Assigned Classes
+									{t("assignedClasses")}
 								</p>
 								<div className="flex flex-wrap gap-2">
 									{!viewingSubject.classes ||
@@ -345,7 +352,7 @@ export default function SubjectList() {
 													variant="outline"
 													className="bg-accent/50 text-foreground h-7 px-3 py-1 text-sm font-normal"
 												>
-													{cls ? cls.name : clsId}
+													{cls ? getLocalizedName(cls.name, locale) : clsId}
 												</Badge>
 											);
 										})
@@ -363,7 +370,7 @@ export default function SubjectList() {
 			>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Edit Subject</DialogTitle>
+						<DialogTitle>{t("editSubjectTitle")}</DialogTitle>
 					</DialogHeader>
 					{editingSubject && (
 						<SubjectForm
@@ -378,9 +385,9 @@ export default function SubjectList() {
 				isOpen={!!subjectToDelete}
 				onClose={() => setSubjectToDelete(null)}
 				onConfirm={confirmDelete}
-				title="Delete Subject"
-				description="Are you sure you want to delete this subject? This action cannot be undone."
-				confirmText="Delete"
+				title={t("deleteSubjectTitle")}
+				description={t("deleteSubjectDesc")}
+				confirmText={tc("delete")}
 				variant="destructive"
 				isLoading={isDeleting}
 			/>
@@ -389,9 +396,13 @@ export default function SubjectList() {
 				isOpen={!!subjectToChangeStatus}
 				onClose={() => setSubjectToChangeStatus(null)}
 				onConfirm={confirmStatusChange}
-				title="Change Subject Status"
-				description={`Are you sure you want to change the status to ${subjectToChangeStatus?.newStatus ? "Active" : "Inactive"}?`}
-				confirmText="Change Status"
+				title={t("statusChangeTitle")}
+				description={
+					subjectToChangeStatus?.newStatus
+						? tc("changeToActiveDesc")
+						: tc("changeToInactiveDesc")
+				}
+				confirmText={tc("changeStatus")}
 				variant="default"
 				isLoading={isChangingStatus}
 			/>

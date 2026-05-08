@@ -9,7 +9,7 @@ export interface Section {
 
 export class ClassModel {
 	private _id: string;
-	private _name: string;
+	private _name: string | { en: string; bn: string };
 	private _sections: Section[];
 	private _capacity?: number;
 	private _roomNumber?: string;
@@ -36,7 +36,7 @@ export class ClassModel {
 		return this._id;
 	}
 
-	get name(): string {
+	get name(): any {
 		return this._name;
 	}
 

@@ -1,88 +1,142 @@
-import * as React from "react"
-import { useSWR } from "@/shared/hooks/use-swr"
-import { Teacher } from "@/shared/models/teacher.model"
+import { Avatar, AvatarFallback } from "@/shared/components/ui/avatar";
 import {
-  Combobox,
-  ComboboxInput,
-  ComboboxContent,
-  ComboboxList,
-  ComboboxItem,
-  ComboboxEmpty,
-  useComboboxAnchor,
-} from "@/shared/components/ui/combobox"
-import { Skeleton } from "@/shared/components/ui/skeleton"
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar"
-import { cn } from "@/shared/lib/utils"
+	Combobox,
+	ComboboxContent,
+	ComboboxEmpty,
+	ComboboxInput,
+	ComboboxItem,
+	ComboboxList,
+	useComboboxAnchor,
+} from "@/shared/components/ui/combobox";
+import { Skeleton } from "@/shared/components/ui/skeleton";
+import { useSWR } from "@/shared/hooks/use-swr";
+import { cn } from "@/shared/lib/utils";
+import { Teacher } from "@/shared/models/teacher.model";
+import * as React from "react";
 
 interface TeacherSelectionProps {
-  value: string
-  onChange: (value: string) => void
-  className?: string
-  placeholder?: string
+	value: string;
+	onChange: (value: string) => void;
+	className?: string;
+	placeholder?: string;
 }
 
 export default function TeacherSelection({
-  value,
-  onChange,
-  className,
-  placeholder = "Select teacher...",
+	value,
+	onChange,
+	className,
+	placeholder = "Select teacher...",
 }: TeacherSelectionProps) {
-  const { data: teachers, isLoading } = useSWR("/teachers")
-  const [searchValue, setSearchValue] = React.useState("")
-  const anchor = useComboboxAnchor()
+	const { data: teachers, isLoading: isTeachersLoading } = useSWR("/teachers");
+	const { data: subjects, isLoading: isSubjectsLoading } = useSWR("/subjects");
+	const isLoading = isTeachersLoading || isSubjectsLoading;
 
-  const serializedTeachers = teachers?.map((t: any) => new Teacher(t)) || []
+	const [searchValue, setSearchValue] = React.useState("");
+	const [open, setOpen] = React.useState(false);
+	const anchor = useComboboxAnchor();
 
-  const filteredTeachers = serializedTeachers.filter((teacher: Teacher) =>
-    teacher.name.toLowerCase().includes(searchValue.toLowerCase())
-  )
+	const serializedTeachers = teachers?.map((t: any) => new Teacher(t)) || [];
+	const selectedTeacher = serializedTeachers.find((t: Teacher) => t.id === value);
 
-  const selectedTeacher = serializedTeachers.find((t: Teacher) => t.id === value)
+	React.useEffect(() => {
+		if (selectedTeacher) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
+			setSearchValue(selectedTeacher.name);
+		} else {
+			setSearchValue("");
+		}
+	}, [selectedTeacher]);
 
-  return (
-    <div className={cn("w-full", className)}>
-      {isLoading ? (
-        <Skeleton className="h-10 w-full rounded-md" />
-      ) : (
-        <Combobox
-          value={value}
-          onValueChange={(val) => onChange(val || "")}
-        >
-          <div ref={anchor}>
-            <ComboboxInput
-              placeholder={placeholder}
-              value={searchValue}
-              onChange={(e: any) => setSearchValue(e.target.value)}
-              className="text-sm"
-              showClear
-            />
-          </div>
+	const filteredTeachers = serializedTeachers.filter((teacher: Teacher) =>
+		teacher.name.toLowerCase().includes(searchValue.toLowerCase())
+	);
 
-          <ComboboxContent anchor={anchor} className="w-(--anchor-width) min-w-[300px]">
-            <ComboboxList>
-              {filteredTeachers.length === 0 ? (
-                <ComboboxEmpty>No teachers found.</ComboboxEmpty>
-              ) : (
-                filteredTeachers.map((teacher: Teacher) => (
-                  <ComboboxItem key={teacher.id} value={teacher.id} className="py-2">
-                    <div className="flex items-center gap-3">
-                      <Avatar className="size-8">
-                        <AvatarFallback>{teacher.name.substring(0, 2).toUpperCase()}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex flex-col">
-                        <span className="font-medium">{teacher.name}</span>
-                        <span className="text-xs text-muted-foreground">
-                          {teacher.subjects.join(", ") || "No subject assigned"}
-                        </span>
-                      </div>
-                    </div>
-                  </ComboboxItem>
-                ))
-              )}
-            </ComboboxList>
-          </ComboboxContent>
-        </Combobox>
-      )}
-    </div>
-  )
+	const getSubjectNames = (subjectIds: string[]) => {
+		if (!subjectIds || subjectIds.length === 0) return "No subject assigned";
+		if (!subjects) return subjectIds.join(", ");
+
+		const names = subjectIds.map((id) => {
+			const subject = subjects.find((s: any) => s.id === id);
+			return subject ? subject.name : id;
+		});
+
+		return names.join(", ");
+	};
+
+	return (
+		<div className={cn("w-full", className)}>
+			{isLoading ? (
+				<Skeleton className="h-10 w-full rounded-md" />
+			) : (
+				<Combobox
+					open={open}
+					onOpenChange={(newOpen) => {
+						setOpen(newOpen);
+						if (!newOpen) {
+							setSearchValue(selectedTeacher?.name || "");
+						} else {
+							setSearchValue("");
+						}
+					}}
+					value={value}
+					onValueChange={(val) => {
+						onChange(val || "");
+						setOpen(false);
+					}}
+				>
+					<div ref={anchor}>
+						<ComboboxInput
+							placeholder={placeholder}
+							value={searchValue}
+							onChange={(e: any) => {
+								setSearchValue(e.target.value);
+								setOpen(true);
+							}}
+							onFocus={() => {
+								if (!open) {
+									setOpen(true);
+									setSearchValue("");
+								}
+							}}
+							className="text-sm"
+							showClear
+						/>
+					</div>
+
+					<ComboboxContent
+						anchor={anchor}
+						className="w-(--anchor-width) min-w-[300px] p-1"
+					>
+						<ComboboxList>
+							{filteredTeachers.length === 0 ? (
+								<ComboboxEmpty>No teachers found.</ComboboxEmpty>
+							) : (
+								filteredTeachers.map((teacher: Teacher) => (
+									<ComboboxItem
+										key={teacher.id}
+										value={teacher.id}
+										className="cursor-pointer"
+									>
+										<div className="flex items-center gap-3">
+											<Avatar className="size-8">
+												<AvatarFallback>
+													{teacher.name.substring(0, 2).toUpperCase()}
+												</AvatarFallback>
+											</Avatar>
+											<div className="flex flex-col">
+												<span className="font-medium">{teacher.name}</span>
+												<span className="text-muted-foreground line-clamp-1 text-xs">
+													{getSubjectNames(teacher.subjects)}
+												</span>
+											</div>
+										</div>
+									</ComboboxItem>
+								))
+							)}
+						</ComboboxList>
+					</ComboboxContent>
+				</Combobox>
+			)}
+		</div>
+	);
 }

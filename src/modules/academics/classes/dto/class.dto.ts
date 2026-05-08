@@ -9,7 +9,10 @@ export const sectionSchema = z.object({
 });
 
 export const classSchema = z.object({
-	name: z.string().min(1, { message: "Class name is required" }),
+	name: z.object({
+		en: z.string().min(1, { message: "English class name is required" }),
+		bn: z.string().min(1, { message: "Bangla class name is required" }),
+	}),
 	sections: z.array(sectionSchema),
 	capacity: z.number().optional(),
 	roomNumber: z.string().optional(),

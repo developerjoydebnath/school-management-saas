@@ -13,6 +13,8 @@ import { Skeleton } from "@/shared/components/ui/skeleton";
 import { useSWR } from "@/shared/hooks/use-swr";
 import { cn } from "@/shared/lib/utils";
 import { Subject } from "@/shared/models/subject.model";
+import { useLocale } from "next-intl";
+import { getLocalizedName } from "@/shared/utils/localization";
 import * as React from "react";
 
 interface SubjectSelectionProps {
@@ -29,11 +31,12 @@ export default function SubjectSelection({
 	const { data: subjects, isLoading } = useSWR("/subjects");
 	const [searchValue, setSearchValue] = React.useState("");
 	const anchor = useComboboxAnchor();
+	const locale = useLocale();
 
 	const serializedSubjects = subjects?.map((s: any) => new Subject(s)) || [];
 
 	const filteredSubjects = serializedSubjects.filter((subject: Subject) =>
-		subject.name.toLowerCase().includes(searchValue.toLowerCase())
+		getLocalizedName(subject.name, locale).toLowerCase().includes(searchValue.toLowerCase())
 	);
 
 	const handleSelect = (val: string) => {
@@ -57,7 +60,9 @@ export default function SubjectSelection({
 									(s: Subject) => s.id === val || s.name === val
 								);
 								return (
-									<ComboboxChip key={val}>{subject?.name || val}</ComboboxChip>
+									<ComboboxChip key={val}>
+										{subject ? getLocalizedName(subject.name, locale) : val}
+									</ComboboxChip>
 								);
 							})}
 							<ComboboxChipsInput
@@ -83,7 +88,7 @@ export default function SubjectSelection({
 										value={subject.id}
 										className="cursor-pointer"
 									>
-										{subject.name}
+										{getLocalizedName(subject.name, locale)}
 									</ComboboxItem>
 								))
 							)}

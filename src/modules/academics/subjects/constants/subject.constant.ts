@@ -1,8 +1,14 @@
 export const SUBJECT_FORM_FIELDS = [
   {
-    name: "name",
-    label: "Subject Name",
+    name: "name.en",
+    label: "Subject Name (English)",
     placeholder: "e.g. Bangla 1st Paper",
+    type: "text",
+  },
+  {
+    name: "name.bn",
+    label: "Subject Name (Bangla)",
+    placeholder: "e.g. বাংলা ১ম পত্র",
     type: "text",
   },
   {

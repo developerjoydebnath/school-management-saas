@@ -7,6 +7,7 @@ import {
 	IconFilter2Cancel,
 	IconTable,
 } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 import SearchInput from "../form/SearchInput";
 import { Button } from "../ui/button";
 import {
@@ -41,6 +42,7 @@ export default function TableFilter<T extends WithSearch>({
 	hideSearch,
 	resetFilters,
 }: Props<T>) {
+	const t = useTranslations("TableFilters");
 	return (
 		<section className={cn("flex items-center justify-between gap-2", className)}>
 			<div className="flex items-center gap-2">
@@ -50,26 +52,26 @@ export default function TableFilter<T extends WithSearch>({
 							render={
 								<Button variant="outline">
 									<IconCloudDownload className="size-4" />
-									Export
+									{t("export")}
 								</Button>
 							}
 						/>
 						<DropdownMenuContent>
 							<DropdownMenuItem className="cursor-pointer">
 								<IconCopy className="size-4" />
-								Copy
+								{t("copy")}
 							</DropdownMenuItem>
 							<DropdownMenuItem className="cursor-pointer">
 								<IconFileTypePdf className="size-4" />
-								PDF
+								{t("pdf")}
 							</DropdownMenuItem>
 							<DropdownMenuItem className="cursor-pointer">
 								<IconTable className="size-4" />
-								Excel
+								{t("excel")}
 							</DropdownMenuItem>
 							<DropdownMenuItem className="cursor-pointer">
 								<IconFileDescription className="size-4" />
-								CSV
+								{t("csv")}
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
@@ -84,13 +86,14 @@ export default function TableFilter<T extends WithSearch>({
 						value={filter.search}
 						onValueChange={(search) => setFilter({ ...filter, search })}
 						className="w-full max-w-80"
+						placeholder={t("search")}
 					/>
 				)}
 
 				{!hideReset && (
 					<Button onClick={resetFilters ? resetFilters : () => {}} variant={"outline"}>
 						<IconFilter2Cancel className="size-4" />
-						<span className="hidden sm:block">Reset Filters</span>
+						<span className="hidden sm:block">{t("reset")}</span>
 					</Button>
 				)}
 			</div>

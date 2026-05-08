@@ -1,54 +1,63 @@
+"use client";
+
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
 } from "@/shared/components/ui/alert-dialog";
-import React from "react";
+import { useTranslations } from "next-intl";
 
 interface ConfirmationModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onConfirm: () => void;
-  title?: string;
-  description?: string;
-  confirmText?: string;
-  cancelText?: string;
-  isLoading?: boolean;
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+	isOpen: boolean;
+	onClose: () => void;
+	onConfirm: () => void;
+	title?: string;
+	description?: string;
+	confirmText?: string;
+	cancelText?: string;
+	isLoading?: boolean;
+	variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
 }
 
 export default function ConfirmationModal({
-  isOpen,
-  onClose,
-  onConfirm,
-  title = "Are you sure?",
-  description = "This action cannot be undone.",
-  confirmText = "Confirm",
-  cancelText = "Cancel",
-  isLoading = false,
-  variant = "default",
+	isOpen,
+	onClose,
+	onConfirm,
+	title = "Are you sure?",
+	description = "This action cannot be undone.",
+	confirmText,
+	cancelText,
+	isLoading = false,
+	variant = "default",
 }: ConfirmationModalProps) {
-  return (
-    <AlertDialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{description}</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel onClick={onClose} disabled={isLoading}>
-            {cancelText}
-          </AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm} disabled={isLoading} variant={variant}>
-            {isLoading ? "Processing..." : confirmText}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
+	const t = useTranslations("Forms");
+
+	const cancelAltText = cancelText || t("cancel");
+	const confirmAltText = confirmText || t("confirm");
+	const titleAltText = title || t("areYouSure");
+	const descriptionAltText = description || t("thisActionCannotBeUndone");
+
+	return (
+		<AlertDialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+			<AlertDialogContent>
+				<AlertDialogHeader>
+					<AlertDialogTitle>{titleAltText}</AlertDialogTitle>
+					<AlertDialogDescription>{descriptionAltText}</AlertDialogDescription>
+				</AlertDialogHeader>
+				<AlertDialogFooter>
+					<AlertDialogCancel onClick={onClose} disabled={isLoading}>
+						{cancelAltText}
+					</AlertDialogCancel>
+					<AlertDialogAction onClick={onConfirm} disabled={isLoading} variant={variant}>
+						{isLoading ? t("processing") : confirmAltText}
+					</AlertDialogAction>
+				</AlertDialogFooter>
+			</AlertDialogContent>
+		</AlertDialog>
+	);
 }

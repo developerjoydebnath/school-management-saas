@@ -17,12 +17,17 @@ import ClassForm from "./ClassForm";
 
 import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { ClassModel } from "@/shared/models/class.model";
+import { useTranslations, useLocale } from "next-intl";
+import { getLocalizedName } from "@/shared/utils/localization";
 
 export default function ClassList() {
 	const { data: classes, isLoading, mutate } = useSWR("/classes");
 	const [editingClass, setEditingClass] = useState<ClassModel | null>(null);
 	const [classToDelete, setClassToDelete] = useState<string | null>(null);
 	const [isDeleting, setIsDeleting] = useState(false);
+	const t = useTranslations("Classes");
+	const tc = useTranslations("Common");
+	const locale = useLocale();
 
 	const [classToChangeStatus, setClassToChangeStatus] = useState<{
 		cls: ClassModel;
@@ -69,7 +74,7 @@ export default function ClassList() {
 		<>
 			<Card className="w-full shadow-none ring-0">
 				<CardHeader>
-					<CardTitle className="text-lg">Class List</CardTitle>
+					<CardTitle className="text-lg">{t("classList")}</CardTitle>
 				</CardHeader>
 				<CardContent>
 					{isLoading ? (
@@ -79,9 +84,9 @@ export default function ClassList() {
 							<Skeleton className="h-[88px] w-full" />
 						</div>
 					) : !serializedClasses || serializedClasses.length === 0 ? (
-						<p className="text-muted-foreground text-sm">No classes found.</p>
+						<p className="text-muted-foreground text-sm">{t("noClassesFound")}</p>
 					) : (
-						<div className="max-h-[600px] space-y-4 overflow-y-auto pr-2">
+						<div className="space-y-4">
 							{serializedClasses.map((cls: ClassModel) => (
 								<div
 									key={cls.id}
@@ -89,7 +94,7 @@ export default function ClassList() {
 								>
 									<div className="space-y-1.5">
 										<p className="flex items-center gap-2 text-lg font-medium">
-											{cls.name}
+											{getLocalizedName(cls.name, locale)}
 											{cls.sections && cls.sections.length > 0 && (
 												<span className="flex items-center gap-1">
 													{cls.sections.map((sec) => (
@@ -169,6 +174,7 @@ export default function ClassList() {
 										</div>
 										<div className="flex items-center gap-2">
 											<Button
+												title={t("editClassTitle")}
 												variant="outline"
 												size="icon"
 												onClick={() => setEditingClass(cls)}
@@ -176,6 +182,7 @@ export default function ClassList() {
 												<Pencil className="text-muted-foreground hover:text-foreground h-4 w-4" />
 											</Button>
 											<Button
+												title={t("deleteClassTitle")}
 												variant="outline"
 												size="icon"
 												onClick={() => setClassToDelete(cls.id)}
@@ -194,7 +201,7 @@ export default function ClassList() {
 			<Dialog open={!!editingClass} onOpenChange={(open) => !open && setEditingClass(null)}>
 				<DialogContent className="px-0">
 					<DialogHeader className="px-6">
-						<DialogTitle>Edit Class</DialogTitle>
+						<DialogTitle>{t("editClassTitle")}</DialogTitle>
 					</DialogHeader>
 					<ScrollArea className="max-h-[80vh] px-4">
 						{editingClass && (
@@ -211,9 +218,9 @@ export default function ClassList() {
 				isOpen={!!classToDelete}
 				onClose={() => setClassToDelete(null)}
 				onConfirm={confirmDelete}
-				title="Delete Class"
-				description="Are you sure you want to delete this class? This action cannot be undone."
-				confirmText="Delete"
+				title={t("deleteClassTitle")}
+				description={t("deleteClassDescription")}
+				confirmText={tc("delete")}
 				variant="destructive"
 				isLoading={isDeleting}
 			/>
@@ -222,9 +229,13 @@ export default function ClassList() {
 				isOpen={!!classToChangeStatus}
 				onClose={() => setClassToChangeStatus(null)}
 				onConfirm={confirmStatusChange}
-				title="Change Class Status"
-				description={`Are you sure you want to change the status to ${classToChangeStatus?.newStatus ? "Active" : "Inactive"}?`}
-				confirmText="Change Status"
+				title={t("statusChangeTitle")}
+				description={
+					classToChangeStatus?.newStatus
+						? tc("changeToActiveDesc")
+						: tc("changeToInactiveDesc")
+				}
+				confirmText={tc("changeStatus")}
 				variant="default"
 				isLoading={isChangingStatus}
 			/>

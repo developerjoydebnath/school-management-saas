@@ -1,51 +1,39 @@
 import { NextRequest } from "next/server";
 
 // Fallback to JSON server port if environment variable is not set
-const TARGET_URL = process.env.API_BASE_URL || "http://localhost:3001";
+const TARGET_URL = process.env.API_BASE_URL || "http://127.0.0.1:3001";
 
-async function proxyRequest(req: NextRequest) {
+async function proxyRequest(
+	req: NextRequest,
+	{ params }: { params: Promise<{ path: string[] }> }
+) {
 	try {
-		// 1. Construct the target URL
-		// This strips /api/proxy and retains the rest of the path
-		const path = req.nextUrl.pathname.replace(/^\/api\/proxy/, "");
+		const { path: pathSegments } = await params;
+		const path = "/" + pathSegments.join("/");
 		const searchParams = req.nextUrl.search;
+		const targetUrl = `${TARGET_URL}${path}${searchParams}`;
+		
+		console.log("[PROXY] Fetching from:", targetUrl);
 
-		// Safely construct the full URL
-		const targetUrl = new URL(`${path}${searchParams}`, TARGET_URL).toString();
+		const headers = new Headers();
+		const headersToForward = ["content-type", "accept", "accept-language"];
+		headersToForward.forEach(h => {
+			const val = req.headers.get(h);
+			if (val) headers.set(h, val);
+		});
 
-		// 2. Forward Request Headers
-		const headers = new Headers(req.headers);
-		// Remove host header to avoid conflicts with the target server
-		headers.delete("host");
-		// Remove connection header
-		headers.delete("connection");
-
-		// 3. Handle Request Body
-		// For methods that support body, pass the raw stream directly
-		const hasBody = req.method !== "GET" && req.method !== "HEAD" && req.method !== "OPTIONS";
-		const body = hasBody ? req.body : null;
-
-		// 4. Perform the Proxy Fetch Request
-		const fetchOptions: any = {
+		const response = await fetch(targetUrl, {
 			method: req.method,
 			headers,
-			body,
-			redirect: "manual",
-			// Bypass Next.js cache to ensure real-time data from backend
+			body: req.method !== "GET" && req.method !== "HEAD" ? req.body : null,
 			cache: "no-store",
-			// Required parameter for passing a ReadableStream in Next.js fetch
-			duplex: "half",
-		};
+			...(req.method !== "GET" && req.method !== "HEAD" ? { duplex: "half" } : {}),
+		} as any);
 
-		const response = await fetch(targetUrl, fetchOptions);
-
-		// 5. Forward Response Headers safely
 		const resHeaders = new Headers(response.headers);
-		// Let the Next.js edge handle content encoding
 		resHeaders.delete("content-encoding");
-		resHeaders.delete("content-length"); // Length might change if encoding is stripped
+		resHeaders.delete("content-length");
 
-		// 6. Return the Response Stream
 		return new Response(response.body, {
 			status: response.status,
 			statusText: response.statusText,
@@ -53,19 +41,7 @@ async function proxyRequest(req: NextRequest) {
 		});
 	} catch (error: any) {
 		console.error("[PROXY_ERROR]", error.message);
-
-		return new Response(
-			JSON.stringify({
-				error: "Proxy Request Failed",
-				message:
-					"Unable to connect to the target API server. Ensure your backend server is running.",
-				details: error.message,
-			}),
-			{
-				status: 502, // Bad Gateway
-				headers: { "Content-Type": "application/json" },
-			}
-		);
+		return new Response(JSON.stringify({ error: error.message }), { status: 500 });
 	}
 }
 

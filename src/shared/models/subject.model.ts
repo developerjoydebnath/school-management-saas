@@ -2,7 +2,7 @@ import { StatusEnum, SubjectTypeEnum } from "../types/enums";
 
 export class Subject {
 	private _id: string;
-	private _name: string;
+	private _name: string | { en: string; bn: string };
 	private _code: string;
 	private _type: SubjectTypeEnum;
 	private _status: StatusEnum;
@@ -27,7 +27,7 @@ export class Subject {
 		return this._id;
 	}
 
-	get name(): string {
+	get name(): any {
 		return this._name;
 	}
 
