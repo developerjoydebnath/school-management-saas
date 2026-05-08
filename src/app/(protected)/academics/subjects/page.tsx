@@ -22,14 +22,15 @@ export default function SubjectsPage() {
 	const { setBreadcrumbs } = useBreadcrumbStore();
 	const [isCreateOpen, setIsCreateOpen] = useState(false);
 	const t = useTranslations("Subjects");
+	const tNav = useTranslations("Navigation");
 
 	useEffect(() => {
 		setBreadcrumbs([
-			{ label: "Dashboard", href: PATHS.DASHBOARD },
-			{ label: "Academics", href: PATHS.ACADEMICS.ROOT },
-			{ label: "Subjects", href: PATHS.ACADEMICS.SUBJECTS.ROOT },
+			{ label: tNav("dashboard"), href: PATHS.DASHBOARD },
+			{ label: tNav("academics"), href: PATHS.ACADEMICS.ROOT },
+			{ label: tNav("academics_subjects"), href: PATHS.ACADEMICS.SUBJECTS.ROOT },
 		]);
-	}, [setBreadcrumbs]);
+	}, [setBreadcrumbs, tNav]);
 
 	return (
 		<div className="space-y-6">

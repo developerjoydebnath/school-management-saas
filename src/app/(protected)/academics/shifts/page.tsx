@@ -24,14 +24,15 @@ export default function ShiftsPage() {
 	const { setBreadcrumbs } = useBreadcrumbStore();
 	const [isCreateOpen, setIsCreateOpen] = useState(false);
 	const t = useTranslations("Shifts");
+	const tNav = useTranslations("Navigation");
 
 	useEffect(() => {
 		setBreadcrumbs([
-			{ label: "Dashboard", href: PATHS.DASHBOARD },
-			{ label: "Academics", href: PATHS.ACADEMICS.ROOT },
-			{ label: "Shifts", href: PATHS.ACADEMICS.SHIFTS.ROOT },
+			{ label: tNav("dashboard"), href: PATHS.DASHBOARD },
+			{ label: tNav("academics"), href: PATHS.ACADEMICS.ROOT },
+			{ label: tNav("academics_shifts"), href: PATHS.ACADEMICS.SHIFTS.ROOT },
 		]);
-	}, [setBreadcrumbs]);
+	}, [setBreadcrumbs, tNav]);
 
 	return (
 		<div className="space-y-6">

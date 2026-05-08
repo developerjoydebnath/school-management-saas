@@ -22,14 +22,15 @@ export default function ClassesPage() {
 	const { setBreadcrumbs } = useBreadcrumbStore();
 	const [isCreateOpen, setIsCreateOpen] = useState(false);
 	const t = useTranslations("Classes");
+	const tNav = useTranslations("Navigation");
 
 	useEffect(() => {
 		setBreadcrumbs([
-			{ label: "Dashboard", href: PATHS.DASHBOARD },
-			{ label: "Academics", href: PATHS.ACADEMICS.ROOT },
-			{ label: "Classes", href: PATHS.ACADEMICS.CLASSES.ROOT },
+			{ label: tNav("dashboard"), href: PATHS.DASHBOARD },
+			{ label: tNav("academics"), href: PATHS.ACADEMICS.ROOT },
+			{ label: tNav("academics_classes"), href: PATHS.ACADEMICS.CLASSES.ROOT },
 		]);
-	}, [setBreadcrumbs]);
+	}, [setBreadcrumbs, tNav]);
 
 	return (
 		<div className="space-y-6">
