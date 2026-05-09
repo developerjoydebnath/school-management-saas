@@ -5,6 +5,7 @@ import PermissionGuard from "@/shared/components/custom/PermissionGuard";
 import { TOption } from "@/shared/components/form/FilterButton";
 import DataTable from "@/shared/components/table/DataTable";
 import TableFilter from "@/shared/components/table/TableFilter";
+import { AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
@@ -16,12 +17,12 @@ import { useTableData } from "@/shared/hooks/use-table-data";
 import axios from "@/shared/lib/axios";
 import { Subject } from "@/shared/models/subject.model";
 import { StatusEnum } from "@/shared/types/enums";
+import { getLocalizedName } from "@/shared/utils/localization";
 import { ColumnDef } from "@tanstack/react-table";
 import { Eye, Pencil, Trash2 } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import { getLocalizedName } from "@/shared/utils/localization";
 import SubjectFilterBar from "./SubjectFilterBar";
 import SubjectForm from "./SubjectForm";
 
@@ -46,10 +47,7 @@ export default function SubjectList() {
 	const [subjectToDelete, setSubjectToDelete] = useState<string | null>(null);
 	const [isDeleting, setIsDeleting] = useState(false);
 
-	const [subjectToChangeStatus, setSubjectToChangeStatus] = useState<{
-		subject: Subject;
-		newStatus: boolean;
-	} | null>(null);
+	const [subjectToChangeStatus, setSubjectToChangeStatus] = useState<Subject | null>(null);
 	const [isChangingStatus, setIsChangingStatus] = useState(false);
 
 	const {
@@ -68,11 +66,11 @@ export default function SubjectList() {
 	// serialize the data
 	const serializedSubjects = subjects?.map((subject: any) => new Subject(subject));
 
-	const confirmDelete = async () => {
-		if (!subjectToDelete) return;
+	const confirmDelete = async (id: string) => {
+		setSubjectToDelete(id);
 		setIsDeleting(true);
 		try {
-			await axios.delete(`/subjects/${subjectToDelete}`);
+			await axios.delete(`/subjects/${id}`);
 			toast.success("Subject deleted successfully");
 			mutate();
 		} catch (err: any) {
@@ -83,12 +81,11 @@ export default function SubjectList() {
 		}
 	};
 
-	const confirmStatusChange = async () => {
-		if (!subjectToChangeStatus) return;
+	const confirmStatusChange = async (subject: Subject, newStatus: boolean) => {
+		setSubjectToChangeStatus(subject);
 		setIsChangingStatus(true);
 		try {
-			const { subject, newStatus } = subjectToChangeStatus;
-			const status = newStatus ? "Active" : "Inactive";
+			const status = newStatus ? StatusEnum.ACTIVE : StatusEnum.INACTIVE;
 			await axios.patch(`/subjects/${subject.id}`, { status });
 			toast.success(`Status updated to ${status}`);
 			mutate();
@@ -174,12 +171,25 @@ export default function SubjectList() {
 				const sub = row.original;
 				return (
 					<div className="flex items-center gap-2">
-						<Switch
-							checked={sub.status === StatusEnum.ACTIVE}
-							onCheckedChange={(checked) =>
-								setSubjectToChangeStatus({ subject: sub, newStatus: checked })
+						<ConfirmationModal
+							onConfirm={() =>
+								confirmStatusChange(sub, sub.status !== StatusEnum.ACTIVE)
 							}
-						/>
+							title={t("statusChangeTitle")}
+							description={
+								sub.status === StatusEnum.ACTIVE
+									? tc("changeToInactiveDesc")
+									: tc("changeToActiveDesc")
+							}
+							confirmText={tc("changeStatus")}
+							variant="default"
+							isLoading={isChangingStatus && subjectToChangeStatus?.id === sub.id}
+						>
+							<AlertDialogTrigger
+								nativeButton={false}
+								render={<Switch checked={sub.status === StatusEnum.ACTIVE} />}
+							/>
+						</ConfirmationModal>
 						<div
 							className={`w-fit rounded-full px-2.5 py-1 text-xs font-medium ${
 								sub.status === StatusEnum.ACTIVE
@@ -230,13 +240,22 @@ export default function SubjectList() {
 								PERMISSIONS.ACADEMICS.SUBJECTS.DELETE,
 							]}
 						>
-							<Button
+							<ConfirmationModal
+								onConfirm={() => confirmDelete(sub.id)}
+								title={t("deleteSubjectTitle")}
+								description={t("deleteSubjectDesc")}
+								confirmText={tc("delete")}
 								variant="destructive"
-								size="icon-sm"
-								onClick={() => setSubjectToDelete(sub.id)}
+								isLoading={isDeleting && subjectToDelete === sub.id}
 							>
-								<Trash2 />
-							</Button>
+								<AlertDialogTrigger
+									render={
+										<Button variant="destructive" size="icon-sm">
+											<Trash2 className="h-4 w-4" />
+										</Button>
+									}
+								/>
+							</ConfirmationModal>
 						</PermissionGuard>
 					</div>
 				);
@@ -352,7 +371,9 @@ export default function SubjectList() {
 													variant="outline"
 													className="bg-accent/50 text-foreground h-7 px-3 py-1 text-sm font-normal"
 												>
-													{cls ? getLocalizedName(cls.name, locale) : clsId}
+													{cls
+														? getLocalizedName(cls.name, locale)
+														: clsId}
 												</Badge>
 											);
 										})
@@ -380,32 +401,6 @@ export default function SubjectList() {
 					)}
 				</DialogContent>
 			</Dialog>
-
-			<ConfirmationModal
-				isOpen={!!subjectToDelete}
-				onClose={() => setSubjectToDelete(null)}
-				onConfirm={confirmDelete}
-				title={t("deleteSubjectTitle")}
-				description={t("deleteSubjectDesc")}
-				confirmText={tc("delete")}
-				variant="destructive"
-				isLoading={isDeleting}
-			/>
-
-			<ConfirmationModal
-				isOpen={!!subjectToChangeStatus}
-				onClose={() => setSubjectToChangeStatus(null)}
-				onConfirm={confirmStatusChange}
-				title={t("statusChangeTitle")}
-				description={
-					subjectToChangeStatus?.newStatus
-						? tc("changeToActiveDesc")
-						: tc("changeToInactiveDesc")
-				}
-				confirmText={tc("changeStatus")}
-				variant="default"
-				isLoading={isChangingStatus}
-			/>
 		</>
 	);
 }

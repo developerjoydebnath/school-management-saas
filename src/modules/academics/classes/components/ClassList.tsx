@@ -1,24 +1,24 @@
 "use client";
 
 import ConfirmationModal from "@/shared/components/custom/ConfirmationModal";
+import { AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/shared/components/ui/dialog";
+import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Switch } from "@/shared/components/ui/switch";
 import { useSWR } from "@/shared/hooks/use-swr";
 import axios from "@/shared/lib/axios";
+import { ClassModel } from "@/shared/models/class.model";
 import { StatusEnum } from "@/shared/types/enums";
+import { getLocalizedName } from "@/shared/utils/localization";
 import { Pencil, Trash2 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
 import ClassForm from "./ClassForm";
-
-import { ScrollArea } from "@/shared/components/ui/scroll-area";
-import { ClassModel } from "@/shared/models/class.model";
-import { useTranslations, useLocale } from "next-intl";
-import { getLocalizedName } from "@/shared/utils/localization";
 
 export default function ClassList() {
 	const { data: classes, isLoading, mutate } = useSWR("/classes");
@@ -29,20 +29,17 @@ export default function ClassList() {
 	const tc = useTranslations("Common");
 	const locale = useLocale();
 
-	const [classToChangeStatus, setClassToChangeStatus] = useState<{
-		cls: ClassModel;
-		newStatus: boolean;
-	} | null>(null);
+	const [classToChangeStatus, setClassToChangeStatus] = useState<ClassModel | null>(null);
 	const [isChangingStatus, setIsChangingStatus] = useState(false);
 
 	// serialize the data
 	const serializedClasses = classes?.map((cls: any) => new ClassModel(cls));
 
-	const confirmDelete = async () => {
-		if (!classToDelete) return;
+	const confirmDelete = async (id: string) => {
+		setClassToDelete(id);
 		setIsDeleting(true);
 		try {
-			await axios.delete(`/classes/${classToDelete}`);
+			await axios.delete(`/classes/${id}`);
 			toast.success("Class deleted successfully");
 			mutate();
 		} catch (err: any) {
@@ -53,11 +50,10 @@ export default function ClassList() {
 		}
 	};
 
-	const confirmStatusChange = async () => {
-		if (!classToChangeStatus) return;
+	const confirmStatusChange = async (cls: ClassModel, newStatus: boolean) => {
+		setClassToChangeStatus(cls);
 		setIsChangingStatus(true);
 		try {
-			const { cls, newStatus } = classToChangeStatus;
 			const status = newStatus ? "Active" : "Inactive";
 			await axios.patch(`/classes/${cls.id}`, { status });
 			toast.success(`Status updated to ${status}`);
@@ -151,15 +147,37 @@ export default function ClassList() {
 									</div>
 									<div className="flex items-center gap-6">
 										<div className="flex items-center gap-2">
-											<Switch
-												checked={cls.status === StatusEnum.ACTIVE}
-												onCheckedChange={(checked) =>
-													setClassToChangeStatus({
+											<ConfirmationModal
+												onConfirm={() =>
+													confirmStatusChange(
 														cls,
-														newStatus: checked,
-													})
+														cls.status !== StatusEnum.ACTIVE
+													)
 												}
-											/>
+												title={t("statusChangeTitle")}
+												description={
+													cls.status === StatusEnum.ACTIVE
+														? tc("changeToInactiveDesc")
+														: tc("changeToActiveDesc")
+												}
+												confirmText={tc("changeStatus")}
+												variant="default"
+												isLoading={
+													isChangingStatus &&
+													classToChangeStatus?.id === cls.id
+												}
+											>
+												<AlertDialogTrigger
+													nativeButton={false}
+													render={
+														<Switch
+															checked={
+																cls.status === StatusEnum.ACTIVE
+															}
+														/>
+													}
+												/>
+											</ConfirmationModal>
 											<div
 												className={`rounded-full px-2.5 py-1 text-xs font-medium ${
 													cls.status === StatusEnum.ACTIVE
@@ -181,14 +199,26 @@ export default function ClassList() {
 											>
 												<Pencil className="text-muted-foreground hover:text-foreground h-4 w-4" />
 											</Button>
-											<Button
+											<ConfirmationModal
+												onConfirm={() => confirmDelete(cls.id)}
 												title={t("deleteClassTitle")}
-												variant="outline"
-												size="icon"
-												onClick={() => setClassToDelete(cls.id)}
+												description={t("deleteClassDescription")}
+												confirmText={tc("delete")}
+												variant="destructive"
+												isLoading={isDeleting && classToDelete === cls.id}
 											>
-												<Trash2 className="h-4 w-4 text-red-500 hover:text-red-600" />
-											</Button>
+												<AlertDialogTrigger
+													render={
+														<Button
+															title={t("deleteClassTitle")}
+															variant="outline"
+															size="icon"
+														>
+															<Trash2 className="h-4 w-4 text-red-500 hover:text-red-600" />
+														</Button>
+													}
+												/>
+											</ConfirmationModal>
 										</div>
 									</div>
 								</div>
@@ -213,32 +243,6 @@ export default function ClassList() {
 					</ScrollArea>
 				</DialogContent>
 			</Dialog>
-
-			<ConfirmationModal
-				isOpen={!!classToDelete}
-				onClose={() => setClassToDelete(null)}
-				onConfirm={confirmDelete}
-				title={t("deleteClassTitle")}
-				description={t("deleteClassDescription")}
-				confirmText={tc("delete")}
-				variant="destructive"
-				isLoading={isDeleting}
-			/>
-
-			<ConfirmationModal
-				isOpen={!!classToChangeStatus}
-				onClose={() => setClassToChangeStatus(null)}
-				onConfirm={confirmStatusChange}
-				title={t("statusChangeTitle")}
-				description={
-					classToChangeStatus?.newStatus
-						? tc("changeToActiveDesc")
-						: tc("changeToInactiveDesc")
-				}
-				confirmText={tc("changeStatus")}
-				variant="default"
-				isLoading={isChangingStatus}
-			/>
 		</>
 	);
 }

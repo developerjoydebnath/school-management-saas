@@ -13,8 +13,7 @@ import {
 import { useTranslations } from "next-intl";
 
 interface ConfirmationModalProps {
-	isOpen: boolean;
-	onClose: () => void;
+	children: React.ReactNode;
 	onConfirm: () => void;
 	title?: string;
 	description?: string;
@@ -25,8 +24,7 @@ interface ConfirmationModalProps {
 }
 
 export default function ConfirmationModal({
-	isOpen,
-	onClose,
+	children,
 	onConfirm,
 	title = "Are you sure?",
 	description = "This action cannot be undone.",
@@ -43,16 +41,15 @@ export default function ConfirmationModal({
 	const descriptionAltText = description || t("thisActionCannotBeUndone");
 
 	return (
-		<AlertDialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+		<AlertDialog>
+			{children}
 			<AlertDialogContent>
 				<AlertDialogHeader>
 					<AlertDialogTitle>{titleAltText}</AlertDialogTitle>
 					<AlertDialogDescription>{descriptionAltText}</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
-					<AlertDialogCancel onClick={onClose} disabled={isLoading}>
-						{cancelAltText}
-					</AlertDialogCancel>
+					<AlertDialogCancel disabled={isLoading}>{cancelAltText}</AlertDialogCancel>
 					<AlertDialogAction onClick={onConfirm} disabled={isLoading} variant={variant}>
 						{isLoading ? t("processing") : confirmAltText}
 					</AlertDialogAction>

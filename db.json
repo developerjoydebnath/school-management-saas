@@ -1,1279 +1,1403 @@
 {
-	"admissions": [],
-	"teachers": [
-		{
-			"id": "teacher-1",
-			"name": {
-				"en": "Abdul Karim",
-				"bn": "আব্দুল করিম"
-			},
-			"mobile": "01710000001",
-			"email": "abdul.karim@school.com",
-			"address": "Dhaka, Bangladesh",
-			"subjects": ["sub-bangla", "sub-bangla-grammar"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-2",
-			"name": {
-				"en": "Farzana Rahman",
-				"bn": "ফারজানা রহমান"
-			},
-			"mobile": "01710000002",
-			"email": "farzana.rahman@school.com",
-			"address": "Gazipur, Bangladesh",
-			"subjects": ["sub-english", "sub-english-grammar"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-3",
-			"name": {
-				"en": "Sabbir Hossain",
-				"bn": "সাব্বির হোসেন"
-			},
-			"mobile": "01710000003",
-			"email": "sabbir.hossain@school.com",
-			"address": "Narsingdi, Bangladesh",
-			"subjects": ["sub-math"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-4",
-			"name": {
-				"en": "Nusrat Jahan",
-				"bn": "নুসরাত জাহান"
-			},
-			"mobile": "01710000004",
-			"email": "nusrat.jahan@school.com",
-			"address": "Dhaka, Bangladesh",
-			"subjects": ["sub-science"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-5",
-			"name": {
-				"en": "Rakib Hasan",
-				"bn": "রাকিব হাসান"
-			},
-			"mobile": "01710000005",
-			"email": "rakib.hasan@school.com",
-			"address": "Mymensingh, Bangladesh",
-			"subjects": ["sub-bgs"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-6",
-			"name": {
-				"en": "Jannatul Ferdous",
-				"bn": "জান্নাতুল ফেরদৌস"
-			},
-			"mobile": "01710000006",
-			"email": "jannatul.ferdous@school.com",
-			"address": "Sylhet, Bangladesh",
-			"subjects": ["sub-ict"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-7",
-			"name": {
-				"en": "Mahmudul Hasan",
-				"bn": "মাহমুদুল হাসান"
-			},
-			"mobile": "01710000007",
-			"email": "mahmudul.hasan@school.com",
-			"address": "Rajshahi, Bangladesh",
-			"subjects": ["sub-physics"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-8",
-			"name": {
-				"en": "Sharmin Akter",
-				"bn": "শারমিন আক্তার"
-			},
-			"mobile": "01710000008",
-			"email": "sharmin.akter@school.com",
-			"address": "Khulna, Bangladesh",
-			"subjects": ["sub-chemistry"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-9",
-			"name": {
-				"en": "Tanvir Ahmed",
-				"bn": "তানভীর আহমেদ"
-			},
-			"mobile": "01710000009",
-			"email": "tanvir.ahmed@school.com",
-			"address": "Barisal, Bangladesh",
-			"subjects": ["sub-biology"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-10",
-			"name": {
-				"en": "Rafiqul Islam",
-				"bn": "রফিকুল ইসলাম"
-			},
-			"mobile": "01710000010",
-			"email": "rafiqul.islam@school.com",
-			"address": "Cumilla, Bangladesh",
-			"subjects": ["sub-higher-math"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-11",
-			"name": {
-				"en": "Ayesha Siddika",
-				"bn": "আয়েশা সিদ্দিকা"
-			},
-			"mobile": "01710000011",
-			"email": "ayesha.siddika@school.com",
-			"address": "Dhaka, Bangladesh",
-			"subjects": ["sub-accounting"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-12",
-			"name": {
-				"en": "Imran Kabir",
-				"bn": "ইমরান কবির"
-			},
-			"mobile": "01710000012",
-			"email": "imran.kabir@school.com",
-			"address": "Tangail, Bangladesh",
-			"subjects": ["sub-finance"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-13",
-			"name": {
-				"en": "Mehedi Hasan",
-				"bn": "মেহেদী হাসান"
-			},
-			"mobile": "01710000013",
-			"email": "mehedi.hasan@school.com",
-			"address": "Bogura, Bangladesh",
-			"subjects": ["sub-business"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-14",
-			"name": {
-				"en": "Shamima Akter",
-				"bn": "শামিমা আক্তার"
-			},
-			"mobile": "01710000014",
-			"email": "shamima.akter@school.com",
-			"address": "Rangpur, Bangladesh",
-			"subjects": ["sub-geography"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-15",
-			"name": {
-				"en": "Mizanur Rahman",
-				"bn": "মিজানুর রহমান"
-			},
-			"mobile": "01710000015",
-			"email": "mizanur.rahman@school.com",
-			"address": "Dhaka, Bangladesh",
-			"subjects": ["sub-agriculture"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-16",
-			"name": {
-				"en": "Sonia Islam",
-				"bn": "সোনিয়া ইসলাম"
-			},
-			"mobile": "01710000016",
-			"email": "sonia.islam@school.com",
-			"address": "Gazipur, Bangladesh",
-			"subjects": ["sub-religion-islam"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-17",
-			"name": {
-				"en": "Arif Mahmud",
-				"bn": "আরিফ মাহমুদ"
-			},
-			"mobile": "01710000017",
-			"email": "arif.mahmud@school.com",
-			"address": "Narayanganj, Bangladesh",
-			"subjects": ["sub-general-knowledge"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-18",
-			"name": {
-				"en": "Tania Sultana",
-				"bn": "তানিয়া সুলতানা"
-			},
-			"mobile": "01710000018",
-			"email": "tania.sultana@school.com",
-			"address": "Dhaka, Bangladesh",
-			"subjects": ["sub-drawing"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-19",
-			"name": {
-				"en": "Hasibul Islam",
-				"bn": "হাসিবুল ইসলাম"
-			},
-			"mobile": "01710000019",
-			"email": "hasibul.islam@school.com",
-			"address": "Jessore, Bangladesh",
-			"subjects": ["sub-physical-education"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "teacher-20",
-			"name": {
-				"en": "Mst. Rupa Khatun",
-				"bn": "মোছাঃ রুপা খাতুন"
-			},
-			"mobile": "01710000020",
-			"email": "rupa.khatun@school.com",
-			"address": "Pabna, Bangladesh",
-			"subjects": ["sub-career-education"],
-			"status": "ACTIVE"
-		}
-	],
-	"shifts": [
-		{
-			"name": "MORNING",
-			"startTime": "08:00",
-			"endTime": "10:00",
-			"status": "Active",
-			"id": "evgE7-6Pxy4"
-		},
-		{
-			"name": "DAY",
-			"startTime": "10:30",
-			"endTime": "14:00",
-			"status": "ACTIVE",
-			"id": "WO6-7NEmG_8"
-		},
-		{
-			"name": "EVENING",
-			"startTime": "14:30",
-			"endTime": "19:00",
-			"status": "ACTIVE",
-			"id": "M-Vflt6CEwk"
-		}
-	],
-	"subjects": [
-		{
-			"id": "sub-bangla",
-			"name": {
-				"en": "Bangla 1st Paper",
-				"bn": "বাংলা ১ম পত্র"
-			},
-			"code": "101",
-			"type": "MANDATORY",
-			"classes": [
-				"class-1",
-				"class-2",
-				"class-3",
-				"class-4",
-				"class-5",
-				"class-6",
-				"class-7",
-				"class-8",
-				"class-9",
-				"class-10"
-			],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-bangla-grammar",
-			"name": {
-				"en": "Bangla 2nd Paper",
-				"bn": "বাংলা ২য় পত্র"
-			},
-			"code": "102",
-			"type": "MANDATORY",
-			"classes": ["class-6", "class-7", "class-8", "class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-english",
-			"name": {
-				"en": "English 1st Paper",
-				"bn": "ইংরেজি ১ম পত্র"
-			},
-			"code": "107",
-			"type": "MANDATORY",
-			"classes": [
-				"kg",
-				"class-1",
-				"class-2",
-				"class-3",
-				"class-4",
-				"class-5",
-				"class-6",
-				"class-7",
-				"class-8",
-				"class-9",
-				"class-10"
-			],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-english-grammar",
-			"name": {
-				"en": "English 2nd Paper",
-				"bn": "ইংরেজি ২য় পত্র"
-			},
-			"code": "108",
-			"type": "MANDATORY",
-			"classes": ["class-6", "class-7", "class-8", "class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-math",
-			"name": {
-				"en": "Mathematics",
-				"bn": "গণিত"
-			},
-			"code": "109",
-			"type": "MANDATORY",
-			"classes": [
-				"nursery",
-				"kg",
-				"class-1",
-				"class-2",
-				"class-3",
-				"class-4",
-				"class-5",
-				"class-6",
-				"class-7",
-				"class-8",
-				"class-9",
-				"class-10"
-			],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-science",
-			"name": {
-				"en": "General Science",
-				"bn": "সাধারণ বিজ্ঞান"
-			},
-			"code": "127",
-			"type": "MANDATORY",
-			"classes": ["class-3", "class-4", "class-5", "class-6", "class-7", "class-8"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-bgs",
-			"name": {
-				"en": "Bangladesh and Global Studies",
-				"bn": "বাংলাদেশ ও বিশ্বপরিচয়"
-			},
-			"code": "150",
-			"type": "MANDATORY",
-			"classes": [
-				"class-3",
-				"class-4",
-				"class-5",
-				"class-6",
-				"class-7",
-				"class-8",
-				"class-9",
-				"class-10"
-			],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-ict",
-			"name": {
-				"en": "Information and Communication Technology",
-				"bn": "তথ্য ও যোগাযোগ প্রযুক্তি"
-			},
-			"code": "154",
-			"type": "MANDATORY",
-			"classes": ["class-6", "class-7", "class-8", "class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-physics",
-			"name": {
-				"en": "Physics",
-				"bn": "পদার্থবিজ্ঞান"
-			},
-			"code": "136",
-			"type": "OPTIONAL",
-			"classes": ["class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-chemistry",
-			"name": {
-				"en": "Chemistry",
-				"bn": "রসায়ন"
-			},
-			"code": "137",
-			"type": "OPTIONAL",
-			"classes": ["class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-biology",
-			"name": {
-				"en": "Biology",
-				"bn": "জীববিজ্ঞান"
-			},
-			"code": "138",
-			"type": "OPTIONAL",
-			"classes": ["class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-higher-math",
-			"name": {
-				"en": "Higher Mathematics",
-				"bn": "উচ্চতর গণিত"
-			},
-			"code": "126",
-			"type": "OPTIONAL",
-			"classes": ["class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-accounting",
-			"name": {
-				"en": "Accounting",
-				"bn": "হিসাববিজ্ঞান"
-			},
-			"code": "146",
-			"type": "OPTIONAL",
-			"classes": ["class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-finance",
-			"name": {
-				"en": "Finance and Banking",
-				"bn": "ফিন্যান্স ও ব্যাংকিং"
-			},
-			"code": "152",
-			"type": "OPTIONAL",
-			"classes": ["class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-business",
-			"name": {
-				"en": "Business Entrepreneurship",
-				"bn": "ব্যবসায় উদ্যোগ"
-			},
-			"code": "143",
-			"type": "OPTIONAL",
-			"classes": ["class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-geography",
-			"name": {
-				"en": "Geography and Environment",
-				"bn": "ভূগোল ও পরিবেশ"
-			},
-			"code": "110",
-			"type": "OPTIONAL",
-			"classes": ["class-9", "class-10"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-agriculture",
-			"name": {
-				"en": "Agriculture Studies",
-				"bn": "কৃষি শিক্ষা"
-			},
-			"code": "134",
-			"type": "PRACTICAL",
-			"classes": ["class-6", "class-7", "class-8"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-religion-islam",
-			"name": {
-				"en": "Islam and Moral Education",
-				"bn": "ইসলাম ও নৈতিক শিক্ষা"
-			},
-			"code": "111",
-			"type": "MANDATORY",
-			"classes": [
-				"class-1",
-				"class-2",
-				"class-3",
-				"class-4",
-				"class-5",
-				"class-6",
-				"class-7",
-				"class-8",
-				"class-9",
-				"class-10"
-			],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-general-knowledge",
-			"name": {
-				"en": "General Knowledge",
-				"bn": "সাধারণ জ্ঞান"
-			},
-			"code": "GK-01",
-			"type": "MANDATORY",
-			"classes": ["nursery", "kg"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-drawing",
-			"name": {
-				"en": "Drawing",
-				"bn": "চিত্রাঙ্কন"
-			},
-			"code": "DR-01",
-			"type": "PRACTICAL",
-			"classes": ["nursery", "kg", "class-1", "class-2"],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-physical-education",
-			"name": {
-				"en": "Physical Education",
-				"bn": "শারীরিক শিক্ষা"
-			},
-			"code": "PE-01",
-			"type": "MANDATORY",
-			"classes": [
-				"class-1",
-				"class-2",
-				"class-3",
-				"class-4",
-				"class-5",
-				"class-6",
-				"class-7",
-				"class-8",
-				"class-9",
-				"class-10"
-			],
-			"status": "ACTIVE"
-		},
-		{
-			"id": "sub-career-education",
-			"name": {
-				"en": "Career Education",
-				"bn": "ক্যারিয়ার শিক্ষা"
-			},
-			"code": "CE-01",
-			"type": "MANDATORY",
-			"classes": ["class-9", "class-10"],
-			"status": "ACTIVE"
-		}
-	],
-	"classes": [
-		{
-			"name": {
-				"en": "Nursery",
-				"bn": "নার্সারি"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 25,
-					"roomNumber": "N-101",
-					"shift": "MORNING"
-				},
-				{
-					"name": "B",
-					"capacity": 25,
-					"roomNumber": "N-102",
-					"shift": "MORNING"
-				}
-			],
-			"capacity": 25,
-			"roomNumber": "N-101",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "nursery"
-		},
-		{
-			"name": {
-				"en": "KG",
-				"bn": "কেজি"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 25,
-					"roomNumber": "KG-101",
-					"shift": "MORNING"
-				},
-				{
-					"name": "B",
-					"capacity": 25,
-					"roomNumber": "KG-102",
-					"shift": "MORNING"
-				}
-			],
-			"capacity": 25,
-			"roomNumber": "KG-101",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "kg"
-		},
-		{
-			"name": {
-				"en": "Class 1",
-				"bn": "ক্লাস ১"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 30,
-					"roomNumber": "101",
-					"shift": "MORNING"
-				},
-				{
-					"name": "B",
-					"capacity": 30,
-					"roomNumber": "102",
-					"shift": "MORNING"
-				}
-			],
-			"capacity": 30,
-			"roomNumber": "101",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-1"
-		},
-		{
-			"name": {
-				"en": "Class 2",
-				"bn": "ক্লাস ২"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 30,
-					"roomNumber": "103",
-					"shift": "MORNING"
-				},
-				{
-					"name": "B",
-					"capacity": 30,
-					"roomNumber": "104",
-					"shift": "MORNING"
-				}
-			],
-			"capacity": 30,
-			"roomNumber": "103",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-2"
-		},
-		{
-			"name": {
-				"en": "Class 3",
-				"bn": "ক্লাস ৩"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 35,
-					"roomNumber": "105",
-					"shift": "MORNING"
-				},
-				{
-					"name": "B",
-					"capacity": 35,
-					"roomNumber": "106",
-					"shift": "MORNING"
-				}
-			],
-			"capacity": 35,
-			"roomNumber": "105",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-3"
-		},
-		{
-			"name": {
-				"en": "Class 4",
-				"bn": "ক্লাস ৪"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 35,
-					"roomNumber": "107",
-					"shift": "MORNING"
-				},
-				{
-					"name": "B",
-					"capacity": 35,
-					"roomNumber": "108",
-					"shift": "MORNING"
-				}
-			],
-			"capacity": 35,
-			"roomNumber": "107",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-4"
-		},
-		{
-			"name": {
-				"en": "Class 5",
-				"bn": "ক্লাস ৫"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 40,
-					"roomNumber": "109",
-					"shift": "DAY"
-				},
-				{
-					"name": "B",
-					"capacity": 40,
-					"roomNumber": "110",
-					"shift": "DAY"
-				}
-			],
-			"capacity": 40,
-			"roomNumber": "109",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-5"
-		},
-		{
-			"name": {
-				"en": "Class 6",
-				"bn": "ক্লাস ৬"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 40,
-					"roomNumber": "201",
-					"shift": "DAY"
-				},
-				{
-					"name": "B",
-					"capacity": 40,
-					"roomNumber": "202",
-					"shift": "DAY"
-				}
-			],
-			"capacity": 40,
-			"roomNumber": "201",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-6"
-		},
-		{
-			"name": {
-				"en": "Class 7",
-				"bn": "ক্লাস ৭"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 40,
-					"roomNumber": "203",
-					"shift": "DAY"
-				},
-				{
-					"name": "B",
-					"capacity": 40,
-					"roomNumber": "204",
-					"shift": "DAY"
-				}
-			],
-			"capacity": 40,
-			"roomNumber": "203",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-7"
-		},
-		{
-			"name": {
-				"en": "Class 8",
-				"bn": "ক্লাস ৮"
-			},
-			"sections": [
-				{
-					"name": "A",
-					"capacity": 45,
-					"roomNumber": "205",
-					"shift": "DAY"
-				},
-				{
-					"name": "B",
-					"capacity": 45,
-					"roomNumber": "206",
-					"shift": "DAY"
-				}
-			],
-			"capacity": 45,
-			"roomNumber": "205",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-8"
-		},
-		{
-			"name": {
-				"en": "Class 9",
-				"bn": "ক্লাস ৯"
-			},
-			"sections": [
-				{
-					"name": "Science",
-					"capacity": 50,
-					"roomNumber": "301",
-					"shift": "DAY"
-				},
-				{
-					"name": "Business Studies",
-					"capacity": 45,
-					"roomNumber": "302",
-					"shift": "DAY"
-				},
-				{
-					"name": "Humanities",
-					"capacity": 45,
-					"roomNumber": "303",
-					"shift": "DAY"
-				}
-			],
-			"capacity": 50,
-			"roomNumber": "301",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-9"
-		},
-		{
-			"name": {
-				"en": "Class 10",
-				"bn": "ক্লাস ১০"
-			},
-			"sections": [
-				{
-					"name": "Science",
-					"capacity": 50,
-					"roomNumber": "304",
-					"shift": "DAY"
-				},
-				{
-					"name": "Business Studies",
-					"capacity": 45,
-					"roomNumber": "305",
-					"shift": "DAY"
-				},
-				{
-					"name": "Humanities",
-					"capacity": 45,
-					"roomNumber": "306",
-					"shift": "DAY"
-				}
-			],
-			"capacity": 50,
-			"roomNumber": "304",
-			"shift": "MORNING",
-			"status": "ACTIVE",
-			"id": "class-10"
-		}
-	],
-	"users": [
-		{
-			"id": "1",
-			"email": "dev@educore.com",
-			"password": "password",
-			"name": "Developer User",
-			"base_role": "DEVELOPER",
-			"permissions": [],
-			"token": "token_dev"
-		},
-		{
-			"id": "2",
-			"email": "superadmin@educore.com",
-			"password": "password",
-			"name": "Super Admin",
-			"base_role": "SUPER_ADMIN",
-			"permissions": [],
-			"token": "token_superadmin"
-		},
-		{
-			"id": "3",
-			"email": "admin@educore.com",
-			"password": "password",
-			"name": "School Admin",
-			"base_role": "SCHOOL_ADMIN",
-			"permissions": ["dashboard.view", "academics.view", "students.view"],
-			"token": "token_schooladmin"
-		},
-		{
-			"id": "4",
-			"email": "teacher@educore.com",
-			"password": "password",
-			"name": "Teacher User",
-			"base_role": "TEACHER",
-			"permissions": ["dashboard.view", "academics.view"],
-			"token": "token_teacher"
-		},
-		{
-			"id": "5",
-			"email": "student@educore.com",
-			"password": "password",
-			"name": "Student User",
-			"base_role": "STUDENT",
-			"permissions": ["dashboard.view"],
-			"token": "token_student"
-		},
-		{
-			"id": "6",
-			"email": "parent@educore.com",
-			"password": "password",
-			"name": "Parent User",
-			"base_role": "PARENT",
-			"permissions": ["dashboard.view"],
-			"token": "token_parent"
-		}
-	],
-	"students": [],
-	"timetables": [
-		{
-			"classId": "1",
-			"section": null,
-			"periods": [
-				{
-					"id": "1",
-					"name": "Period 1",
-					"startTime": "08:00",
-					"endTime": "08:45",
-					"type": "Period"
-				},
-				{
-					"id": "2",
-					"name": "Period 2",
-					"startTime": "08:45",
-					"endTime": "09:30",
-					"type": "Period"
-				},
-				{
-					"id": "3",
-					"name": "Period 3",
-					"startTime": "09:30",
-					"endTime": "10:15",
-					"type": "Period"
-				},
-				{
-					"id": "4",
-					"name": "Break",
-					"startTime": "10:15",
-					"endTime": "10:30",
-					"type": "Break"
-				},
-				{
-					"id": "5",
-					"name": "Period 4",
-					"startTime": "10:30",
-					"endTime": "11:15",
-					"type": "Period"
-				}
-			],
-			"assignments": {
-				"Sunday_1": [
-					{
-						"subjectId": "2",
-						"teacherId": "Ujvhgks7qE8",
-						"roomNumber": "101",
-						"subjectName": "Bangla 2nd Paper",
-						"teacherName": "Teacher 1"
-					}
-				],
-				"Sunday_2": [
-					{
-						"subjectId": "2",
-						"teacherId": "f1EP9aP5y5o",
-						"roomNumber": "101",
-						"subjectName": "Bangla 2nd Paper",
-						"teacherName": "Teacher 2"
-					}
-				]
-			},
-			"id": "wvidDAiEq9g"
-		},
-		{
-			"classId": "9HQ5ejTr2bE",
-			"section": ["B", "A"],
-			"periods": [
-				{
-					"id": "1",
-					"name": "Period 1",
-					"startTime": "08:00",
-					"endTime": "08:45",
-					"type": "Period"
-				},
-				{
-					"id": "2",
-					"name": "Period 2",
-					"startTime": "08:45",
-					"endTime": "09:30",
-					"type": "Period"
-				},
-				{
-					"id": "3",
-					"name": "Period 3",
-					"startTime": "09:30",
-					"endTime": "10:15",
-					"type": "Period"
-				},
-				{
-					"id": "4",
-					"name": "Break",
-					"startTime": "10:15",
-					"endTime": "10:30",
-					"type": "Break"
-				},
-				{
-					"id": "5",
-					"name": "Period 4",
-					"startTime": "10:30",
-					"endTime": "11:15",
-					"type": "Period"
-				}
-			],
-			"assignments": {
-				"Sunday_1": [
-					{
-						"subjectId": "1",
-						"teacherId": "Ujvhgks7qE8",
-						"roomNumber": "101",
-						"subjectName": "Bangla 1st Paper",
-						"teacherName": "Teacher 1"
-					}
-				],
-				"Sunday_2": [
-					{
-						"subjectId": "3",
-						"teacherId": "Ujvhgks7qE8",
-						"roomNumber": "101",
-						"subjectName": "English 1st Paper",
-						"teacherName": "Teacher 1"
-					}
-				]
-			},
-			"id": "LGVgAfy3hz0"
-		},
-		{
-			"classId": "_a3wDP5pTf0",
-			"section": ["A"],
-			"periods": [
-				{
-					"id": "1",
-					"name": "Period 1",
-					"startTime": "08:00",
-					"endTime": "08:45",
-					"type": "Period"
-				},
-				{
-					"id": "2",
-					"name": "Period 2",
-					"startTime": "08:45",
-					"endTime": "09:30",
-					"type": "Period"
-				},
-				{
-					"id": "3",
-					"name": "Period 3",
-					"startTime": "09:30",
-					"endTime": "10:15",
-					"type": "Period"
-				},
-				{
-					"id": "4",
-					"name": "Break",
-					"startTime": "10:15",
-					"endTime": "10:30",
-					"type": "Break"
-				},
-				{
-					"id": "5",
-					"name": "Period 4",
-					"startTime": "10:30",
-					"endTime": "11:15",
-					"type": "Period"
-				}
-			],
-			"assignments": {
-				"Sunday_1": [
-					{
-						"subjectId": "1",
-						"teacherId": "Ujvhgks7qE8",
-						"roomNumber": "101",
-						"subjectName": "Bangla 1st Paper",
-						"teacherName": "Teacher 1"
-					}
-				]
-			},
-			"id": "F4LSnlrA9jQ"
-		},
-		{
-			"classId": "_a3wDP5pTf0",
-			"section": ["B"],
-			"periods": [
-				{
-					"id": "1",
-					"name": "Period 1",
-					"startTime": "08:00",
-					"endTime": "08:45",
-					"type": "Period"
-				},
-				{
-					"id": "2",
-					"name": "Period 2",
-					"startTime": "08:45",
-					"endTime": "09:30",
-					"type": "Period"
-				},
-				{
-					"id": "3",
-					"name": "Period 3",
-					"startTime": "09:30",
-					"endTime": "10:15",
-					"type": "Period"
-				},
-				{
-					"id": "4",
-					"name": "Break",
-					"startTime": "10:15",
-					"endTime": "10:30",
-					"type": "Break"
-				},
-				{
-					"id": "5",
-					"name": "Period 4",
-					"startTime": "10:30",
-					"endTime": "11:15",
-					"type": "Period"
-				}
-			],
-			"assignments": {
-				"Monday_1": [
-					{
-						"subjectId": "3",
-						"teacherId": "f1EP9aP5y5o",
-						"roomNumber": "111",
-						"subjectName": "English 1st Paper",
-						"teacherName": "Teacher 2"
-					}
-				]
-			},
-			"id": "gADguqh0kls"
-		},
-		{
-			"classId": "class-1",
-			"section": "B",
-			"periods": [
-				{
-					"id": "1",
-					"name": "Period 1",
-					"startTime": "08:00",
-					"endTime": "08:45",
-					"type": "Period"
-				},
-				{
-					"id": "2",
-					"name": "Period 2",
-					"startTime": "08:45",
-					"endTime": "09:30",
-					"type": "Period"
-				},
-				{
-					"id": "3",
-					"name": "Period 3",
-					"startTime": "09:30",
-					"endTime": "10:15",
-					"type": "Period"
-				},
-				{
-					"id": "4",
-					"name": "Break",
-					"startTime": "10:15",
-					"endTime": "10:30",
-					"type": "Break"
-				},
-				{
-					"id": "5",
-					"name": "Period 4",
-					"startTime": "10:30",
-					"endTime": "11:15",
-					"type": "Period"
-				}
-			],
-			"assignments": {},
-			"id": "UZ45m-tC714"
-		},
-		{
-			"classId": "nursery",
-			"section": "B",
-			"periods": [
-				{
-					"id": "1",
-					"name": "Period 1",
-					"startTime": "08:00",
-					"endTime": "08:45",
-					"type": "Period"
-				},
-				{
-					"id": "2",
-					"name": "Break",
-					"startTime": "08:45",
-					"endTime": "09:30",
-					"type": "Break"
-				},
-				{
-					"id": "3",
-					"name": "Period 3",
-					"startTime": "09:30",
-					"endTime": "10:15",
-					"type": "Period"
-				},
-				{
-					"id": "4",
-					"name": "Break",
-					"startTime": "10:15",
-					"endTime": "10:30",
-					"type": "Break"
-				},
-				{
-					"id": "5",
-					"name": "Period 4",
-					"startTime": "10:30",
-					"endTime": "11:15",
-					"type": "Period"
-				}
-			],
-			"assignments": {
-				"Sunday_3": [
-					{
-						"subjectId": "1",
-						"teacherId": "Ujvhgks7qE8",
-						"roomNumber": "101",
-						"subjectName": "Bangla 1st Paper",
-						"teacherName": "Teacher 1"
-					}
-				]
-			},
-			"id": "7RhG8ZWnT9g"
-		}
-	],
-	"$schema": "./node_modules/json-server/schema.json"
+  "admissions": [],
+  "teachers": [
+    {
+      "id": "teacher-1",
+      "name": {
+        "en": "Abdul Karim",
+        "bn": "আব্দুল করিম"
+      },
+      "mobile": "01710000001",
+      "email": "abdul.karim@school.com",
+      "address": "Dhaka, Bangladesh",
+      "subjects": [
+        "sub-bangla",
+        "sub-bangla-grammar"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-2",
+      "name": {
+        "en": "Farzana Rahman",
+        "bn": "ফারজানা রহমান"
+      },
+      "mobile": "01710000002",
+      "email": "farzana.rahman@school.com",
+      "address": "Gazipur, Bangladesh",
+      "subjects": [
+        "sub-english",
+        "sub-english-grammar"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-3",
+      "name": {
+        "en": "Sabbir Hossain",
+        "bn": "সাব্বির হোসেন"
+      },
+      "mobile": "01710000003",
+      "email": "sabbir.hossain@school.com",
+      "address": "Narsingdi, Bangladesh",
+      "subjects": [
+        "sub-math"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-4",
+      "name": {
+        "en": "Nusrat Jahan",
+        "bn": "নুসরাত জাহান"
+      },
+      "mobile": "01710000004",
+      "email": "nusrat.jahan@school.com",
+      "address": "Dhaka, Bangladesh",
+      "subjects": [
+        "sub-science"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-5",
+      "name": {
+        "en": "Rakib Hasan",
+        "bn": "রাকিব হাসান"
+      },
+      "mobile": "01710000005",
+      "email": "rakib.hasan@school.com",
+      "address": "Mymensingh, Bangladesh",
+      "subjects": [
+        "sub-bgs"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-6",
+      "name": {
+        "en": "Jannatul Ferdous",
+        "bn": "জান্নাতুল ফেরদৌস"
+      },
+      "mobile": "01710000006",
+      "email": "jannatul.ferdous@school.com",
+      "address": "Sylhet, Bangladesh",
+      "subjects": [
+        "sub-ict"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-7",
+      "name": {
+        "en": "Mahmudul Hasan",
+        "bn": "মাহমুদুল হাসান"
+      },
+      "mobile": "01710000007",
+      "email": "mahmudul.hasan@school.com",
+      "address": "Rajshahi, Bangladesh",
+      "subjects": [
+        "sub-physics"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-8",
+      "name": {
+        "en": "Sharmin Akter",
+        "bn": "শারমিন আক্তার"
+      },
+      "mobile": "01710000008",
+      "email": "sharmin.akter@school.com",
+      "address": "Khulna, Bangladesh",
+      "subjects": [
+        "sub-chemistry"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-9",
+      "name": {
+        "en": "Tanvir Ahmed",
+        "bn": "তানভীর আহমেদ"
+      },
+      "mobile": "01710000009",
+      "email": "tanvir.ahmed@school.com",
+      "address": "Barisal, Bangladesh",
+      "subjects": [
+        "sub-biology"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-10",
+      "name": {
+        "en": "Rafiqul Islam",
+        "bn": "রফিকুল ইসলাম"
+      },
+      "mobile": "01710000010",
+      "email": "rafiqul.islam@school.com",
+      "address": "Cumilla, Bangladesh",
+      "subjects": [
+        "sub-higher-math"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-11",
+      "name": {
+        "en": "Ayesha Siddika",
+        "bn": "আয়েশা সিদ্দিকা"
+      },
+      "mobile": "01710000011",
+      "email": "ayesha.siddika@school.com",
+      "address": "Dhaka, Bangladesh",
+      "subjects": [
+        "sub-accounting"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-12",
+      "name": {
+        "en": "Imran Kabir",
+        "bn": "ইমরান কবির"
+      },
+      "mobile": "01710000012",
+      "email": "imran.kabir@school.com",
+      "address": "Tangail, Bangladesh",
+      "subjects": [
+        "sub-finance"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-13",
+      "name": {
+        "en": "Mehedi Hasan",
+        "bn": "মেহেদী হাসান"
+      },
+      "mobile": "01710000013",
+      "email": "mehedi.hasan@school.com",
+      "address": "Bogura, Bangladesh",
+      "subjects": [
+        "sub-business"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-14",
+      "name": {
+        "en": "Shamima Akter",
+        "bn": "শামিমা আক্তার"
+      },
+      "mobile": "01710000014",
+      "email": "shamima.akter@school.com",
+      "address": "Rangpur, Bangladesh",
+      "subjects": [
+        "sub-geography"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-15",
+      "name": {
+        "en": "Mizanur Rahman",
+        "bn": "মিজানুর রহমান"
+      },
+      "mobile": "01710000015",
+      "email": "mizanur.rahman@school.com",
+      "address": "Dhaka, Bangladesh",
+      "subjects": [
+        "sub-agriculture"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-16",
+      "name": {
+        "en": "Sonia Islam",
+        "bn": "সোনিয়া ইসলাম"
+      },
+      "mobile": "01710000016",
+      "email": "sonia.islam@school.com",
+      "address": "Gazipur, Bangladesh",
+      "subjects": [
+        "sub-religion-islam"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-17",
+      "name": {
+        "en": "Arif Mahmud",
+        "bn": "আরিফ মাহমুদ"
+      },
+      "mobile": "01710000017",
+      "email": "arif.mahmud@school.com",
+      "address": "Narayanganj, Bangladesh",
+      "subjects": [
+        "sub-general-knowledge"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-18",
+      "name": {
+        "en": "Tania Sultana",
+        "bn": "তানিয়া সুলতানা"
+      },
+      "mobile": "01710000018",
+      "email": "tania.sultana@school.com",
+      "address": "Dhaka, Bangladesh",
+      "subjects": [
+        "sub-drawing"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-19",
+      "name": {
+        "en": "Hasibul Islam",
+        "bn": "হাসিবুল ইসলাম"
+      },
+      "mobile": "01710000019",
+      "email": "hasibul.islam@school.com",
+      "address": "Jessore, Bangladesh",
+      "subjects": [
+        "sub-physical-education"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "teacher-20",
+      "name": {
+        "en": "Mst. Rupa Khatun",
+        "bn": "মোছাঃ রুপা খাতুন"
+      },
+      "mobile": "01710000020",
+      "email": "rupa.khatun@school.com",
+      "address": "Pabna, Bangladesh",
+      "subjects": [
+        "sub-career-education"
+      ],
+      "status": "ACTIVE"
+    }
+  ],
+  "shifts": [
+    {
+      "name": "MORNING",
+      "startTime": "08:00",
+      "endTime": "10:00",
+      "status": "Active",
+      "id": "evgE7-6Pxy4"
+    },
+    {
+      "name": "DAY",
+      "startTime": "10:30",
+      "endTime": "14:00",
+      "status": "ACTIVE",
+      "id": "WO6-7NEmG_8"
+    },
+    {
+      "name": "EVENING",
+      "startTime": "14:30",
+      "endTime": "19:00",
+      "status": "ACTIVE",
+      "id": "M-Vflt6CEwk"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "sub-bangla",
+      "name": {
+        "en": "Bangla 1st Paper",
+        "bn": "বাংলা ১ম পত্র"
+      },
+      "code": "101",
+      "type": "MANDATORY",
+      "classes": [
+        "class-1",
+        "class-2",
+        "class-3",
+        "class-4",
+        "class-5",
+        "class-6",
+        "class-7",
+        "class-8",
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-bangla-grammar",
+      "name": {
+        "en": "Bangla 2nd Paper",
+        "bn": "বাংলা ২য় পত্র"
+      },
+      "code": "102",
+      "type": "MANDATORY",
+      "classes": [
+        "class-6",
+        "class-7",
+        "class-8",
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-english",
+      "name": {
+        "en": "English 1st Paper",
+        "bn": "ইংরেজি ১ম পত্র"
+      },
+      "code": "107",
+      "type": "MANDATORY",
+      "classes": [
+        "kg",
+        "class-1",
+        "class-2",
+        "class-3",
+        "class-4",
+        "class-5",
+        "class-6",
+        "class-7",
+        "class-8",
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-english-grammar",
+      "name": {
+        "en": "English 2nd Paper",
+        "bn": "ইংরেজি ২য় পত্র"
+      },
+      "code": "108",
+      "type": "MANDATORY",
+      "classes": [
+        "class-6",
+        "class-7",
+        "class-8",
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-math",
+      "name": {
+        "en": "Mathematics",
+        "bn": "গণিত"
+      },
+      "code": "109",
+      "type": "MANDATORY",
+      "classes": [
+        "nursery",
+        "kg",
+        "class-1",
+        "class-2",
+        "class-3",
+        "class-4",
+        "class-5",
+        "class-6",
+        "class-7",
+        "class-8",
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-science",
+      "name": {
+        "en": "General Science",
+        "bn": "সাধারণ বিজ্ঞান"
+      },
+      "code": "127",
+      "type": "MANDATORY",
+      "classes": [
+        "class-3",
+        "class-4",
+        "class-5",
+        "class-6",
+        "class-7",
+        "class-8"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-bgs",
+      "name": {
+        "en": "Bangladesh and Global Studies",
+        "bn": "বাংলাদেশ ও বিশ্বপরিচয়"
+      },
+      "code": "150",
+      "type": "MANDATORY",
+      "classes": [
+        "class-3",
+        "class-4",
+        "class-5",
+        "class-6",
+        "class-7",
+        "class-8",
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-ict",
+      "name": {
+        "en": "Information and Communication Technology",
+        "bn": "তথ্য ও যোগাযোগ প্রযুক্তি"
+      },
+      "code": "154",
+      "type": "MANDATORY",
+      "classes": [
+        "class-6",
+        "class-7",
+        "class-8",
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-physics",
+      "name": {
+        "en": "Physics",
+        "bn": "পদার্থবিজ্ঞান"
+      },
+      "code": "136",
+      "type": "OPTIONAL",
+      "classes": [
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-chemistry",
+      "name": {
+        "en": "Chemistry",
+        "bn": "রসায়ন"
+      },
+      "code": "137",
+      "type": "OPTIONAL",
+      "classes": [
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-biology",
+      "name": {
+        "en": "Biology",
+        "bn": "জীববিজ্ঞান"
+      },
+      "code": "138",
+      "type": "OPTIONAL",
+      "classes": [
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-higher-math",
+      "name": {
+        "en": "Higher Mathematics",
+        "bn": "উচ্চতর গণিত"
+      },
+      "code": "126",
+      "type": "OPTIONAL",
+      "classes": [
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-accounting",
+      "name": {
+        "en": "Accounting",
+        "bn": "হিসাববিজ্ঞান"
+      },
+      "code": "146",
+      "type": "OPTIONAL",
+      "classes": [
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-finance",
+      "name": {
+        "en": "Finance and Banking",
+        "bn": "ফিন্যান্স ও ব্যাংকিং"
+      },
+      "code": "152",
+      "type": "OPTIONAL",
+      "classes": [
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-business",
+      "name": {
+        "en": "Business Entrepreneurship",
+        "bn": "ব্যবসায় উদ্যোগ"
+      },
+      "code": "143",
+      "type": "OPTIONAL",
+      "classes": [
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-geography",
+      "name": {
+        "en": "Geography and Environment",
+        "bn": "ভূগোল ও পরিবেশ"
+      },
+      "code": "110",
+      "type": "OPTIONAL",
+      "classes": [
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-agriculture",
+      "name": {
+        "en": "Agriculture Studies",
+        "bn": "কৃষি শিক্ষা"
+      },
+      "code": "134",
+      "type": "PRACTICAL",
+      "classes": [
+        "class-6",
+        "class-7",
+        "class-8"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-religion-islam",
+      "name": {
+        "en": "Islam and Moral Education",
+        "bn": "ইসলাম ও নৈতিক শিক্ষা"
+      },
+      "code": "111",
+      "type": "MANDATORY",
+      "classes": [
+        "class-1",
+        "class-2",
+        "class-3",
+        "class-4",
+        "class-5",
+        "class-6",
+        "class-7",
+        "class-8",
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-general-knowledge",
+      "name": {
+        "en": "General Knowledge",
+        "bn": "সাধারণ জ্ঞান"
+      },
+      "code": "GK-01",
+      "type": "MANDATORY",
+      "classes": [
+        "nursery",
+        "kg"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-drawing",
+      "name": {
+        "en": "Drawing",
+        "bn": "চিত্রাঙ্কন"
+      },
+      "code": "DR-01",
+      "type": "PRACTICAL",
+      "classes": [
+        "nursery",
+        "kg",
+        "class-1",
+        "class-2"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-physical-education",
+      "name": {
+        "en": "Physical Education",
+        "bn": "শারীরিক শিক্ষা"
+      },
+      "code": "PE-01",
+      "type": "MANDATORY",
+      "classes": [
+        "class-1",
+        "class-2",
+        "class-3",
+        "class-4",
+        "class-5",
+        "class-6",
+        "class-7",
+        "class-8",
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    },
+    {
+      "id": "sub-career-education",
+      "name": {
+        "en": "Career Education",
+        "bn": "ক্যারিয়ার শিক্ষা"
+      },
+      "code": "CE-01",
+      "type": "MANDATORY",
+      "classes": [
+        "class-9",
+        "class-10"
+      ],
+      "status": "ACTIVE"
+    }
+  ],
+  "classes": [
+    {
+      "name": {
+        "en": "Nursery",
+        "bn": "নার্সারি"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 25,
+          "roomNumber": "N-101",
+          "shift": "MORNING"
+        },
+        {
+          "name": "B",
+          "capacity": 25,
+          "roomNumber": "N-102",
+          "shift": "MORNING"
+        }
+      ],
+      "capacity": 25,
+      "roomNumber": "N-101",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "nursery"
+    },
+    {
+      "name": {
+        "en": "KG",
+        "bn": "কেজি"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 25,
+          "roomNumber": "KG-101",
+          "shift": "MORNING"
+        },
+        {
+          "name": "B",
+          "capacity": 25,
+          "roomNumber": "KG-102",
+          "shift": "MORNING"
+        }
+      ],
+      "capacity": 25,
+      "roomNumber": "KG-101",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "kg"
+    },
+    {
+      "name": {
+        "en": "Class 1",
+        "bn": "ক্লাস ১"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 30,
+          "roomNumber": "101",
+          "shift": "MORNING"
+        },
+        {
+          "name": "B",
+          "capacity": 30,
+          "roomNumber": "102",
+          "shift": "MORNING"
+        }
+      ],
+      "capacity": 30,
+      "roomNumber": "101",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-1"
+    },
+    {
+      "name": {
+        "en": "Class 2",
+        "bn": "ক্লাস ২"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 30,
+          "roomNumber": "103",
+          "shift": "MORNING"
+        },
+        {
+          "name": "B",
+          "capacity": 30,
+          "roomNumber": "104",
+          "shift": "MORNING"
+        }
+      ],
+      "capacity": 30,
+      "roomNumber": "103",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-2"
+    },
+    {
+      "name": {
+        "en": "Class 3",
+        "bn": "ক্লাস ৩"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 35,
+          "roomNumber": "105",
+          "shift": "MORNING"
+        },
+        {
+          "name": "B",
+          "capacity": 35,
+          "roomNumber": "106",
+          "shift": "MORNING"
+        }
+      ],
+      "capacity": 35,
+      "roomNumber": "105",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-3"
+    },
+    {
+      "name": {
+        "en": "Class 4",
+        "bn": "ক্লাস ৪"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 35,
+          "roomNumber": "107",
+          "shift": "MORNING"
+        },
+        {
+          "name": "B",
+          "capacity": 35,
+          "roomNumber": "108",
+          "shift": "MORNING"
+        }
+      ],
+      "capacity": 35,
+      "roomNumber": "107",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-4"
+    },
+    {
+      "name": {
+        "en": "Class 5",
+        "bn": "ক্লাস ৫"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 40,
+          "roomNumber": "109",
+          "shift": "DAY"
+        },
+        {
+          "name": "B",
+          "capacity": 40,
+          "roomNumber": "110",
+          "shift": "DAY"
+        }
+      ],
+      "capacity": 40,
+      "roomNumber": "109",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-5"
+    },
+    {
+      "name": {
+        "en": "Class 6",
+        "bn": "ক্লাস ৬"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 40,
+          "roomNumber": "201",
+          "shift": "DAY"
+        },
+        {
+          "name": "B",
+          "capacity": 40,
+          "roomNumber": "202",
+          "shift": "DAY"
+        }
+      ],
+      "capacity": 40,
+      "roomNumber": "201",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-6"
+    },
+    {
+      "name": {
+        "en": "Class 7",
+        "bn": "ক্লাস ৭"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 40,
+          "roomNumber": "203",
+          "shift": "DAY"
+        },
+        {
+          "name": "B",
+          "capacity": 40,
+          "roomNumber": "204",
+          "shift": "DAY"
+        }
+      ],
+      "capacity": 40,
+      "roomNumber": "203",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-7"
+    },
+    {
+      "name": {
+        "en": "Class 8",
+        "bn": "ক্লাস ৮"
+      },
+      "sections": [
+        {
+          "name": "A",
+          "capacity": 45,
+          "roomNumber": "205",
+          "shift": "DAY"
+        },
+        {
+          "name": "B",
+          "capacity": 45,
+          "roomNumber": "206",
+          "shift": "DAY"
+        }
+      ],
+      "capacity": 45,
+      "roomNumber": "205",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-8"
+    },
+    {
+      "name": {
+        "en": "Class 9",
+        "bn": "ক্লাস ৯"
+      },
+      "sections": [
+        {
+          "name": "Science",
+          "capacity": 50,
+          "roomNumber": "301",
+          "shift": "DAY"
+        },
+        {
+          "name": "Business Studies",
+          "capacity": 45,
+          "roomNumber": "302",
+          "shift": "DAY"
+        },
+        {
+          "name": "Humanities",
+          "capacity": 45,
+          "roomNumber": "303",
+          "shift": "DAY"
+        }
+      ],
+      "capacity": 50,
+      "roomNumber": "301",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-9"
+    },
+    {
+      "name": {
+        "en": "Class 10",
+        "bn": "ক্লাস ১০"
+      },
+      "sections": [
+        {
+          "name": "Science",
+          "capacity": 50,
+          "roomNumber": "304",
+          "shift": "DAY"
+        },
+        {
+          "name": "Business Studies",
+          "capacity": 45,
+          "roomNumber": "305",
+          "shift": "DAY"
+        },
+        {
+          "name": "Humanities",
+          "capacity": 45,
+          "roomNumber": "306",
+          "shift": "DAY"
+        }
+      ],
+      "capacity": 50,
+      "roomNumber": "304",
+      "shift": "MORNING",
+      "status": "ACTIVE",
+      "id": "class-10"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "email": "dev@educore.com",
+      "password": "password",
+      "name": "Developer User",
+      "base_role": "DEVELOPER",
+      "permissions": [],
+      "token": "token_dev"
+    },
+    {
+      "id": "2",
+      "email": "superadmin@educore.com",
+      "password": "password",
+      "name": "Super Admin",
+      "base_role": "SUPER_ADMIN",
+      "permissions": [],
+      "token": "token_superadmin"
+    },
+    {
+      "id": "3",
+      "email": "admin@educore.com",
+      "password": "password",
+      "name": "School Admin",
+      "base_role": "SCHOOL_ADMIN",
+      "permissions": [
+        "dashboard.view",
+        "academics.view",
+        "students.view"
+      ],
+      "token": "token_schooladmin"
+    },
+    {
+      "id": "4",
+      "email": "teacher@educore.com",
+      "password": "password",
+      "name": "Teacher User",
+      "base_role": "TEACHER",
+      "permissions": [
+        "dashboard.view",
+        "academics.view"
+      ],
+      "token": "token_teacher"
+    },
+    {
+      "id": "5",
+      "email": "student@educore.com",
+      "password": "password",
+      "name": "Student User",
+      "base_role": "STUDENT",
+      "permissions": [
+        "dashboard.view"
+      ],
+      "token": "token_student"
+    },
+    {
+      "id": "6",
+      "email": "parent@educore.com",
+      "password": "password",
+      "name": "Parent User",
+      "base_role": "PARENT",
+      "permissions": [
+        "dashboard.view"
+      ],
+      "token": "token_parent"
+    }
+  ],
+  "students": [],
+  "timetables": [
+    {
+      "classId": "1",
+      "section": null,
+      "periods": [
+        {
+          "id": "1",
+          "name": "Period 1",
+          "startTime": "08:00",
+          "endTime": "08:45",
+          "type": "Period"
+        },
+        {
+          "id": "2",
+          "name": "Period 2",
+          "startTime": "08:45",
+          "endTime": "09:30",
+          "type": "Period"
+        },
+        {
+          "id": "3",
+          "name": "Period 3",
+          "startTime": "09:30",
+          "endTime": "10:15",
+          "type": "Period"
+        },
+        {
+          "id": "4",
+          "name": "Break",
+          "startTime": "10:15",
+          "endTime": "10:30",
+          "type": "Break"
+        },
+        {
+          "id": "5",
+          "name": "Period 4",
+          "startTime": "10:30",
+          "endTime": "11:15",
+          "type": "Period"
+        }
+      ],
+      "assignments": {
+        "Sunday_1": [
+          {
+            "subjectId": "2",
+            "teacherId": "Ujvhgks7qE8",
+            "roomNumber": "101",
+            "subjectName": "Bangla 2nd Paper",
+            "teacherName": "Teacher 1"
+          }
+        ],
+        "Sunday_2": [
+          {
+            "subjectId": "2",
+            "teacherId": "f1EP9aP5y5o",
+            "roomNumber": "101",
+            "subjectName": "Bangla 2nd Paper",
+            "teacherName": "Teacher 2"
+          }
+        ]
+      },
+      "id": "wvidDAiEq9g"
+    },
+    {
+      "classId": "9HQ5ejTr2bE",
+      "section": [
+        "B",
+        "A"
+      ],
+      "periods": [
+        {
+          "id": "1",
+          "name": "Period 1",
+          "startTime": "08:00",
+          "endTime": "08:45",
+          "type": "Period"
+        },
+        {
+          "id": "2",
+          "name": "Period 2",
+          "startTime": "08:45",
+          "endTime": "09:30",
+          "type": "Period"
+        },
+        {
+          "id": "3",
+          "name": "Period 3",
+          "startTime": "09:30",
+          "endTime": "10:15",
+          "type": "Period"
+        },
+        {
+          "id": "4",
+          "name": "Break",
+          "startTime": "10:15",
+          "endTime": "10:30",
+          "type": "Break"
+        },
+        {
+          "id": "5",
+          "name": "Period 4",
+          "startTime": "10:30",
+          "endTime": "11:15",
+          "type": "Period"
+        }
+      ],
+      "assignments": {
+        "Sunday_1": [
+          {
+            "subjectId": "1",
+            "teacherId": "Ujvhgks7qE8",
+            "roomNumber": "101",
+            "subjectName": "Bangla 1st Paper",
+            "teacherName": "Teacher 1"
+          }
+        ],
+        "Sunday_2": [
+          {
+            "subjectId": "3",
+            "teacherId": "Ujvhgks7qE8",
+            "roomNumber": "101",
+            "subjectName": "English 1st Paper",
+            "teacherName": "Teacher 1"
+          }
+        ]
+      },
+      "id": "LGVgAfy3hz0"
+    },
+    {
+      "classId": "_a3wDP5pTf0",
+      "section": [
+        "A"
+      ],
+      "periods": [
+        {
+          "id": "1",
+          "name": "Period 1",
+          "startTime": "08:00",
+          "endTime": "08:45",
+          "type": "Period"
+        },
+        {
+          "id": "2",
+          "name": "Period 2",
+          "startTime": "08:45",
+          "endTime": "09:30",
+          "type": "Period"
+        },
+        {
+          "id": "3",
+          "name": "Period 3",
+          "startTime": "09:30",
+          "endTime": "10:15",
+          "type": "Period"
+        },
+        {
+          "id": "4",
+          "name": "Break",
+          "startTime": "10:15",
+          "endTime": "10:30",
+          "type": "Break"
+        },
+        {
+          "id": "5",
+          "name": "Period 4",
+          "startTime": "10:30",
+          "endTime": "11:15",
+          "type": "Period"
+        }
+      ],
+      "assignments": {
+        "Sunday_1": [
+          {
+            "subjectId": "1",
+            "teacherId": "Ujvhgks7qE8",
+            "roomNumber": "101",
+            "subjectName": "Bangla 1st Paper",
+            "teacherName": "Teacher 1"
+          }
+        ]
+      },
+      "id": "F4LSnlrA9jQ"
+    },
+    {
+      "classId": "_a3wDP5pTf0",
+      "section": [
+        "B"
+      ],
+      "periods": [
+        {
+          "id": "1",
+          "name": "Period 1",
+          "startTime": "08:00",
+          "endTime": "08:45",
+          "type": "Period"
+        },
+        {
+          "id": "2",
+          "name": "Period 2",
+          "startTime": "08:45",
+          "endTime": "09:30",
+          "type": "Period"
+        },
+        {
+          "id": "3",
+          "name": "Period 3",
+          "startTime": "09:30",
+          "endTime": "10:15",
+          "type": "Period"
+        },
+        {
+          "id": "4",
+          "name": "Break",
+          "startTime": "10:15",
+          "endTime": "10:30",
+          "type": "Break"
+        },
+        {
+          "id": "5",
+          "name": "Period 4",
+          "startTime": "10:30",
+          "endTime": "11:15",
+          "type": "Period"
+        }
+      ],
+      "assignments": {
+        "Monday_1": [
+          {
+            "subjectId": "3",
+            "teacherId": "f1EP9aP5y5o",
+            "roomNumber": "111",
+            "subjectName": "English 1st Paper",
+            "teacherName": "Teacher 2"
+          }
+        ]
+      },
+      "id": "gADguqh0kls"
+    },
+    {
+      "classId": "class-1",
+      "section": "B",
+      "periods": [
+        {
+          "id": "1",
+          "name": "Period 1",
+          "startTime": "08:00",
+          "endTime": "08:45",
+          "type": "Period"
+        },
+        {
+          "id": "2",
+          "name": "Period 2",
+          "startTime": "08:45",
+          "endTime": "09:30",
+          "type": "Period"
+        },
+        {
+          "id": "3",
+          "name": "Period 3",
+          "startTime": "09:30",
+          "endTime": "10:15",
+          "type": "Period"
+        },
+        {
+          "id": "4",
+          "name": "Break",
+          "startTime": "10:15",
+          "endTime": "10:30",
+          "type": "Break"
+        },
+        {
+          "id": "5",
+          "name": "Period 4",
+          "startTime": "10:30",
+          "endTime": "11:15",
+          "type": "Period"
+        }
+      ],
+      "assignments": {},
+      "id": "UZ45m-tC714"
+    },
+    {
+      "classId": "nursery",
+      "section": "B",
+      "periods": [
+        {
+          "id": "1",
+          "name": "Period 1",
+          "startTime": "08:00",
+          "endTime": "08:45",
+          "type": "Period"
+        },
+        {
+          "id": "2",
+          "name": "Break",
+          "startTime": "08:45",
+          "endTime": "09:30",
+          "type": "Break"
+        },
+        {
+          "id": "3",
+          "name": "Period 3",
+          "startTime": "09:30",
+          "endTime": "10:15",
+          "type": "Period"
+        },
+        {
+          "id": "4",
+          "name": "Break",
+          "startTime": "10:15",
+          "endTime": "10:30",
+          "type": "Break"
+        },
+        {
+          "id": "5",
+          "name": "Period 4",
+          "startTime": "10:30",
+          "endTime": "11:15",
+          "type": "Period"
+        }
+      ],
+      "assignments": {
+        "Sunday_3": [
+          {
+            "subjectId": "1",
+            "teacherId": "Ujvhgks7qE8",
+            "roomNumber": "101",
+            "subjectName": "Bangla 1st Paper",
+            "teacherName": "Teacher 1"
+          }
+        ]
+      },
+      "id": "7RhG8ZWnT9g"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

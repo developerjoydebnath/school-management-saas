@@ -50,11 +50,6 @@ export default function TimetableView() {
 	// Dialog States
 	const [editingColumn, setEditingColumn] = useState<any | null>(null);
 	const [assigningPeriod, setAssigningPeriod] = useState<any | null>(null);
-	const [deleteTarget, setDeleteTarget] = useState<{
-		type: "column" | "assignment";
-		id: string;
-		day?: string;
-	} | null>(null);
 
 	const [saveDialogOpen, setSaveDialogOpen] = useState(false);
 	const [selectedSectionsToApply, setSelectedSectionsToApply] = useState<string[]>([]);
@@ -113,13 +108,10 @@ export default function TimetableView() {
 		setEditingColumn(null);
 	};
 
-	const handleDeleteColumn = () => {
-		if (deleteTarget?.type === "column") {
-			setPeriods(periods.filter((p) => p.id !== deleteTarget.id));
-			setDeleteTarget(null);
-			setEditingColumn(null);
-			toast.success("Column deleted");
-		}
+	const handleDeleteColumn = (id: string) => {
+		setPeriods(periods.filter((p) => p.id !== id));
+		setEditingColumn(null);
+		toast.success("Column deleted");
 	};
 
 	const { data: subjectsData } = useSWR("/subjects");
@@ -146,16 +138,13 @@ export default function TimetableView() {
 		setAssigningPeriod(null);
 	};
 
-	const handleDeleteAssignment = () => {
-		if (deleteTarget?.type === "assignment") {
-			const key = `${deleteTarget.day}_${deleteTarget.id}`;
-			const newAssignments = { ...assignments };
-			delete newAssignments[key];
-			setAssignments(newAssignments);
-			setDeleteTarget(null);
-			setAssigningPeriod(null);
-			toast.success("Assignment cleared");
-		}
+	const handleDeleteAssignment = (day: string, id: string) => {
+		const key = `${day}_${id}`;
+		const newAssignments = { ...assignments };
+		delete newAssignments[key];
+		setAssignments(newAssignments);
+		setAssigningPeriod(null);
+		toast.success("Assignment cleared");
 	};
 
 	const handleSaveTimetable = () => {
@@ -290,7 +279,7 @@ export default function TimetableView() {
 							periods={periods}
 							assignments={assignments}
 							onEditColumn={setEditingColumn}
-							onDeleteColumn={(id) => setDeleteTarget({ type: "column", id })}
+							onDeleteColumn={handleDeleteColumn}
 							onAssignPeriod={(day, period, assignment) =>
 								setAssigningPeriod({ day, period, assignment })
 							}
@@ -316,7 +305,7 @@ export default function TimetableView() {
 				onClose={() => setEditingColumn(null)}
 				onChange={setEditingColumn}
 				onSave={handleSaveColumn}
-				onDelete={(id) => setDeleteTarget({ type: "column", id })}
+				onDelete={handleDeleteColumn}
 			/>
 
 			<AssignPeriodDialog
@@ -325,24 +314,9 @@ export default function TimetableView() {
 				onClose={() => setAssigningPeriod(null)}
 				onChange={setAssigningPeriod}
 				onAssign={handleAssignPeriod}
-				onDelete={(day, id) => setDeleteTarget({ type: "assignment", day, id })}
+				onDelete={handleDeleteAssignment}
 			/>
 
-			<ConfirmationModal
-				isOpen={!!deleteTarget}
-				onClose={() => setDeleteTarget(null)}
-				onConfirm={
-					deleteTarget?.type === "column" ? handleDeleteColumn : handleDeleteAssignment
-				}
-				title={deleteTarget?.type === "column" ? t("deleteColumn") : t("clearAssignment")}
-				description={
-					deleteTarget?.type === "column"
-						? t("deleteColumnDesc")
-						: t("clearAssignmentDesc")
-				}
-				confirmText={deleteTarget?.type === "column" ? t("delete") : t("clear")}
-				variant="destructive"
-			/>
 
 			{/* Save Apply to Sections Dialog */}
 			<Dialog open={saveDialogOpen} onOpenChange={setSaveDialogOpen}>

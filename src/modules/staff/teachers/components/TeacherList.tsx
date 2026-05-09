@@ -5,6 +5,7 @@ import PermissionGuard from "@/shared/components/custom/PermissionGuard";
 import { TOption } from "@/shared/components/form/FilterButton";
 import DataTable from "@/shared/components/table/DataTable";
 import TableFilter from "@/shared/components/table/TableFilter";
+import { AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
@@ -12,17 +13,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/shared/compo
 import { ScrollArea } from "@/shared/components/ui/scroll-area";
 import { Switch } from "@/shared/components/ui/switch";
 import { PERMISSIONS } from "@/shared/configs/permissions.config";
+import { useSWR } from "@/shared/hooks/use-swr";
 import { useTableData } from "@/shared/hooks/use-table-data";
 import axios from "@/shared/lib/axios";
 import { Teacher } from "@/shared/models/teacher.model";
 import { StatusEnum } from "@/shared/types/enums";
+import { getLocalizedName } from "@/shared/utils/localization";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil, Trash2 } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useSWR } from "@/shared/hooks/use-swr";
-import { getLocalizedName } from "@/shared/utils/localization";
 import TeacherFilterBar from "./TeacherFilterBar";
 import TeacherForm from "./TeacherForm";
 
@@ -39,10 +40,7 @@ export default function TeacherList() {
 	const [teacherToDelete, setTeacherToDelete] = useState<string | null>(null);
 	const [isDeleting, setIsDeleting] = useState(false);
 
-	const [teacherToChangeStatus, setTeacherToChangeStatus] = useState<{
-		teacher: Teacher;
-		newStatus: boolean;
-	} | null>(null);
+	const [teacherToChangeStatus, setTeacherToChangeStatus] = useState<Teacher | null>(null);
 	const [isChangingStatus, setIsChangingStatus] = useState(false);
 	const t = useTranslations("Teachers");
 	const tc = useTranslations("Common");
@@ -65,11 +63,11 @@ export default function TeacherList() {
 
 	const serializedTeachers = teachers?.map((teacher: any) => new Teacher(teacher));
 
-	const confirmDelete = async () => {
-		if (!teacherToDelete) return;
+	const confirmDelete = async (id: string) => {
+		setTeacherToDelete(id);
 		setIsDeleting(true);
 		try {
-			await axios.delete(`/teachers/${teacherToDelete}`);
+			await axios.delete(`/teachers/${id}`);
 			toast.success("Teacher deleted successfully");
 			mutate();
 		} catch (err: any) {
@@ -80,12 +78,11 @@ export default function TeacherList() {
 		}
 	};
 
-	const confirmStatusChange = async () => {
-		if (!teacherToChangeStatus) return;
+	const confirmStatusChange = async (teacher: Teacher, newStatus: boolean) => {
+		setTeacherToChangeStatus(teacher);
 		setIsChangingStatus(true);
 		try {
-			const { teacher, newStatus } = teacherToChangeStatus;
-			const status = newStatus ? "Active" : "Inactive";
+			const status = newStatus ? StatusEnum.ACTIVE : StatusEnum.INACTIVE;
 			await axios.patch(`/teachers/${teacher.id}`, { status });
 			toast.success(`Status updated to ${status}`);
 			mutate();
@@ -160,20 +157,33 @@ export default function TeacherList() {
 				const teacher = row.original;
 				return (
 					<div className="flex items-center gap-2">
-						<Switch
-							checked={teacher.status === StatusEnum.ACTIVE}
-							onCheckedChange={(checked) =>
-								setTeacherToChangeStatus({ teacher, newStatus: checked })
+						<ConfirmationModal
+							onConfirm={() =>
+								confirmStatusChange(teacher, teacher.status !== StatusEnum.ACTIVE)
 							}
-						/>
+							title={t("statusChangeTitle")}
+							description={
+								teacher.status === StatusEnum.ACTIVE
+									? tc("changeToInactiveDesc")
+									: tc("changeToActiveDesc")
+							}
+							confirmText={tc("changeStatus")}
+							variant="default"
+							isLoading={isChangingStatus && teacherToChangeStatus?.id === teacher.id}
+						>
+							<AlertDialogTrigger
+								nativeButton={false}
+								render={<Switch checked={teacher.status === StatusEnum.ACTIVE} />}
+							/>
+						</ConfirmationModal>
 						<div
-							className={`rounded-full px-2.5 py-1 text-xs font-medium ${
+							className={`w-fit rounded-full px-2.5 py-1 text-xs font-medium ${
 								teacher.status === StatusEnum.ACTIVE
 									? "bg-green-100 text-green-800"
 									: "bg-red-100 text-red-800"
 							}`}
 						>
-							{teacher.status === StatusEnum.ACTIVE ? "Active" : "Inactive"}
+							{teacher.status}
 						</div>
 					</div>
 				);
@@ -208,13 +218,22 @@ export default function TeacherList() {
 								PERMISSIONS.STAFF.TEACHERS.DELETE,
 							]}
 						>
-							<Button
+							<ConfirmationModal
+								onConfirm={() => confirmDelete(teacher.id)}
+								title={t("deleteTeacherTitle")}
+								description={t("deleteTeacherDescription")}
+								confirmText={tc("delete")}
 								variant="destructive"
-								size="icon-sm"
-								onClick={() => setTeacherToDelete(teacher.id)}
+								isLoading={isDeleting && teacherToDelete === teacher.id}
 							>
-								<Trash2 className="h-4 w-4 text-red-500 hover:text-red-600" />
-							</Button>
+								<AlertDialogTrigger
+									render={
+										<Button variant="destructive" size="icon-sm">
+											<Trash2 className="h-4 w-4 text-red-500 hover:text-red-600" />
+										</Button>
+									}
+								/>
+							</ConfirmationModal>
 						</PermissionGuard>
 					</div>
 				);
@@ -271,32 +290,6 @@ export default function TeacherList() {
 					</ScrollArea>
 				</DialogContent>
 			</Dialog>
-
-			<ConfirmationModal
-				isOpen={!!teacherToDelete}
-				onClose={() => setTeacherToDelete(null)}
-				onConfirm={confirmDelete}
-				title={t("deleteTeacherTitle")}
-				description={t("deleteTeacherDescription")}
-				confirmText={tc("delete")}
-				variant="destructive"
-				isLoading={isDeleting}
-			/>
-
-			<ConfirmationModal
-				isOpen={!!teacherToChangeStatus}
-				onClose={() => setTeacherToChangeStatus(null)}
-				onConfirm={confirmStatusChange}
-				title={t("statusChangeTitle")}
-				description={
-					teacherToChangeStatus?.newStatus
-						? tc("changeToActiveDesc")
-						: tc("changeToInactiveDesc")
-				}
-				confirmText={tc("changeStatus")}
-				variant="default"
-				isLoading={isChangingStatus}
-			/>
 		</Card>
 	);
 }

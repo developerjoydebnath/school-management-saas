@@ -1,11 +1,13 @@
 "use client";
 
+import ConfirmationModal from "@/shared/components/custom/ConfirmationModal";
+import { AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
+import { getLocalizedName } from "@/shared/utils/localization";
 import { GripHorizontal, Pencil, Plus, Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { getLocalizedName } from "@/shared/utils/localization";
 import { DAYS } from "../types";
 
 interface TimetableGridProps {
@@ -90,14 +92,25 @@ export function TimetableGrid({
 									>
 										<Pencil className="size-2.5" />
 									</Button>
-									<Button
+									<ConfirmationModal
+										onConfirm={() => onDeleteColumn(p.id)}
+										title={t("deleteColumn")}
+										description={t("deleteColumnDesc")}
+										confirmText={t("delete")}
 										variant="destructive"
-										size="icon-xs"
-										className="h-5 w-5"
-										onClick={() => onDeleteColumn(p.id)}
 									>
-										<Trash2 className="size-3" />
-									</Button>
+										<AlertDialogTrigger
+											render={
+												<Button
+													variant="destructive"
+													size="icon-xs"
+													className="h-5 w-5"
+												>
+													<Trash2 className="size-3" />
+												</Button>
+											}
+										/>
+									</ConfirmationModal>
 								</div>
 							</th>
 						))}

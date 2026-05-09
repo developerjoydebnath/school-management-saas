@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import PageHeading from '@/shared/components/custom/PageHeading';
-import NewAdmissionForm from '@/modules/admission/components/NewAdmissionForm';
+import NewAdmissionForm from '@/modules/admission/new-admission/components/NewAdmissionForm';
 import { useBreadcrumbStore } from '@/shared/stores/breadcrumb-store';
 import { PATHS } from '@/shared/configs/paths.config';
 import { useRouter } from 'next/navigation';
@@ -28,11 +28,10 @@ export default function NewAdmissionPage() {
   return (
     <div className="space-y-6">
       <PageHeading 
-        heading="New Admission" 
-        subHeading="Create a new student admission application." 
+        routeName="AdmissionNew" 
       />
       
-      <div className="grid lg:grid-cols-2 gap-8 items-start">
+      <div className="max-w-4xl mx-auto">
         <NewAdmissionForm onSuccess={handleSuccess} />
       </div>
     </div>

@@ -4,6 +4,7 @@ import ConfirmationModal from "@/shared/components/custom/ConfirmationModal";
 import PermissionGuard from "@/shared/components/custom/PermissionGuard";
 import DataTable from "@/shared/components/table/DataTable";
 import TableFilter from "@/shared/components/table/TableFilter";
+import { AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent } from "@/shared/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/shared/components/ui/dialog";
@@ -38,10 +39,7 @@ export default function ShiftList() {
 	const [shiftToDelete, setShiftToDelete] = useState<string | null>(null);
 	const [isDeleting, setIsDeleting] = useState(false);
 
-	const [shiftToChangeStatus, setShiftToChangeStatus] = useState<{
-		shift: ShiftModel;
-		newStatus: boolean;
-	} | null>(null);
+	const [shiftToChangeStatus, setShiftToChangeStatus] = useState<ShiftModel | null>(null);
 	const [isChangingStatus, setIsChangingStatus] = useState(false);
 
 	const {
@@ -58,11 +56,11 @@ export default function ShiftList() {
 	// serialize the data
 	const serializedShifts = shifts?.map((shift: any) => new ShiftModel(shift));
 
-	const confirmDelete = async () => {
-		if (!shiftToDelete) return;
+	const confirmDelete = async (id: string) => {
+		setShiftToDelete(id);
 		setIsDeleting(true);
 		try {
-			await axios.delete(`/shifts/${shiftToDelete}`);
+			await axios.delete(`/shifts/${id}`);
 			toast.success("Shift deleted successfully");
 			mutate();
 		} catch (err: any) {
@@ -73,11 +71,10 @@ export default function ShiftList() {
 		}
 	};
 
-	const confirmStatusChange = async () => {
-		if (!shiftToChangeStatus) return;
+	const confirmStatusChange = async (shift: ShiftModel, newStatus: boolean) => {
+		setShiftToChangeStatus(shift);
 		setIsChangingStatus(true);
 		try {
-			const { shift, newStatus } = shiftToChangeStatus;
 			const status = newStatus ? "Active" : "Inactive";
 			await axios.patch(`/shifts/${shift.id}`, { status });
 			toast.success(`Status updated to ${status}`);
@@ -117,12 +114,24 @@ export default function ShiftList() {
 				const shift = row.original;
 				return (
 					<div className="flex items-center gap-2">
-						<Switch
-							checked={shift.status === StatusEnum.ACTIVE}
-							onCheckedChange={(checked) =>
-								setShiftToChangeStatus({ shift: shift, newStatus: checked })
+						<ConfirmationModal
+							onConfirm={() =>
+								confirmStatusChange(shift, shift.status !== StatusEnum.ACTIVE)
 							}
-						/>
+							title={t("statusChangeTitle")}
+							description={
+								shift.status === StatusEnum.ACTIVE
+									? tc("changeToInactiveDesc")
+									: tc("changeToActiveDesc")
+							}
+							confirmText={tc("changeStatus")}
+							variant="default"
+							isLoading={isChangingStatus && shiftToChangeStatus?.id === shift.id}
+						>
+							<AlertDialogTrigger
+								render={<Switch checked={shift.status === StatusEnum.ACTIVE} />}
+							/>
+						</ConfirmationModal>
 						<div
 							className={`w-fit rounded-full px-2.5 py-1 text-xs font-medium ${
 								shift.status === StatusEnum.ACTIVE
@@ -169,13 +178,22 @@ export default function ShiftList() {
 								].filter(Boolean) as string[]
 							}
 						>
-							<Button
+							<ConfirmationModal
+								onConfirm={() => confirmDelete(shift.id)}
+								title={t("deleteShiftTitle")}
+								description={t("deleteShiftDescription")}
+								confirmText={tc("delete")}
 								variant="destructive"
-								size="icon-sm"
-								onClick={() => setShiftToDelete(shift.id)}
+								isLoading={isDeleting && shiftToDelete === shift.id}
 							>
-								<Trash2 />
-							</Button>
+								<AlertDialogTrigger
+									render={
+										<Button variant="destructive" size="icon-sm">
+											<Trash2 />
+										</Button>
+									}
+								/>
+							</ConfirmationModal>
 						</PermissionGuard>
 					</div>
 				);
@@ -232,31 +250,6 @@ export default function ShiftList() {
 				</DialogContent>
 			</Dialog>
 
-			<ConfirmationModal
-				isOpen={!!shiftToDelete}
-				onClose={() => setShiftToDelete(null)}
-				onConfirm={confirmDelete}
-				title={t("deleteShiftTitle")}
-				description={t("deleteShiftDescription")}
-				confirmText={tc("delete")}
-				variant="destructive"
-				isLoading={isDeleting}
-			/>
-
-			<ConfirmationModal
-				isOpen={!!shiftToChangeStatus}
-				onClose={() => setShiftToChangeStatus(null)}
-				onConfirm={confirmStatusChange}
-				title={t("statusChangeTitle")}
-				description={
-					shiftToChangeStatus?.newStatus
-						? tc("changeToActiveDesc")
-						: tc("changeToInactiveDesc")
-				}
-				confirmText={tc("changeStatus")}
-				variant="default"
-				isLoading={isChangingStatus}
-			/>
 		</>
 	);
 }

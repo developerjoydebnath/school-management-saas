@@ -2,6 +2,8 @@
 
 import SubjectSingleSelection from "@/shared/components/form/SubjectSingleSelection";
 import TeacherSelection from "@/shared/components/form/TeacherSelection";
+import ConfirmationModal from "@/shared/components/custom/ConfirmationModal";
+import { AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import { Button } from "@/shared/components/ui/button";
 import {
 	Dialog,
@@ -160,17 +162,28 @@ export function AssignPeriodDialog({
 				</ScrollArea>
 				<DialogFooter className="flex items-center justify-between border-t px-6 pt-4">
 					{assigningPeriod?.assignment && (
-						<Button
-							variant="ghost"
-							size="sm"
-							className="text-red-500 hover:bg-red-50 hover:text-red-600"
-							onClick={() =>
+						<ConfirmationModal
+							onConfirm={() =>
 								assigningPeriod &&
 								onDelete(assigningPeriod.day, assigningPeriod.period.id)
 							}
+							title={t("clearAssignment")}
+							description={t("clearAssignmentDesc")}
+							confirmText={t("clear")}
+							variant="destructive"
 						>
-							<Trash2 className="mr-2 size-4" /> {t("clearSlot")}
-						</Button>
+							<AlertDialogTrigger
+								render={
+									<Button
+										variant="ghost"
+										size="sm"
+										className="text-red-500 hover:bg-red-50 hover:text-red-600"
+									>
+										<Trash2 className="mr-2 size-4" /> {t("clearSlot")}
+									</Button>
+								}
+							/>
+						</ConfirmationModal>
 					)}
 					<div className="ml-auto flex gap-2">
 						<Button variant="outline" size="sm" onClick={onClose}>

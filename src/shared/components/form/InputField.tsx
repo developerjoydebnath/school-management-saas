@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
+import { Switch } from "@/shared/components/ui/switch";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { cn } from "@/shared/lib/utils";
 import { useController, type UseControllerProps } from "react-hook-form";
@@ -161,14 +162,24 @@ export default function InputField({
           />
         ))
 
-        // subjectSelection
-        .with("subjectSelection", () => (
-          <SubjectSelection
-            value={field.value || []}
-            onChange={field.onChange}
-            className={className}
-          />
-        ))
+		// subjectSelection
+		.with("subjectSelection", () => (
+			<SubjectSelection
+				value={field.value || []}
+				onChange={field.onChange}
+				className={className}
+			/>
+		))
+
+		// switch
+		.with("switch", () => (
+			<Switch
+				id={field.name}
+				checked={field.value}
+				onCheckedChange={field.onChange}
+				className={className}
+			/>
+		))
 
         // native type
         .with(
