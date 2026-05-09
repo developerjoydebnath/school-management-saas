@@ -9,6 +9,7 @@
 		"academics_homework": "Homework & Assignments",
 		"academics_online_classes": "Online Classes",
 		"academics_shifts": "Shifts",
+		"academics_sessions": "Sessions",
 		"admission": "Admission",
 		"admission_new": "New Admission",
 		"admission_list": "Application List",
@@ -266,7 +267,23 @@
 	},
 	"AdmissionNew": {
 		"title": "New Admission",
-		"description": "Create a new student admission application."
+		"description": "Create a new student admission application.",
+		"fastEnrollmentMode": "Fast Enrollment Mode:",
+		"fastEnrollmentDesc": "Only mandatory and custom admission fields are displayed. Additional profile data can be completed later from the Student Directory.",
+		"processingAdmission": "Processing Admission...",
+		"completeAdmission": "Complete Admission"
+	},
+	"Sessions": {
+		"title": "Academic Sessions",
+		"description": "Manage academic sessions for the school",
+		"sessionName": "Session Name",
+		"status": "Status",
+		"actions": "Actions",
+		"addSession": "Add Session",
+		"editSession": "Edit Session",
+		"deleteSessionTitle": "Delete Session",
+		"deleteSessionDescription": "Are you sure you want to delete this session? This action cannot be undone.",
+		"statusChangeTitle": "Change Status"
 	},
 	"AdmissionSettings": {
 		"title": "Field Configuration",

@@ -21,6 +21,9 @@ import PasswordInput from "./PasswordInput";
 import TagInput from "./TagInput";
 import ClassSelection from "./ClassSelection";
 import SubjectSelection from "./SubjectSelection";
+import ClassSelect from "./ClassSelect";
+import SectionSelect from "./SectionSelect";
+import SessionSelect from "./SessionSelect";
 
 interface FormFieldProps extends UseControllerProps {
   label?: string;
@@ -35,6 +38,7 @@ interface FormFieldProps extends UseControllerProps {
   min?: number;
   max?: number;
   control: any;
+  dependencyId?: string;
 }
 
 export default function InputField({
@@ -167,6 +171,37 @@ export default function InputField({
 			<SubjectSelection
 				value={field.value || []}
 				onChange={field.onChange}
+				className={className}
+			/>
+		))
+
+		// classSelect
+		.with("classSelect", () => (
+			<ClassSelect
+				value={field.value}
+				onChange={field.onChange}
+				placeholder={props.placeholder}
+				className={className}
+			/>
+		))
+
+		// sectionSelect
+		.with("sectionSelect", () => (
+			<SectionSelect
+				value={field.value}
+				onChange={field.onChange}
+				classId={props.dependencyId}
+				placeholder={props.placeholder}
+				className={className}
+			/>
+		))
+
+		// sessionSelect
+		.with("sessionSelect", () => (
+			<SessionSelect
+				value={field.value}
+				onChange={field.onChange}
+				placeholder={props.placeholder}
 				className={className}
 			/>
 		))

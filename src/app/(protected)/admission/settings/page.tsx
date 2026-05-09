@@ -5,18 +5,19 @@ import PageHeading from "@/shared/components/custom/PageHeading";
 import { PATHS } from "@/shared/configs/paths.config";
 import { useBreadcrumbStore } from "@/shared/stores/breadcrumb-store";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function AdmissionSettingsPage() {
 	const { setBreadcrumbs } = useBreadcrumbStore();
+	const tNav = useTranslations("Navigation");
 
 	useEffect(() => {
 		setBreadcrumbs([
-			{ label: "Home", href: "/" },
-			{ label: "Dashboard", href: PATHS.DASHBOARD },
-			{ label: "Admission Management", href: PATHS.ADMISSION.ROOT },
-			{ label: "Admission Settings", href: PATHS.ADMISSION.SETTINGS.ROOT },
+			{ label: tNav("dashboard"), href: PATHS.DASHBOARD },
+			{ label: tNav("admission"), href: PATHS.ADMISSION.ROOT },
+			{ label: tNav("admission_settings"), href: PATHS.ADMISSION.SETTINGS.ROOT },
 		]);
-	}, [setBreadcrumbs]);
+	}, [setBreadcrumbs, tNav]);
 
 	return (
 		<div className="space-y-6">

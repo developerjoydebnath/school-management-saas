@@ -48,6 +48,12 @@ export const PATHS = {
 			EDIT: (id: number | string) => `/academics/shifts/${id}/edit`,
 			DETAILS: (id: number | string) => `/academics/shifts/${id}/details`,
 		},
+		SESSIONS: {
+			ROOT: "/academics/sessions",
+			CREATE: "/academics/sessions/create",
+			EDIT: (id: number | string) => `/academics/sessions/${id}/edit`,
+			DETAILS: (id: number | string) => `/academics/sessions/${id}/details`,
+		},
 	},
 	ADMISSION: {
 		ROOT: "/admission",

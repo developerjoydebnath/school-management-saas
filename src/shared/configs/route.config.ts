@@ -133,6 +133,14 @@ export const SidebarMenu: SidebarMenuType[] = [
 				permissions: [PERMISSIONS.ACADEMICS.SHIFTS.VIEW],
 				matchPaths: [PATHS.ACADEMICS.SHIFTS.ROOT],
 			},
+			{
+				id: "academics_sessions",
+				name: "academics_sessions",
+				path: PATHS.ACADEMICS.SESSIONS.ROOT,
+				icon: CalendarDays,
+				permissions: [PERMISSIONS.ACADEMICS.SESSIONS.VIEW],
+				matchPaths: [PATHS.ACADEMICS.SESSIONS.ROOT],
+			},
 		],
 	},
 	{

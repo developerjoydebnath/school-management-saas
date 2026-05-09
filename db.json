@@ -1,5 +1,22 @@
 {
   "admissions": [],
+  "sessions": [
+    {
+      "id": "session-2024",
+      "name": "2024-25",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "session-2025",
+      "name": "2025-26",
+      "status": "ACTIVE"
+    },
+    {
+      "name": "2026-27",
+      "status": "ACTIVE",
+      "id": "udJNOOzkQlk"
+    }
+  ],
   "teachers": [
     {
       "id": "teacher-1",

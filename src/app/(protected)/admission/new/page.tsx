@@ -6,19 +6,20 @@ import NewAdmissionForm from '@/modules/admission/new-admission/components/NewAd
 import { useBreadcrumbStore } from '@/shared/stores/breadcrumb-store';
 import { PATHS } from '@/shared/configs/paths.config';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from "next-intl";
 
 export default function NewAdmissionPage() {
   const { setBreadcrumbs } = useBreadcrumbStore();
   const router = useRouter();
+  const tNav = useTranslations("Navigation");
 
   useEffect(() => {
     setBreadcrumbs([
-      { label: "Home", href: "/" },
-      { label: "Dashboard", href: PATHS.DASHBOARD },
-      { label: "Admission Management", href: PATHS.ADMISSION.ROOT },
-      { label: "New Admission", href: PATHS.ADMISSION.NEW.ROOT },
+      { label: tNav("dashboard"), href: PATHS.DASHBOARD },
+      { label: tNav("admission"), href: PATHS.ADMISSION.ROOT },
+      { label: tNav("admission_new"), href: PATHS.ADMISSION.NEW.ROOT },
     ]);
-  }, [setBreadcrumbs]);
+  }, [setBreadcrumbs, tNav]);
 
   const handleSuccess = () => {
     // Optionally redirect to application list on success

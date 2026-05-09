@@ -54,6 +54,13 @@ export const PERMISSIONS = {
 			EDIT: "academics.shifts.edit",
 			DELETE: "academics.shifts.delete",
 		},
+		SESSIONS: {
+			ALL: "academics.sessions.all",
+			VIEW: "academics.sessions.view",
+			CREATE: "academics.sessions.create",
+			EDIT: "academics.sessions.edit",
+			DELETE: "academics.sessions.delete",
+		},
 	},
 	ADMISSION: {
 		VIEW: "admission.view",

@@ -13,134 +13,122 @@ import { Switch } from "@/shared/components/ui/switch";
 import { PERMISSIONS } from "@/shared/configs/permissions.config";
 import { useTableData } from "@/shared/hooks/use-table-data";
 import axios from "@/shared/lib/axios";
-import { ShiftModel } from "@/shared/models/shift.model";
+import { SessionModel } from "@/shared/models/session.model";
 import { StatusEnum } from "@/shared/types/enums";
 import { ColumnDef } from "@tanstack/react-table";
 import { Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import ShiftForm from "./ShiftForm";
+import SessionForm from "./SessionForm";
 
-export type ShiftFilter = {
+export type SessionFilter = {
 	search: string;
 };
 
-const initialFilters: ShiftFilter = { search: "" };
+const initialFilters: SessionFilter = { search: "" };
 
-export default function ShiftList() {
-	const [filter, setFilter] = useState<ShiftFilter>(initialFilters);
-	const t = useTranslations("Shifts");
+export default function SessionList() {
+	const [filter, setFilter] = useState<SessionFilter>(initialFilters);
+	const t = useTranslations("Sessions");
 	const tc = useTranslations("Common");
+	const tf = useTranslations("Forms");
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(10);
 
-	const [editingShift, setEditingShift] = useState<ShiftModel | null>(null);
-	const [shiftToDelete, setShiftToDelete] = useState<string | null>(null);
+	const [editingSession, setEditingSession] = useState<SessionModel | null>(null);
+	const [sessionToDelete, setSessionToDelete] = useState<string | null>(null);
 	const [isDeleting, setIsDeleting] = useState(false);
 
-	const [shiftToChangeStatus, setShiftToChangeStatus] = useState<ShiftModel | null>(null);
+	const [sessionToChangeStatus, setSessionToChangeStatus] = useState<SessionModel | null>(null);
 	const [isChangingStatus, setIsChangingStatus] = useState(false);
 
 	const {
-		data: shifts,
+		data: sessions,
 		meta,
 		isLoading,
 		mutate,
-	} = useTableData("/shifts", {
+	} = useTableData("/sessions", {
 		// page,
 		// limit,
 		// search: filter.search
 	});
 
-	// serialize the data
-	const serializedShifts = shifts?.map((shift: any) => new ShiftModel(shift));
+	const serializedSessions = sessions?.map((session: any) => new SessionModel(session));
 
 	const confirmDelete = async (id: string) => {
-		setShiftToDelete(id);
+		setSessionToDelete(id);
 		setIsDeleting(true);
 		try {
-			await axios.delete(`/shifts/${id}`);
-			toast.success("Shift deleted successfully");
+			await axios.delete(`/sessions/${id}`);
+			toast.success("Session deleted successfully");
 			mutate();
 		} catch (err: any) {
-			toast.error("Failed to delete the shift. Please try again.");
+			toast.error("Failed to delete the session. Please try again.");
 		} finally {
 			setIsDeleting(false);
-			setShiftToDelete(null);
+			setSessionToDelete(null);
 		}
 	};
 
-	const confirmStatusChange = async (shift: ShiftModel, newStatus: boolean) => {
-		setShiftToChangeStatus(shift);
+	const confirmStatusChange = async (session: SessionModel, newStatus: boolean) => {
+		setSessionToChangeStatus(session);
 		setIsChangingStatus(true);
 		try {
-			const status = newStatus ? "Active" : "Inactive";
-			await axios.patch(`/shifts/${shift.id}`, { status });
+			const status = newStatus ? "ACTIVE" : "INACTIVE";
+			await axios.patch(`/sessions/${session.id}`, { status });
 			toast.success(`Status updated to ${status}`);
 			mutate();
 		} catch (err: any) {
 			toast.error("Failed to update status.");
 		} finally {
 			setIsChangingStatus(false);
-			setShiftToChangeStatus(null);
+			setSessionToChangeStatus(null);
 		}
 	};
 
-	const columns: ColumnDef<ShiftModel>[] = [
+	const columns: ColumnDef<SessionModel>[] = [
 		{
 			id: "name",
 			accessorKey: "name",
-			header: t("shiftName"),
+			header: t("sessionName"),
 			cell: ({ row }) => <span className="font-medium">{row.original.name}</span>,
-		},
-		{
-			id: "startTime",
-			accessorKey: "startTime",
-			header: t("shiftStartTime"),
-			cell: ({ row }) => row.original.startTime || "-",
-		},
-		{
-			id: "endTime",
-			accessorKey: "endTime",
-			header: t("shiftEndTime"),
-			cell: ({ row }) => row.original.endTime || "-",
 		},
 		{
 			id: "status",
 			accessorKey: "status",
 			header: t("status"),
 			cell: ({ row }) => {
-				const shift = row.original;
+				const session = row.original;
 				return (
 					<div className="flex items-center gap-2">
 						<ConfirmationModal
 							onConfirm={() =>
-								confirmStatusChange(shift, shift.status !== StatusEnum.ACTIVE)
+								confirmStatusChange(session, session.status !== StatusEnum.ACTIVE)
 							}
 							title={t("statusChangeTitle")}
 							description={
-								shift.status === StatusEnum.ACTIVE
+								session.status === StatusEnum.ACTIVE
 									? tc("changeToInactiveDesc")
 									: tc("changeToActiveDesc")
 							}
 							confirmText={tc("changeStatus")}
 							variant="default"
-							isLoading={isChangingStatus && shiftToChangeStatus?.id === shift.id}
+							isLoading={isChangingStatus && sessionToChangeStatus?.id === session.id}
 						>
 							<AlertDialogTrigger
 								nativeButton={false}
-								render={<Switch checked={shift.status === StatusEnum.ACTIVE} />}
+								render={<Switch checked={session.status === StatusEnum.ACTIVE} />}
 							/>
 						</ConfirmationModal>
 						<div
 							className={`w-fit rounded-full px-2.5 py-1 text-xs font-medium ${
-								shift.status === StatusEnum.ACTIVE
+								session.status === StatusEnum.ACTIVE
 									? "bg-green-100 text-green-800"
 									: "bg-red-100 text-red-800"
 							}`}
 						>
-							{shift.status}
+							{session.status}
 						</div>
 					</div>
 				);
@@ -150,42 +138,30 @@ export default function ShiftList() {
 			id: "actions",
 			header: t("actions"),
 			cell: ({ row }) => {
-				const shift = row.original;
+				const session = row.original;
 				return (
 					<div className="flex items-center gap-2">
 						<PermissionGuard
-							permissions={
-								[
-									PERMISSIONS.ACADEMICS.ALL,
-									PERMISSIONS.ACADEMICS.SHIFTS?.ALL,
-									PERMISSIONS.ACADEMICS.SHIFTS?.EDIT,
-								].filter(Boolean) as string[]
-							}
+							permissions={[PERMISSIONS.ACADEMICS.ALL].filter(Boolean) as string[]}
 						>
 							<Button
 								variant="outline"
 								size="icon-sm"
-								onClick={() => setEditingShift(shift)}
+								onClick={() => setEditingSession(session)}
 							>
 								<Pencil className="text-muted-foreground hover:text-foreground h-4 w-4" />
 							</Button>
 						</PermissionGuard>
 						<PermissionGuard
-							permissions={
-								[
-									PERMISSIONS.ACADEMICS.ALL,
-									PERMISSIONS.ACADEMICS.SHIFTS?.ALL,
-									PERMISSIONS.ACADEMICS.SHIFTS?.DELETE,
-								].filter(Boolean) as string[]
-							}
+							permissions={[PERMISSIONS.ACADEMICS.ALL].filter(Boolean) as string[]}
 						>
 							<ConfirmationModal
-								onConfirm={() => confirmDelete(shift.id)}
-								title={t("deleteShiftTitle")}
-								description={t("deleteShiftDescription")}
+								onConfirm={() => confirmDelete(session.id)}
+								title={t("deleteSessionTitle")}
+								description={t("deleteSessionDescription")}
 								confirmText={tc("delete")}
 								variant="destructive"
-								isLoading={isDeleting && shiftToDelete === shift.id}
+								isLoading={isDeleting && sessionToDelete === session.id}
 							>
 								<AlertDialogTrigger
 									render={
@@ -202,7 +178,6 @@ export default function ShiftList() {
 		},
 	];
 
-	// reset filters
 	const resetFilters = () => {
 		setFilter(initialFilters);
 		setPage(1);
@@ -219,8 +194,8 @@ export default function ShiftList() {
 						resetFilters={resetFilters}
 					/>
 
-					<DataTable<ShiftModel>
-						data={serializedShifts || []}
+					<DataTable<SessionModel>
+						data={serializedSessions || []}
 						isLoading={isLoading}
 						pagination={{
 							page: meta.page,
@@ -235,16 +210,19 @@ export default function ShiftList() {
 				</CardContent>
 			</Card>
 
-			<Dialog open={!!editingShift} onOpenChange={(open) => !open && setEditingShift(null)}>
+			<Dialog
+				open={!!editingSession}
+				onOpenChange={(open) => !open && setEditingSession(null)}
+			>
 				<DialogContent className="px-0">
 					<DialogHeader className="px-6">
-						<DialogTitle>Edit Shift</DialogTitle>
+						<DialogTitle>{t("editSession")}</DialogTitle>
 					</DialogHeader>
 					<ScrollArea className="max-h-[80vh] px-4">
-						{editingShift && (
-							<ShiftForm
-								initialData={editingShift}
-								onSuccess={() => setEditingShift(null)}
+						{editingSession && (
+							<SessionForm
+								initialData={editingSession}
+								onSuccess={() => setEditingSession(null)}
 							/>
 						)}
 					</ScrollArea>

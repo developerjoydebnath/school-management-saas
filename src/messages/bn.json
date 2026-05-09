@@ -9,6 +9,7 @@
 		"academics_homework": "হোমওয়ার্ক ও অ্যাসাইনমেন্ট",
 		"academics_online_classes": "অনলাইন ক্লাস",
 		"academics_shifts": "শিফট",
+		"academics_sessions": "সেশন",
 		"admission": "ভর্তি",
 		"admission_new": "নতুন ভর্তি",
 		"admission_list": "আবেদন তালিকা",
@@ -265,7 +266,23 @@
 	},
 	"AdmissionNew": {
 		"title": "নতুন ভর্তি",
-		"description": "নতুন শিক্ষার্থীর ভর্তির আবেদন তৈরি করুন।"
+		"description": "নতুন শিক্ষার্থীর ভর্তির আবেদন তৈরি করুন।",
+		"fastEnrollmentMode": "দ্রুত ভর্তি মোড:",
+		"fastEnrollmentDesc": "শুধুমাত্র বাধ্যতামূলক এবং কাস্টম ভর্তির ফিল্ডগুলো প্রদর্শিত হচ্ছে। স্টুডেন্ট ডিরেক্টরি থেকে পরে অতিরিক্ত প্রোফাইল ডেটা সম্পন্ন করা যাবে।",
+		"processingAdmission": "ভর্তি প্রক্রিয়া চলছে...",
+		"completeAdmission": "ভর্তি সম্পন্ন করুন"
+	},
+	"Sessions": {
+		"title": "একাডেমিক সেশন",
+		"description": "স্কুলের জন্য একাডেমিক সেশন পরিচালনা করুন",
+		"sessionName": "সেশনের নাম",
+		"status": "স্ট্যাটাস",
+		"actions": "অ্যাকশন",
+		"addSession": "সেশন যোগ করুন",
+		"editSession": "সেশন এডিট করুন",
+		"deleteSessionTitle": "সেশন ডিলিট করুন",
+		"deleteSessionDescription": "আপনি কি নিশ্চিত যে আপনি এই সেশনটি ডিলিট করতে চান? এই অ্যাকশনটি পূর্বাবস্থায় ফেরানো যাবে না।",
+		"statusChangeTitle": "স্ট্যাটাস পরিবর্তন করুন"
 	},
 	"AdmissionSettings": {
 		"title": "ফিল্ড কনফিগারেশন",
