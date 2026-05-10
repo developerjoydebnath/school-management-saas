@@ -29,8 +29,17 @@ import { useAdmissionSettingsStore } from "../../shared/stores/admission-setting
 import { AddCustomFieldDialog } from "./AddCustomFieldDialog";
 
 export default function AdmissionSettingsForm() {
-	const { fieldSettings, customFields, updateFieldSetting, removeCustomField, resetSettings } =
-		useAdmissionSettingsStore();
+	const {
+		admissionMode,
+		fieldVisibility,
+		fieldRequired,
+		customFields,
+		updateAdmissionMode,
+		updateFieldVisibility,
+		updateFieldRequired,
+		removeCustomField,
+		resetSettings,
+	} = useAdmissionSettingsStore();
 	const t = useTranslations("AdmissionSettings");
 	const tForms = useTranslations("Forms");
 	const tc = useTranslations("Common");
@@ -39,11 +48,16 @@ export default function AdmissionSettingsForm() {
 		return [...ADMISSION_FIELDS, ...customFields];
 	}, [customFields]);
 
-	const toggleField = (fieldId: string) => {
+	const toggleVisibility = (fieldId: string) => {
 		const field = allFields.find((f) => f.id === fieldId);
 		if (field?.isFixed) return;
+		updateFieldVisibility(fieldId, !fieldVisibility[fieldId]);
+	};
 
-		updateFieldSetting(fieldId, !fieldSettings[fieldId]);
+	const toggleRequired = (fieldId: string) => {
+		const field = allFields.find((f) => f.id === fieldId);
+		if (field?.isFixed) return;
+		updateFieldRequired(fieldId, !fieldRequired[fieldId]);
 	};
 
 	const handleSave = () => {
@@ -69,7 +83,7 @@ export default function AdmissionSettingsForm() {
 					>
 						<AlertDialogTrigger
 							render={
-								<Button variant="destructive" onClick={resetSettings}>
+								<Button variant="destructive">
 									<RotateCcw className="h-4 w-4" />
 									{t("resetAll")}
 								</Button>
@@ -86,6 +100,60 @@ export default function AdmissionSettingsForm() {
 				</div>
 			</div>
 
+			<Card className="">
+				<CardHeader className="pb-3">
+					<CardTitle className="text-lg">{t("admissionMode")}</CardTitle>
+					<CardDescription>{t("admissionModeDesc")}</CardDescription>
+				</CardHeader>
+				<CardContent>
+					<div className="flex items-center gap-6">
+						<ConfirmationModal
+							onConfirm={() => updateAdmissionMode("fast")}
+							title={t("confirmModeChangeTitle")}
+							description={t("confirmModeChangeDesc")}
+							confirmText={tForms("confirm")}
+							cancelText={tForms("cancel")}
+						>
+							<AlertDialogTrigger
+								nativeButton={false}
+								render={
+									<div
+										className={`cursor-pointer rounded-lg border-2 p-4 transition-all ${admissionMode === "fast" ? "border-primary bg-primary/5" : "hover:border-primary/50 border-border"}`}
+									>
+										<div className="font-semibold">{t("fastMode")}</div>
+										<div className="text-muted-foreground text-sm">
+											{t("fastModeDesc")}
+										</div>
+									</div>
+								}
+							/>
+						</ConfirmationModal>
+
+						<ConfirmationModal
+							onConfirm={() => updateAdmissionMode("full")}
+							title={t("confirmModeChangeTitle")}
+							description={t("confirmModeChangeDesc")}
+							confirmText={tForms("confirm")}
+							cancelText={tForms("cancel")}
+						>
+							<AlertDialogTrigger
+								nativeButton={false}
+								render={
+									<div
+										className={`cursor-pointer rounded-lg border-2 p-4 transition-all ${admissionMode === "full" ? "border-primary bg-primary/5" : "hover:border-primary/50 border-border"}`}
+									>
+										<div className="font-semibold">{t("fullMode")}</div>
+										<div className="text-muted-foreground text-sm">
+											{t("fullModeDesc")}
+										</div>
+									</div>
+								}
+							/>
+						</ConfirmationModal>
+					</div>
+				</CardContent>
+			</Card>
+
 			<div className="grid gap-6">
 				{categories.map((category) => (
 					<Card key={category} className="gap-0 py-0 shadow-none">
@@ -93,7 +161,7 @@ export default function AdmissionSettingsForm() {
 							<div className="flex items-center gap-2">
 								<LayoutGrid className="h-4 w-4" />
 								<CardTitle className="text-lg capitalize">
-									{category.replace("_", " ")}
+									{t(`categories.${category}`)}
 								</CardTitle>
 							</div>
 							<CardDescription>{t("description")}</CardDescription>
@@ -102,10 +170,13 @@ export default function AdmissionSettingsForm() {
 							<Table>
 								<TableHeader>
 									<TableRow className="border-t">
-										<TableHead className="pl-6">Field Name</TableHead>
-										<TableHead>Type</TableHead>
-										<TableHead>Required for Admission</TableHead>
-										<TableHead className="pr-6 text-right">Actions</TableHead>
+										<TableHead className="pl-6">{t("fieldHeader")}</TableHead>
+										<TableHead>{t("typeHeader")}</TableHead>
+										<TableHead>{t("isShownHeader")}</TableHead>
+										<TableHead>{t("requiredHeader")}</TableHead>
+										<TableHead className="pr-6 text-right">
+											{t("actionsHeader")}
+										</TableHead>
 									</TableRow>
 								</TableHeader>
 								<TableBody>
@@ -121,14 +192,14 @@ export default function AdmissionSettingsForm() {
 																variant="secondary"
 																className="h-4 border-none bg-gray-100 text-[10px] text-gray-600"
 															>
-																System
+																{t("systemBadge")}
 															</Badge>
 														) : field.isCustom ? (
 															<Badge
 																variant="outline"
 																className="h-4 border-blue-200 bg-blue-50 text-[10px] text-blue-600"
 															>
-																Custom (JSON)
+																{t("customBadge")}
 															</Badge>
 														) : null}
 													</div>
@@ -139,22 +210,44 @@ export default function AdmissionSettingsForm() {
 												<TableCell>
 													<div className="flex items-center gap-3">
 														<Switch
-															checked={fieldSettings[field.id]}
+															checked={fieldVisibility[field.id]}
 															onCheckedChange={() =>
-																toggleField(field.id)
+																toggleVisibility(field.id)
 															}
 															disabled={field.isFixed}
 														/>
 														<span
 															className={
-																fieldSettings[field.id]
+																fieldVisibility[field.id]
 																	? "text-sm font-semibold text-green-600"
 																	: "text-sm text-gray-400"
 															}
 														>
-															{fieldSettings[field.id]
-																? "Mandatory"
-																: "Optional"}
+															{fieldVisibility[field.id]
+																? t("shown")
+																: t("hidden")}
+														</span>
+													</div>
+												</TableCell>
+												<TableCell>
+													<div className="flex items-center gap-3">
+														<Switch
+															checked={fieldRequired[field.id]}
+															onCheckedChange={() =>
+																toggleRequired(field.id)
+															}
+															disabled={field.isFixed}
+														/>
+														<span
+															className={
+																fieldRequired[field.id]
+																	? "text-sm font-semibold text-blue-600"
+																	: "text-sm text-gray-400"
+															}
+														>
+															{fieldRequired[field.id]
+																? t("mandatory")
+																: t("optional")}
 														</span>
 													</div>
 												</TableCell>

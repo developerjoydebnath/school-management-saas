@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -34,14 +35,26 @@ export default function ConfirmationModal({
 	variant = "default",
 }: ConfirmationModalProps) {
 	const t = useTranslations("Forms");
+	const [open, setOpen] = React.useState(false);
 
 	const cancelAltText = cancelText || t("cancel");
 	const confirmAltText = confirmText || t("confirm");
 	const titleAltText = title || t("areYouSure");
 	const descriptionAltText = description || t("thisActionCannotBeUndone");
 
+	const handleConfirm = async (e: React.MouseEvent) => {
+		e.preventDefault(); // Prevent default if any
+		try {
+			await onConfirm();
+			setOpen(false);
+		} catch (error) {
+			// If it fails, we might want to keep it open
+			console.error(error);
+		}
+	};
+
 	return (
-		<AlertDialog>
+		<AlertDialog open={open} onOpenChange={setOpen}>
 			{children}
 			<AlertDialogContent>
 				<AlertDialogHeader>
@@ -49,8 +62,10 @@ export default function ConfirmationModal({
 					<AlertDialogDescription>{descriptionAltText}</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
-					<AlertDialogCancel disabled={isLoading}>{cancelAltText}</AlertDialogCancel>
-					<AlertDialogAction onClick={onConfirm} disabled={isLoading} variant={variant}>
+					<AlertDialogCancel disabled={isLoading} onClick={() => setOpen(false)}>
+						{cancelAltText}
+					</AlertDialogCancel>
+					<AlertDialogAction onClick={handleConfirm} disabled={isLoading} variant={variant}>
 						{isLoading ? t("processing") : confirmAltText}
 					</AlertDialogAction>
 				</AlertDialogFooter>

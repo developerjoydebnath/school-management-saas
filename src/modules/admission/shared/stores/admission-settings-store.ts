@@ -3,9 +3,13 @@ import { persist } from 'zustand/middleware';
 import { ADMISSION_FIELDS, AdmissionField } from '../constants/admission-fields';
 
 interface AdmissionSettingsState {
-  fieldSettings: Record<string, boolean>;
+  admissionMode: 'fast' | 'full';
+  fieldVisibility: Record<string, boolean>;
+  fieldRequired: Record<string, boolean>;
   customFields: AdmissionField[];
-  updateFieldSetting: (fieldId: string, value: boolean) => void;
+  updateAdmissionMode: (mode: 'fast' | 'full') => void;
+  updateFieldVisibility: (fieldId: string, value: boolean) => void;
+  updateFieldRequired: (fieldId: string, value: boolean) => void;
   addCustomField: (field: AdmissionField) => void;
   removeCustomField: (fieldId: string) => void;
   resetSettings: () => void;
@@ -14,39 +18,58 @@ interface AdmissionSettingsState {
 export const useAdmissionSettingsStore = create<AdmissionSettingsState>()(
   persist(
     (set) => ({
-      fieldSettings: ADMISSION_FIELDS.reduce((acc, field) => {
-        acc[field.id] = field.isStep1;
+      admissionMode: 'fast',
+      fieldVisibility: ADMISSION_FIELDS.reduce((acc, field) => {
+        acc[field.id] = true; // All shown by default in V2
+        return acc;
+      }, {} as Record<string, boolean>),
+      fieldRequired: ADMISSION_FIELDS.reduce((acc, field) => {
+        acc[field.id] = field.isStep1 || field.isFixed || false;
         return acc;
       }, {} as Record<string, boolean>),
       customFields: [],
       
-      updateFieldSetting: (fieldId, value) => set((state) => ({
-        fieldSettings: { ...state.fieldSettings, [fieldId]: value }
+      updateAdmissionMode: (mode) => set({ admissionMode: mode }),
+
+      updateFieldVisibility: (fieldId, value) => set((state) => ({
+        fieldVisibility: { ...state.fieldVisibility, [fieldId]: value }
+      })),
+
+      updateFieldRequired: (fieldId, value) => set((state) => ({
+        fieldRequired: { ...state.fieldRequired, [fieldId]: value }
       })),
 
       addCustomField: (field) => set((state) => ({
         customFields: [...state.customFields, { ...field, isCustom: true }],
-        fieldSettings: { ...state.fieldSettings, [field.id]: true }
+        fieldVisibility: { ...state.fieldVisibility, [field.id]: true },
+        fieldRequired: { ...state.fieldRequired, [field.id]: false }
       })),
 
       removeCustomField: (fieldId) => set((state) => {
-        const { [fieldId]: _, ...rest } = state.fieldSettings;
+        const { [fieldId]: _v, ...restVisibility } = state.fieldVisibility;
+        const { [fieldId]: _r, ...restRequired } = state.fieldRequired;
         return {
           customFields: state.customFields.filter(f => f.id !== fieldId),
-          fieldSettings: rest
+          fieldVisibility: restVisibility,
+          fieldRequired: restRequired
         };
       }),
       
       resetSettings: () => set({
-        fieldSettings: ADMISSION_FIELDS.reduce((acc, field) => {
-          acc[field.id] = field.isStep1;
+        admissionMode: 'fast',
+        fieldVisibility: ADMISSION_FIELDS.reduce((acc, field) => {
+          acc[field.id] = true;
+          return acc;
+        }, {} as Record<string, boolean>),
+        fieldRequired: ADMISSION_FIELDS.reduce((acc, field) => {
+          acc[field.id] = field.isStep1 || field.isFixed || false;
           return acc;
         }, {} as Record<string, boolean>),
         customFields: []
       }),
     }),
     {
-      name: 'admission-settings-storage',
+      name: 'admission-settings-v2',
     }
   )
 );
