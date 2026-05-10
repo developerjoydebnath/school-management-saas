@@ -68,39 +68,7 @@ export default function AdmissionSettingsForm() {
 
 	return (
 		<div className="space-y-6 pt-4">
-			<div className="flex items-center justify-between">
-				<div>
-					<h2 className="text-2xl font-bold tracking-tight">{t("title")}</h2>
-					<p className="text-muted-foreground">{t("description")}</p>
-				</div>
-				<div className="flex gap-2">
-					<ConfirmationModal
-						onConfirm={resetSettings}
-						confirmText={t("resetAll")}
-						cancelText={tForms("cancel")}
-						title={t("resetConfirmTitle")}
-						description={t("resetConfirmDesc")}
-					>
-						<AlertDialogTrigger
-							render={
-								<Button variant="destructive">
-									<RotateCcw className="h-4 w-4" />
-									{t("resetAll")}
-								</Button>
-							}
-						/>
-					</ConfirmationModal>
-
-					<AddCustomFieldDialog />
-
-					<Button onClick={handleSave}>
-						<Save className="h-4 w-4" />
-						{t("saveConfiguration")}
-					</Button>
-				</div>
-			</div>
-
-			<Card className="">
+			<Card>
 				<CardHeader className="pb-3">
 					<CardTitle className="text-lg">{t("admissionMode")}</CardTitle>
 					<CardDescription>{t("admissionModeDesc")}</CardDescription>
@@ -153,6 +121,38 @@ export default function AdmissionSettingsForm() {
 					</div>
 				</CardContent>
 			</Card>
+
+			<div className="flex items-center justify-between">
+				<div>
+					<h2 className="text-2xl font-bold tracking-tight">{t("title")}</h2>
+					<p className="text-muted-foreground">{t("description")}</p>
+				</div>
+				<div className="flex gap-2">
+					<ConfirmationModal
+						onConfirm={resetSettings}
+						confirmText={t("resetAll")}
+						cancelText={tForms("cancel")}
+						title={t("resetConfirmTitle")}
+						description={t("resetConfirmDesc")}
+					>
+						<AlertDialogTrigger
+							render={
+								<Button variant="destructive">
+									<RotateCcw className="h-4 w-4" />
+									{t("resetAll")}
+								</Button>
+							}
+						/>
+					</ConfirmationModal>
+
+					<AddCustomFieldDialog />
+
+					<Button onClick={handleSave}>
+						<Save className="h-4 w-4" />
+						{t("saveConfiguration")}
+					</Button>
+				</div>
+			</div>
 
 			<div className="grid gap-6">
 				{categories.map((category) => (

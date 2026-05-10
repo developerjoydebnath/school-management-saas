@@ -1483,5 +1483,61 @@
       "id": "7RhG8ZWnT9g"
     }
   ],
+  "feeHeads": [
+    {
+      "id": "f1",
+      "name": "Admission Fee",
+      "type": "One-time",
+      "amount": 500,
+      "isShown": true,
+      "isRequired": true,
+      "isSystem": true
+    },
+    {
+      "id": "f2",
+      "name": "Registration Fee",
+      "type": "One-time",
+      "amount": 300,
+      "isShown": true,
+      "isRequired": false,
+      "isSystem": true
+    },
+    {
+      "id": "f3",
+      "name": "Session Fee",
+      "type": "Yearly",
+      "amount": 1200,
+      "isShown": true,
+      "isRequired": false,
+      "isSystem": true
+    },
+    {
+      "id": "f4",
+      "name": "ID Card Fee",
+      "type": "One-time",
+      "amount": 150,
+      "isShown": true,
+      "isRequired": false,
+      "isSystem": false
+    },
+    {
+      "id": "f5",
+      "name": "Library Security Fee",
+      "type": "One-time",
+      "amount": 200,
+      "isShown": false,
+      "isRequired": false,
+      "isSystem": false
+    },
+    {
+      "name": "Class 3",
+      "type": "One-time",
+      "amount": 500,
+      "isRequired": false,
+      "isShown": true,
+      "isSystem": false,
+      "id": "PyPnOQsJLdM"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

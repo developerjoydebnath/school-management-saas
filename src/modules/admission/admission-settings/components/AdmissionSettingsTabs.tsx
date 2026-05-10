@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
 import { useTranslations } from "next-intl";
 import AdmissionSettingsForm from "./AdmissionSettingsForm";
+import FeeStructureSettings from "./FeeStructureSettings";
 
 export default function AdmissionSettingsTabs() {
 	const t = useTranslations("AdmissionSettings");
@@ -19,7 +20,7 @@ export default function AdmissionSettingsTabs() {
 					<AdmissionSettingsForm />
 				</TabsContent>
 				<TabsContent value="fee-structure">
-					<p>Fee Structure</p>
+					<FeeStructureSettings />
 				</TabsContent>
 			</Tabs>
 		</div>
