@@ -24,8 +24,8 @@ import { Info, LayoutGrid, RotateCcw, Save, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { toast } from "sonner";
-import { ADMISSION_FIELDS } from "../../shared/constants/admission-fields";
-import { useAdmissionSettingsStore } from "../../shared/stores/admission-settings-store";
+import { ADMISSION_FIELDS } from "../constants/admission-fields";
+import { useAdmissionSettingsStore } from "../stores/admission-settings-store";
 import { AddCustomFieldDialog } from "./AddCustomFieldDialog";
 
 export default function AdmissionSettingsForm() {

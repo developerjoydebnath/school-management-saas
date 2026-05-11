@@ -1,9 +1,5 @@
 "use client";
 
-import {
-	CustomFieldFormValues,
-	customFieldSchema,
-} from "@/modules/admission/shared/dto/admission-settings.dto";
 import InputField from "@/shared/components/form/InputField";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -21,9 +17,10 @@ import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { AdmissionField } from "../../shared/constants/admission-fields";
-import { useAdmissionSettingsStore } from "../../shared/stores/admission-settings-store";
+import { AdmissionField } from "../constants/admission-fields";
 import { ADD_CUSTOM_FIELD_FORM_FIELDS } from "../constants/admission-settings.constant";
+import { CustomFieldFormValues, customFieldSchema } from "../dto/admission-settings.dto";
+import { useAdmissionSettingsStore } from "../stores/admission-settings-store";
 
 const generateCustomFieldId = (label: string) => {
 	return `custom_${label.toLowerCase().replace(/\s+/g, "_")}_${Date.now()}`;
@@ -74,9 +71,7 @@ export function AddCustomFieldDialog() {
 			<DialogContent className="gap-4">
 				<DialogHeader>
 					<DialogTitle>{t("addCustomFieldTitle")}</DialogTitle>
-					<DialogDescription>
-						{t("addCustomFieldDesc")}
-					</DialogDescription>
+					<DialogDescription>{t("addCustomFieldDesc")}</DialogDescription>
 				</DialogHeader>
 
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

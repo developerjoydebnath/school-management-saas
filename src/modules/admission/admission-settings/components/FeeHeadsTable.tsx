@@ -31,8 +31,8 @@ import {
 import { cn } from "@/shared/lib/utils";
 import { LayoutGrid, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { FeeHead, FeeType } from "../types/types";
 import { AddFeeHeadDialog } from "./AddFeeHeadForm";
-import { FeeHead, FeeType } from "./types";
 
 interface FeeHeadsTableProps {
 	fees: FeeHead[];

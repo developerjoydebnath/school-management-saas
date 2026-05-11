@@ -21,10 +21,7 @@ export default function ApplicationListPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeading 
-        heading="Application List" 
-        subHeading="Manage incoming admission applications." 
-      />
+      <PageHeading routeName="Applications" />
       
       <div className="grid grid-cols-1 gap-8 items-start">
         <ApplicationList />

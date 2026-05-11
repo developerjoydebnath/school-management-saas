@@ -7,10 +7,10 @@ import { RotateCcw, Save } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { FeeSummaryBar } from "../fee-structure/FeeBars";
-import { FeeHeadsTable } from "../fee-structure/FeeHeadsTable";
-import { FeeSessionSelector } from "../fee-structure/FeeSessionSelector";
-import { FeeHead } from "../fee-structure/types";
+import { FeeHead } from "../types/types";
+import { FeeSummaryBar } from "./FeeBars";
+import { FeeHeadsTable } from "./FeeHeadsTable";
+import { FeeSessionSelector } from "./FeeSessionSelector";
 
 export default function FeeStructureSettings() {
 	const t = useTranslations("AdmissionSettings");

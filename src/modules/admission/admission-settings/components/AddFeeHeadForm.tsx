@@ -1,9 +1,5 @@
 "use client";
 
-import {
-	FeeHeadFormValues,
-	feeHeadSchema,
-} from "@/modules/admission/shared/dto/admission-settings.dto";
 import InputField from "@/shared/components/form/InputField";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -22,7 +18,8 @@ import { useTranslations } from "next-intl";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { FeeHead } from "./types";
+import { FeeHeadFormValues, feeHeadSchema } from "../dto/admission-settings.dto";
+import { FeeHead } from "../types/types";
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 interface AddFeeHeadDialogProps {
