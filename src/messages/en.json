@@ -460,12 +460,24 @@
 		"permanentAddress": "Permanent Address",
 		"section": "Section",
 		"session": "Session",
-		"status_pending": "Pending",
-		"status_approved": "Approved",
-		"status_rejected": "Rejected",
 		"print": "Print",
 		"reject": "Reject",
-		"approve": "Approve"
+		"approve": "Approve",
+		"statusChangeTitle": "Change Application Status",
+		"statusChangeDescription": "Are you sure you want to change the status to {status}?",
+		"statusUpdateSuccess": "Application status updated to {status} successfully",
+		"rollListTitle": "Existing Students Roll List",
+		"studentListButton": "Student List",
+		"rollNumberLabel": "Student Roll Number (3 Digits)",
+		"rollPlaceholder": "e.g. 001",
+		"rollAlreadyTaken": "This roll number is already taken.",
+		"studentId": "Student ID",
+		"roll": "Roll",
+		"studentName": "Student Name"
+	},
+	"ApplicationEdit": {
+		"title": "Edit Admission Application",
+		"description": "Update the admission application details."
 	},
 	"ApplicationDetails": {
 		"title": "Application Details",

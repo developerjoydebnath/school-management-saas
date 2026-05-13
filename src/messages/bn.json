@@ -459,12 +459,24 @@
 		"permanentAddress": "Permanent Address",
 		"section": "Section",
 		"session": "Session",
-		"status_pending": "অপেক্ষমান",
-		"status_approved": "অনুমোদিত",
-		"status_rejected": "প্রত্যাখ্যাত",
 		"print": "প্রিন্ট",
 		"reject": "বাতিল করুন",
-		"approve": "অনুমোদন করুন"
+		"approve": "অনুমোদন করুন",
+		"statusChangeTitle": "আবেদনের অবস্থা পরিবর্তন করুন",
+		"statusChangeDescription": "আপনি কি নিশ্চিত যে আপনি অবস্থাটি {status}-এ পরিবর্তন করতে চান?",
+		"statusUpdateSuccess": "আবেদনের অবস্থা সফলভাবে {status}-এ পরিবর্তন করা হয়েছে",
+		"rollListTitle": "বিদ্যমান শিক্ষার্থীদের রোলের তালিকা",
+		"studentListButton": "শিক্ষার্থীদের তালিকা",
+		"rollNumberLabel": "শিক্ষার্থীর রোল নম্বর (৩ ডিজিট)",
+		"rollPlaceholder": "যেমন: ০০১",
+		"rollAlreadyTaken": "এই রোল নম্বরটি ইতিমধ্যে নেওয়া হয়েছে।",
+		"studentId": "শিক্ষার্থী আইডি",
+		"roll": "রোল",
+		"studentName": "শিক্ষার্থীর নাম"
+	},
+	"ApplicationEdit": {
+		"title": "ভর্তির আবেদন সম্পাদনা করুন",
+		"description": "ভর্তির আবেদনের বিস্তারিত তথ্য আপডেট করুন।"
 	},
 	"ApplicationDetails": {
 		"title": "আবেদনের বিস্তারিত",

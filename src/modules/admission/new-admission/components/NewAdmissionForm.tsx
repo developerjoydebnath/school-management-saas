@@ -13,7 +13,7 @@ import { cn } from "@/shared/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Info, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -27,15 +27,29 @@ import AdmissionSuccessView from "./AdmissionSuccessView";
 // Extracted impure logic outside the component to satisfy purity rules
 const generateStudentId = () => `STU${Math.floor(1000 + Math.random() * 9000)}`;
 
-export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void }) {
+export default function NewAdmissionForm({
+	onSuccess,
+	initialData,
+	id,
+}: {
+	onSuccess: () => void;
+	initialData?: any;
+	id?: string;
+}) {
 	const [loading, setLoading] = useState(false);
 	const [step, setStep] = useState<"form" | "success">("form");
 	const [createdStudent, setCreatedStudent] = useState<any>(null);
 
 	const t = useTranslations("AdmissionNew");
 
-	const { admissionMode, fieldVisibility, fieldRequired, customFields } =
-		useAdmissionSettingsStore();
+	const {
+		admissionMode: storeAdmissionMode,
+		fieldVisibility,
+		fieldRequired,
+		customFields,
+	} = useAdmissionSettingsStore();
+
+	const admissionMode = id ? "full" : storeAdmissionMode;
 
 	const allFields = useMemo(() => {
 		return [...ADMISSION_FIELDS, ...customFields];
@@ -60,6 +74,8 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 	}, [admissionFields]);
 
 	const [currentStepIndex, setCurrentStepIndex] = useState(0);
+
+	const isPreviewStep = admissionMode === "full" && currentStepIndex === categories.length;
 
 	// Generate dynamic schema and default values
 	const { schema, defaultValues } = useMemo(() => {
@@ -91,20 +107,41 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 			}
 
 			shape[field.id] = fieldSchema;
-			defaults[field.id] = "";
+			// Use initialData if available
+			let val = "";
+			if (initialData) {
+				if (field.isCustom) {
+					try {
+						const custom = JSON.parse(initialData.customData || "{}");
+						val = custom[field.id] || "";
+					} catch (e) {
+						val = "";
+					}
+				} else {
+					val = initialData[field.id] || "";
+				}
+			}
+			defaults[field.id] = val;
 		});
 
 		return {
 			schema: z.object(shape),
 			defaultValues: defaults,
 		};
-	}, [admissionFields, fieldRequired]);
+	}, [admissionFields, fieldRequired, initialData]);
 
 	const form = useForm({
 		resolver: zodResolver(schema),
 		defaultValues,
 		mode: "onChange",
 	});
+
+	// Reset form when defaultValues changes (important for async initialData)
+	useEffect(() => {
+		if (initialData) {
+			form.reset(defaultValues);
+		}
+	}, [defaultValues, form, initialData]);
 
 	const selectedClassId = form.watch("class") as string | undefined;
 
@@ -126,6 +163,10 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 
 	const onSubmit = useCallback(
 		async (values: any) => {
+			// Prevent accidental submission if not in preview step in full mode
+			if (admissionMode === "full" && !isPreviewStep) {
+				return;
+			}
 			setLoading(true);
 			try {
 				const fixedData: Record<string, any> = {};
@@ -143,32 +184,36 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 				const payload = {
 					...fixedData,
 					customData: JSON.stringify(customData),
-					status: "Pending",
-					date: new Date().toISOString(),
+					status: initialData?.status || "Pending",
+					date: initialData?.date || new Date().toISOString(),
 				};
 
 				console.log("Submitting Admission Payload:", payload);
 
-				const response = await axios.post("/admissions", payload);
+				if (id) {
+					await axios.patch(`/admissions/${id}`, payload);
+					toast.success("Application updated successfully!");
+				} else {
+					const response = await axios.post("/admissions", payload);
+					setCreatedStudent({
+						id: response.data.id || generateStudentId(),
+						name: values.fullName,
+						class: values.class,
+						completion: admissionMode === "full" ? 100 : 42,
+					});
+					setStep("success");
+					toast.success("Student admission successful!");
+				}
 
-				setCreatedStudent({
-					id: response.data.id || generateStudentId(),
-					name: values.fullName,
-					class: values.class,
-					completion: admissionMode === "full" ? 100 : 42,
-				});
-
-				setStep("success");
-				toast.success("Student admission successful!");
 				onSuccess?.();
 			} catch (err) {
-				console.error("Error creating admission:", err);
-				toast.error("Failed to process admission. Please try again.");
+				console.error("Error saving admission:", err);
+				toast.error("Failed to save application. Please try again.");
 			} finally {
 				setLoading(false);
 			}
 		},
-		[allFields, onSuccess, admissionMode]
+		[allFields, onSuccess, admissionMode, id, initialData, isPreviewStep]
 	);
 
 	if (step === "success" && createdStudent) {
@@ -184,8 +229,6 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 		);
 	}
 
-	const isPreviewStep = admissionMode === "full" && currentStepIndex === categories.length;
-
 	return (
 		<div className="mx-auto w-full max-w-5xl">
 			<Card className="gap-0 overflow-hidden border-0 py-0 shadow-none">
@@ -200,10 +243,24 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 							categories={categories}
 							currentStepIndex={currentStepIndex}
 							isPreviewStep={isPreviewStep}
+							isEditMode={!!id}
+							onStepClick={(index) => {
+								setCurrentStepIndex(index);
+								window.scrollTo({ top: 0, behavior: "smooth" });
+							}}
 						/>
 					)}
 
-					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+					<form
+						onSubmit={form.handleSubmit(onSubmit)}
+						onKeyDown={(e) => {
+							if (e.key === "Enter" && admissionMode === "full" && !isPreviewStep) {
+								e.preventDefault();
+								handleNext();
+							}
+						}}
+						className="space-y-8"
+					>
 						<div className="space-y-10">
 							{admissionMode === "fast" ? (
 								categories.map((category) => (
@@ -221,6 +278,13 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 								<AdmissionPreview
 									fields={admissionFields}
 									values={form.getValues()}
+									onEditStep={(category) => {
+										const index = categories.indexOf(category);
+										if (index !== -1) {
+											setCurrentStepIndex(index);
+											window.scrollTo({ top: 0, behavior: "smooth" });
+										}
+									}}
 								/>
 							) : (
 								<AdmissionFormSection
@@ -244,9 +308,10 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 							</div>
 						)}
 
-						<div className="flex flex-col gap-4 sm:flex-row">
+						<div className="flex flex-col items-stretch gap-4 sm:flex-row">
 							{admissionMode === "full" && currentStepIndex > 0 && (
 								<Button
+									key="prev-button"
 									type="button"
 									variant="outline"
 									onClick={handlePrev}
@@ -257,6 +322,7 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 							)}
 							{admissionMode === "full" && !isPreviewStep ? (
 								<Button
+									key="next-button"
 									type="button"
 									onClick={handleNext}
 									className="h-12 flex-1 text-base font-semibold"
@@ -266,13 +332,12 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 								</Button>
 							) : (
 								<Button
+									key="submit-button"
 									type="submit"
 									disabled={loading}
 									className={cn(
 										"h-12 flex-1 text-base font-semibold",
-										admissionMode === "full"
-											? "bg-green-600 hover:bg-green-700"
-											: ""
+										admissionMode === "full" ? "bg-green-600 hover:bg-green-700" : ""
 									)}
 								>
 									{loading ? (
@@ -292,13 +357,14 @@ export default function NewAdmissionForm({ onSuccess }: { onSuccess: () => void 
 							)}
 							{isPreviewStep && (
 								<Button
+									key="cancel-button"
 									type="button"
 									variant="destructive"
 									onClick={() => {
 										form.reset();
 										setCurrentStepIndex(0);
 									}}
-									className="h-12 w-full text-base font-semibold"
+									className="h-12 flex-1 text-base font-semibold"
 								>
 									Cancel Admission
 								</Button>

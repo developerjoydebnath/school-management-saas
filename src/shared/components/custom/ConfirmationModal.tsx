@@ -14,14 +14,17 @@ import {
 import { useTranslations } from "next-intl";
 
 interface ConfirmationModalProps {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 	onConfirm: () => void;
 	title?: string;
 	description?: string;
+	body?: React.ReactNode;
 	confirmText?: string;
 	cancelText?: string;
 	isLoading?: boolean;
 	variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
 }
 
 export default function ConfirmationModal({
@@ -29,13 +32,19 @@ export default function ConfirmationModal({
 	onConfirm,
 	title = "Are you sure?",
 	description = "This action cannot be undone.",
+	body,
 	confirmText,
 	cancelText,
 	isLoading = false,
 	variant = "default",
+	open: controlledOpen,
+	onOpenChange: controlledOnOpenChange,
 }: ConfirmationModalProps) {
 	const t = useTranslations("Forms");
-	const [open, setOpen] = React.useState(false);
+	const [internalOpen, setInternalOpen] = React.useState(false);
+
+	const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
+	const setOpen = controlledOnOpenChange !== undefined ? controlledOnOpenChange : setInternalOpen;
 
 	const cancelAltText = cancelText || t("cancel");
 	const confirmAltText = confirmText || t("confirm");
@@ -61,6 +70,7 @@ export default function ConfirmationModal({
 					<AlertDialogTitle>{titleAltText}</AlertDialogTitle>
 					<AlertDialogDescription>{descriptionAltText}</AlertDialogDescription>
 				</AlertDialogHeader>
+				{body && <div className="py-2">{body}</div>}
 				<AlertDialogFooter>
 					<AlertDialogCancel disabled={isLoading} onClick={() => setOpen(false)}>
 						{cancelAltText}

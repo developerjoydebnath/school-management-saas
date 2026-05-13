@@ -16,12 +16,16 @@ interface AdmissionStepperProps {
 	categories: string[];
 	currentStepIndex: number;
 	isPreviewStep: boolean;
+	onStepClick?: (index: number) => void;
+	isEditMode?: boolean;
 }
 
 export default function AdmissionStepper({
 	categories,
 	currentStepIndex,
 	isPreviewStep,
+	onStepClick,
+	isEditMode,
 }: AdmissionStepperProps) {
 	const tc = useTranslations("AdmissionSettings.categories");
 	const t = useTranslations("AdmissionNew");
@@ -63,10 +67,19 @@ export default function AdmissionStepper({
 				></div>
 
 				{categories.map((cat, idx) => (
-					<div key={cat} className="flex flex-col items-center">
+					<button
+						key={cat}
+						type="button"
+						onClick={() => isEditMode && onStepClick?.(idx)}
+						disabled={!isEditMode}
+						className={cn(
+							"group flex flex-col items-center",
+							isEditMode ? "cursor-pointer" : "cursor-default opacity-80"
+						)}
+					>
 						<div
 							className={cn(
-								"flex h-10 w-10 items-center justify-center rounded-full border-2 transition-colors",
+								"flex h-10 w-10 items-center justify-center rounded-full border-2",
 								idx < currentStepIndex
 									? "border-primary bg-primary text-primary-foreground"
 									: idx === currentStepIndex
@@ -84,12 +97,20 @@ export default function AdmissionStepper({
 						>
 							{tc(cat)}
 						</span>
-					</div>
+					</button>
 				))}
-				<div className="flex flex-col items-center">
+				<button
+					type="button"
+					onClick={() => isEditMode && onStepClick?.(categories.length)}
+					disabled={!isEditMode}
+					className={cn(
+						"group flex flex-col items-center",
+						isEditMode ? "cursor-pointer" : "cursor-default opacity-80"
+					)}
+				>
 					<div
 						className={cn(
-							"flex h-10 w-10 items-center justify-center rounded-full border-2 transition-colors",
+							"flex h-10 w-10 items-center justify-center rounded-full border-2",
 							isPreviewStep
 								? "border-primary bg-primary text-primary-foreground shadow-[0_0_15px_rgba(var(--primary),0.3)]"
 								: "border-muted bg-background text-muted-foreground"
@@ -107,7 +128,7 @@ export default function AdmissionStepper({
 					>
 						{t("preview") || "Preview"}
 					</span>
-				</div>
+				</button>
 			</div>
 		</div>
 	);

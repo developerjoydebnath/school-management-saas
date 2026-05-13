@@ -7,16 +7,33 @@ import TableFilter from "@/shared/components/table/TableFilter";
 import { AlertDialogTrigger } from "@/shared/components/ui/alert-dialog";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/shared/components/ui/dialog";
+import { Input } from "@/shared/components/ui/input";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/shared/components/ui/select";
 import { PATHS } from "@/shared/configs/paths.config";
 import { useTableData } from "@/shared/hooks/use-table-data";
 import axios from "@/shared/lib/axios";
+import { cn } from "@/shared/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import { Eye, Pencil, Trash2 } from "lucide-react";
+import { AlertCircle, Eye, List, Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import ApplicationFilterBar from "./ApplicationFilterBar";
+import StudentRollList from "./StudentRollList";
 
 export type ApplicationFilter = {
 	search: string;
@@ -28,6 +45,10 @@ const initialFilters: ApplicationFilter = { search: "", status: [] };
 export default function ApplicationList() {
 	const [applicationToDelete, setApplicationToDelete] = useState<string | null>(null);
 	const [isDeleting, setIsDeleting] = useState(false);
+	const [statusUpdate, setStatusUpdate] = useState<{ id: string; status: string } | null>(null);
+	const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
+	const [roll, setRoll] = useState("");
+	const [showRollList, setShowRollList] = useState(false);
 
 	const t = useTranslations("Applications");
 	const tc = useTranslations("Common");
@@ -46,6 +67,71 @@ export default function ApplicationList() {
 		// limit,
 		// ...filter,
 	});
+
+	const { data: students, mutate: mutateStudents } = useTableData("/students");
+
+	const selectedApplication = statusUpdate
+		? (applications as any[])?.find((a: any) => a.id === statusUpdate.id)
+		: null;
+
+	const handleStatusUpdate = async () => {
+		if (!statusUpdate || !selectedApplication) return;
+
+		if (statusUpdate.status === "Approved") {
+			if (!roll) {
+				toast.error("Roll number is required for approval");
+				return;
+			}
+
+			// Check if roll is already taken
+			const formattedRoll = roll.padStart(3, "0");
+			const isTaken = (students as any[])?.some(
+				(s: any) =>
+					s.roll === formattedRoll &&
+					s.session === selectedApplication?.session &&
+					s.class === selectedApplication?.class &&
+					s.section === selectedApplication?.section
+			);
+
+			if (isTaken) {
+				toast.error("This roll number is already taken in this session");
+				return;
+			}
+		}
+
+		setIsUpdatingStatus(true);
+		try {
+			// Update admission status
+			await axios.patch(`/admissions/${statusUpdate.id}`, { status: statusUpdate.status });
+
+			// If approved, add to students
+			if (statusUpdate.status === "Approved" && selectedApplication) {
+				// Prepare student data
+				const formattedRoll = roll.padStart(3, "0");
+				const sessionName = selectedApplication.session?.replace("session-", "") || "0000";
+				const studentData = {
+					...selectedApplication,
+					studentId: `STU-${sessionName}-${formattedRoll}`,
+					admissionId: selectedApplication.id,
+					roll: formattedRoll,
+					status: "ACTIVE",
+					joinedDate: new Date().toISOString(),
+				};
+				// Remove the id from application to let json-server generate a new one
+				const { id, ...rest } = studentData;
+				await axios.post("/students", rest);
+			}
+
+			toast.success(t("statusUpdateSuccess", { status: statusUpdate.status }));
+			mutate();
+			setRoll("");
+		} catch (err: any) {
+			toast.error(tc("updateFailed"));
+		} finally {
+			setIsUpdatingStatus(false);
+			setStatusUpdate(null);
+		}
+	};
 
 	const confirmDelete = async (id: string) => {
 		setApplicationToDelete(id);
@@ -105,17 +191,37 @@ export default function ApplicationList() {
 				const status = app.status || "Pending";
 
 				return (
-					<div
-						className={`w-fit rounded-full px-2.5 py-1 text-xs font-medium ${
-							status === "Approved"
-								? "bg-green-100 text-green-800"
-								: status === "Rejected"
-									? "bg-red-100 text-red-800"
-									: "bg-orange-100 text-orange-800"
-						}`}
+					<Select
+						value={status}
+						onValueChange={(val) => setStatusUpdate({ id: app.id, status: val })}
+						disabled={status === "Approved"}
 					>
-						{status}
-					</div>
+						<SelectTrigger
+							className={cn(
+								"h-8 w-[120px] rounded-full border-none px-3 text-xs font-medium shadow-none ring-0",
+								status === "Approved"
+									? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+									: "cursor-pointer",
+								status === "Rejected" &&
+									"bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
+								status === "Pending" &&
+									"bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400"
+							)}
+						>
+							<SelectValue />
+						</SelectTrigger>
+						<SelectContent className="p-1">
+							<SelectItem className="cursor-pointer py-2 text-xs" value="Pending">
+								Pending
+							</SelectItem>
+							<SelectItem className="cursor-pointer py-2 text-xs" value="Approved">
+								Approved
+							</SelectItem>
+							<SelectItem className="cursor-pointer py-2 text-xs" value="Rejected">
+								Rejected
+							</SelectItem>
+						</SelectContent>
+					</Select>
 				);
 			},
 		},
@@ -190,6 +296,81 @@ export default function ApplicationList() {
 					columns={columns}
 				/>
 			</CardContent>
+
+			<ConfirmationModal
+				open={!!statusUpdate}
+				onOpenChange={(open) => {
+					if (!open) {
+						setStatusUpdate(null);
+						setRoll("");
+					}
+				}}
+				onConfirm={handleStatusUpdate}
+				title={t("statusChangeTitle")}
+				description={t("statusChangeDescription", {
+					status: statusUpdate?.status ?? "",
+				})}
+				body={
+					statusUpdate?.status === "Approved" ? (
+						<div className="space-y-4">
+							<div className="flex flex-col gap-2">
+								<label className="text-muted-foreground text-xs font-medium">
+									Student Roll Number (3 Digits)
+								</label>
+								<div className="flex items-center gap-2">
+									<Input
+										placeholder="e.g. 001"
+										value={roll}
+										onChange={(e) => setRoll(e.target.value)}
+										className="w-full"
+										maxLength={3}
+									/>
+									<Dialog
+										open={showRollList}
+										onOpenChange={(open) => {
+											setShowRollList(open);
+											if (open) mutateStudents();
+										}}
+									>
+										<DialogTrigger
+											render={
+												<Button variant="outline" type="button">
+													<List className="h-4 w-4" />
+													<span>{t("studentListButton")}</span>
+												</Button>
+											}
+										/>
+										<DialogContent className="max-w-2xl">
+											<DialogHeader>
+												<DialogTitle>{t("rollListTitle")}</DialogTitle>
+											</DialogHeader>
+											<StudentRollList
+												classId={selectedApplication?.class}
+												sessionId={selectedApplication?.session}
+												section={selectedApplication?.section}
+											/>
+										</DialogContent>
+									</Dialog>
+								</div>
+								{roll &&
+									(students as any[])?.some(
+										(s: any) =>
+											s.roll === roll.padStart(3, "0") &&
+											s.session === selectedApplication?.session &&
+											s.class === selectedApplication?.class &&
+											s.section === selectedApplication?.section
+									) && (
+										<div className="flex items-center gap-1.5 text-xs text-red-500">
+											<AlertCircle className="h-3.5 w-3.5" />
+											<span>{t("rollAlreadyTaken")}</span>
+										</div>
+									)}
+							</div>
+						</div>
+					) : null
+				}
+				isLoading={isUpdatingStatus}
+			/>
 		</Card>
 	);
 }
