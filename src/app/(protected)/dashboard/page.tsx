@@ -11,64 +11,60 @@ import { IconPlus } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 
 export type FilterOption = {
-  label: string;
-  value: string;
+	label: string;
+	value: string;
 };
 
 export type OrderFilter = {
-  status: FilterOption[];
-  orderType: FilterOption[];
-  search: string;
-  startDate?: Date;
-  endDate?: Date;
+	status: FilterOption[];
+	orderType: FilterOption[];
+	search: string;
+	startDate?: Date;
+	endDate?: Date;
 };
 
 export default function Orders() {
-  const [filter, setFilter] = useState<OrderFilter>({
-    status: [],
-    orderType: [],
-    search: "",
-    startDate: undefined,
-    endDate: undefined,
-  });
-  const { setBreadcrumbs } = useBreadcrumbStore();
+	const [filter, setFilter] = useState<OrderFilter>({
+		status: [],
+		orderType: [],
+		search: "",
+		startDate: undefined,
+		endDate: undefined,
+	});
+	const { setBreadcrumbs } = useBreadcrumbStore();
 
+	useEffect(() => {
+		setBreadcrumbs([
+			{
+				label: "Home",
+				href: "/",
+			},
+			{
+				label: "Orders",
+				href: "/dashboard",
+			},
+		]);
+	}, [setBreadcrumbs]);
 
-  useEffect(() => {
-    setBreadcrumbs([
-      {
-        label: "Home",
-        href: "/",
-      },
-      {
-        label: "Orders",
-        href: "/dashboard",
-      },
-    ]);
-  }, [setBreadcrumbs]);
+	return (
+		<div className="space-y-6">
+			<PageHeading routeName="Orders">
+				<Button>
+					<IconPlus />
+					Add Order
+				</Button>
+			</PageHeading>
 
-  return (
-    <div className="space-y-6">
-      <PageHeading
-        heading="Orders"
-        subHeading="Manage your orders here. You can filter, search, and view details of each order."
-      >
-        <Button>
-          <IconPlus />
-          Add Order
-        </Button>
-      </PageHeading>
+			<Card className="p-6 ring-0">
+				<CardHeader className="p-0">
+					<OrderFilterBar filter={filter} setFilter={setFilter} />
+				</CardHeader>
 
-      <Card className="p-6 ring-0">
-        <CardHeader className="p-0">
-          <OrderFilterBar filter={filter} setFilter={setFilter} />
-        </CardHeader>
-
-        <CardContent className="p-0 space-y-4">
-          <TableFilter filter={filter} setFilter={setFilter} />
-          <OrderTable queryType="ACTIVE" filter={filter} />
-        </CardContent>
-      </Card>
-    </div>
-  );
+				<CardContent className="space-y-4 p-0">
+					<TableFilter filter={filter} setFilter={setFilter} />
+					<OrderTable queryType="ACTIVE" filter={filter} />
+				</CardContent>
+			</Card>
+		</div>
+	);
 }
