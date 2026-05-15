@@ -1,18 +1,18 @@
 "use client";
 
+import StudentProfileHeader from "@/modules/students/profile/components/StudentProfileHeader";
 import AcademicsTab from "@/modules/students/profile/components/tabs/AcademicsTab";
 import AttendanceTab from "@/modules/students/profile/components/tabs/AttendanceTab";
 import DocumentsTab from "@/modules/students/profile/components/tabs/DocumentsTab";
 import FeesTab from "@/modules/students/profile/components/tabs/FeesTab";
 import ProfileOverviewTab from "@/modules/students/profile/components/tabs/ProfileOverviewTab";
-import StudentProfileHeader from "@/modules/students/profile/components/StudentProfileHeader";
 import { Button } from "@/shared/components/ui/button";
 import { Skeleton } from "@/shared/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
 import { PATHS } from "@/shared/configs/paths.config";
 import { useSWR } from "@/shared/hooks/use-swr";
-import { getLocalizedName } from "@/shared/utils/localization";
 import { useBreadcrumbStore } from "@/shared/stores/breadcrumb-store";
+import { getLocalizedName } from "@/shared/utils/localization";
 import { ArrowLeft } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
@@ -62,7 +62,7 @@ export default function StudentProfilePage() {
 	if (!student) {
 		return (
 			<div className="flex flex-col items-center justify-center py-20">
-				<p className="text-lg text-muted-foreground">{t("notFound")}</p>
+				<p className="text-muted-foreground text-lg">{t("notFound")}</p>
 				<Link href={`/students/directory/${classId}`}>
 					<Button variant="outline" className="mt-4 gap-2">
 						<ArrowLeft className="h-4 w-4" />

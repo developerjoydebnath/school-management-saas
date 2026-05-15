@@ -539,5 +539,9 @@
 		"fatherPhone": "পিতার ফোন",
 		"motherName": "মাতার নাম",
 		"motherPhone": "মাতার ফোন"
+	},
+	"StudentsAttendance": {
+		"title": "শিক্ষার্থী উপস্থিতি",
+		"description": "সকল ক্লাস ও সেকশনের দৈনিক উপস্থিতি নিন ও পরিচালনা করুন।"
 	}
 }

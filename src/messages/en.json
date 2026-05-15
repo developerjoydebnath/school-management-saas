@@ -540,5 +540,9 @@
 		"fatherPhone": "Father's Phone",
 		"motherName": "Mother's Name",
 		"motherPhone": "Mother's Phone"
+	},
+	"StudentsAttendance": {
+		"title": "Student Attendance",
+		"description": "Take and manage daily attendance for all classes and sections."
 	}
 }

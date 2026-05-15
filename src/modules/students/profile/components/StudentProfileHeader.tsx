@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "@/shared/components/custom/Image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
@@ -15,14 +16,25 @@ export default function StudentProfileHeader({ student }: StudentProfileHeaderPr
 	const t = useTranslations("StudentProfile");
 
 	return (
-		<Card className="overflow-hidden border-none shadow-sm">
-			<div className="h-32 w-full bg-gradient-to-r from-primary/80 to-primary"></div>
-			<CardContent className="relative px-6 pb-6 pt-0 sm:px-10">
+		<Card className="overflow-hidden py-0">
+			<div className="from-primary/80 to-primary h-48 w-full bg-gradient-to-r">
+				<Image
+					src="/images/avatar-cover.png"
+					alt="banner"
+					width={1280}
+					height={200}
+					className="h-full w-full object-cover"
+				/>
+			</div>
+			<CardContent className="relative px-6 pt-0 pb-6 sm:px-10">
 				<div className="flex flex-col sm:flex-row sm:items-end sm:justify-between">
 					<div className="flex flex-col items-center gap-5 sm:flex-row sm:items-end">
-						<Avatar className="ring-background -mt-12 h-28 w-28 rounded-full border-4 ring-4 sm:-mt-16 sm:h-32 sm:w-32">
-							<AvatarImage src={student.photoUrl || ""} alt={student.fullName} />
-							<AvatarFallback className="bg-primary/10 text-4xl font-bold text-primary">
+						<Avatar className="ring-primary bg-muted -mt-12 h-28 w-28 rounded-full border-4 ring-4 sm:-mt-16 sm:h-32 sm:w-32">
+							<AvatarImage
+								src={student.photoUrl || "/images/avatar.png"}
+								alt={student.fullName}
+							/>
+							<AvatarFallback className="bg-primary/10 text-primary text-4xl font-bold">
 								{student.fullName?.charAt(0) || "S"}
 							</AvatarFallback>
 						</Avatar>
@@ -33,18 +45,16 @@ export default function StudentProfileHeader({ student }: StudentProfileHeaderPr
 									{student.fullName}
 								</h1>
 								<Badge
-									variant={
-										student.status === "ACTIVE" ? "default" : "secondary"
-									}
+									variant={student.status === "ACTIVE" ? "default" : "secondary"}
 								>
 									{student.status || "ACTIVE"}
 								</Badge>
 							</div>
-							<p className="mt-1 text-sm font-medium text-muted-foreground">
-								ID: {student.studentId} • Class {student.class} (
-								{student.section}) • Roll: {student.roll}
+							<p className="text-muted-foreground mt-1 text-sm font-medium">
+								ID: {student.studentId} • Class {student.class} ({student.section})
+								• Roll: {student.roll}
 							</p>
-							<div className="mt-2 flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground sm:justify-start">
+							<div className="text-muted-foreground mt-2 flex flex-wrap items-center justify-center gap-3 text-sm sm:justify-start">
 								{student.mobile && (
 									<div className="flex items-center gap-1">
 										<Phone className="h-3.5 w-3.5" />
