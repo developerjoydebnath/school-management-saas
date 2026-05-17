@@ -143,7 +143,7 @@ export default function AttendanceSheet() {
 	const className = currentClass ? getLocalizedName(currentClass.name, locale) : classId;
 
 	return (
-		<div className="space-y-6">
+		<div className="@container/attendance-sheet space-y-6">
 			{/* Header */}
 			<AttendanceSheetHeader
 				className={className}
@@ -155,9 +155,9 @@ export default function AttendanceSheet() {
 			/>
 
 			{/* Stats + Calendar Row */}
-			<div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+			<div className="grid grid-cols-1 gap-6 @4xl/attendance-sheet:grid-cols-[1fr_1fr_360px]">
 				{/* Stats Cards & Chart */}
-				<div className="space-y-4 lg:col-span-2">
+				<div className="space-y-4 @4xl/attendance-sheet:col-span-2">
 					<AttendanceSheetStats stats={stats} />
 					<AttendanceTrendChart trendData={trendData} trendConfig={trendConfig} />
 				</div>

@@ -59,7 +59,9 @@ export default function Header() {
 				</Breadcrumb>
 			</div>
 			<div className="flex items-center gap-4">
-				<p className="text-foreground text-sm font-medium">Session : 2024-2025</p>
+				<p className="text-foreground text-sm font-medium">
+					<span className="hidden font-medium sm:inline">Session :</span> 2024-2025
+				</p>
 				<Separator orientation="vertical" className="my-auto h-4" />
 				<LanguageSwitcher />
 				<NavUser user={data.user} />

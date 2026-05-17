@@ -31,13 +31,13 @@ export function AttendanceSheetHeader({
 					</Button>
 				</Link>
 				<div>
-					<h1 className="text-xl font-bold">
+					<h1 className="text-base font-bold sm:text-lg md:text-xl">
 						{className}
 						{section && (
 							<span className="text-muted-foreground ml-2">— Section {section}</span>
 						)}
 					</h1>
-					<p className="text-muted-foreground text-sm">
+					<p className="text-muted-foreground text-xs sm:text-sm">
 						Attendance Sheet •{" "}
 						{selectedDate.toLocaleDateString("en-US", {
 							weekday: "long",

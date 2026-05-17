@@ -106,12 +106,8 @@ export function AttendanceTable({
 								<TableRow>
 									<TableHead className="w-16 font-semibold">#</TableHead>
 									<TableHead className="w-24 font-semibold">Roll</TableHead>
-									<TableHead className="w-32 font-semibold">
-										Student ID
-									</TableHead>
-									<TableHead className="font-semibold">
-										Student Name
-									</TableHead>
+									<TableHead className="w-32 font-semibold">Student ID</TableHead>
+									<TableHead className="font-semibold">Student Name</TableHead>
 									<TableHead className="w-[100px] text-center font-semibold">
 										Present
 									</TableHead>
@@ -196,9 +192,7 @@ export function AttendanceTable({
 											<TableCell className="text-center">
 												<button
 													type="button"
-													onClick={() =>
-														toggleStatus(student.id, "late")
-													}
+													onClick={() => toggleStatus(student.id, "late")}
 													disabled={!canEdit}
 													className={`inline-flex h-8 w-8 items-center justify-center rounded-full border-2 transition-all ${
 														status === "late"
@@ -229,15 +223,15 @@ export function AttendanceTable({
 										{stats.total}
 									</span>{" "}
 									students •{" "}
-									<span className="text-green-600 font-semibold">
+									<span className="font-semibold text-green-600">
 										{stats.present}
 									</span>{" "}
 									present •{" "}
-									<span className="text-red-500 font-semibold">
+									<span className="font-semibold text-red-500">
 										{stats.absent}
 									</span>{" "}
 									absent •{" "}
-									<span className="text-amber-500 font-semibold">
+									<span className="font-semibold text-amber-500">
 										{stats.late}
 									</span>{" "}
 									late
@@ -257,8 +251,8 @@ export function AttendanceTable({
 							<div className="text-muted-foreground flex items-center gap-2 border-t pt-4 text-sm">
 								<Lock className="h-4 w-4 text-green-600" />
 								<span>
-									Attendance for this date has been submitted and locked.
-									Changes can only be made through reconciliation.
+									Attendance for this date has been submitted and locked. Changes
+									can only be made through reconciliation.
 								</span>
 							</div>
 						)}

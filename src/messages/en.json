@@ -544,5 +544,108 @@
 	"StudentsAttendance": {
 		"title": "Student Attendance",
 		"description": "Take and manage daily attendance for all classes and sections."
+	},
+	"StudentProfileSearch": {
+		"title": "Student Profile Search",
+		"description": "Search for a student by ID, roll, name, or mobile number to view their full profile.",
+		"searchPlaceholder": "Search by ID, Roll, Name, or Mobile...",
+		"searchButton": "Search Student",
+		"clearButton": "Clear",
+		"results": "Search Results",
+		"resultsFound": "Students Found",
+		"noResults": "No students found matching your search criteria.",
+		"table": {
+			"studentId": "Student ID",
+			"roll": "Roll",
+			"name": "Name",
+			"class": "Class",
+			"section": "Section",
+			"mobile": "Mobile",
+			"guardianMobile": "Guardian Mobile",
+			"actions": "Actions",
+			"viewProfile": "View Profile"
+		}
+	},
+	"StudentIdCards": {
+		"title": "ID Card Generator",
+		"description": "Design, generate, and print bulk ID cards for students with barcode integration.",
+		"filters": {
+			"class": "Select Class",
+			"section": "Select Section",
+			"session": "Select Session",
+			"generate": "Generate List"
+		},
+		"list": {
+			"title": "Select Students",
+			"selectAll": "Select All",
+			"searchPlaceholder": "Search student name or ID...",
+			"noStudents": "No students found. Please generate list."
+		},
+		"preview": {
+			"title": "ID Card Preview",
+			"templateType": "Template Presets",
+			"modernVertical": "Modern (Vertical)",
+			"classicHorizontal": "Classic (Horizontal)",
+			"minimalVertical": "Minimal (Vertical)",
+			"elegantHorizontal": "Elegant (Horizontal)",
+			"corporateVertical": "Corporate (Vertical)",
+			"kidsHorizontal": "Kids (Horizontal)",
+			"techVertical": "Tech (Vertical)",
+			"creativeHorizontal": "Creative (Horizontal)",
+			"descModernVertical": "Standard vertical layout with primary colors.",
+			"descClassicHorizontal": "Standard horizontal layout with sidebar.",
+			"descMinimalVertical": "Clean, white-based vertical design.",
+			"descElegantHorizontal": "Dark-themed elegant horizontal card.",
+			"descCorporateVertical": "Professional header-based layout.",
+			"descKidsHorizontal": "Colorful & playful design.",
+			"descTechVertical": "Dark mode neon terminal aesthetic.",
+			"descCreativeHorizontal": "Modern asymmetrical layout.",
+			"printSelected": "Print Selected",
+			"downloadSelected": "Download Selected",
+			"front": "Front",
+			"back": "Back"
+		},
+		"card": {
+			"id": "ID",
+			"class": "Class",
+			"roll": "Roll",
+			"dob": "DOB",
+			"bloodGroup": "B.Group",
+			"contact": "Contact",
+			"address": "Address",
+			"validTill": "Valid Till",
+			"principal": "Principal Signature"
+		}
+	},
+	"StudentPromotion": {
+		"title": "Class Promotion",
+		"description": "Promote students to the next academic session, class, and section with new roll numbers.",
+		"filter": {
+			"sourceSession": "Current Session",
+			"sourceClass": "Current Class",
+			"sourceSection": "Current Section",
+			"fetchStudents": "Fetch Students"
+		},
+		"bulk": {
+			"title": "Bulk Target Settings",
+			"description": "Apply these settings to all students in the table below.",
+			"targetSession": "Next Session",
+			"targetClass": "Next Class",
+			"targetSection": "Next Section",
+			"apply": "Apply to All"
+		},
+		"table": {
+			"studentInfo": "Student Details",
+			"currentInfo": "Current Info",
+			"status": "Promotion Status",
+			"nextClass": "Next Class",
+			"nextSection": "Next Section",
+			"nextRoll": "Next Roll No.",
+			"noStudents": "No students found. Please select criteria and fetch.",
+			"promote": "Promote",
+			"retain": "Retain / Fail",
+			"leave": "Leave School"
+		},
+		"submit": "Confirm Promotion"
 	}
 }
